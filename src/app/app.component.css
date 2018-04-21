@@ -1,0 +1,14 @@
+mat-toolbar {
+  text-align: center;
+  border-bottom: 5px #9dcbb6 solid;
+}
+.header__logo {
+  background-image: url(/assets/ngx-tools-logo.png);
+  display: inline-block;
+  width: 220px;
+  margin: auto;
+  height: 105px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-top: -10px;
+}

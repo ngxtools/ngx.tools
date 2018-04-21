@@ -1,0 +1,15 @@
+<section class="palette__color-2">
+  <mat-form-field [formGroup]="searchForm">
+    <input formControlName="query" matInput placeholder="Search for Angular packages, eg. compodoc, material, schematics...">
+  </mat-form-field>
+  <p class="algolia-credits">Powered by
+    <a href="https://www.algolia.com" target="__blank">
+      <img width="55" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-logo-light.png" alt="algolia logo"
+      />
+    </a>
+  </p>
+</section>
+
+<section class="palette__color-5 search-result">
+  <app-search-result></app-search-result>
+</section>

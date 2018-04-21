@@ -1,0 +1,30 @@
+section {
+  width: 100%;
+  height: 210px;
+  text-align: center;
+}
+
+mat-form-field {
+  font-size: 1.5em;
+  width: 90vw;
+  padding: 50px 0;
+}
+
+.search-result {
+  height: 100%;
+  padding: 40px 0;
+}
+
+.algolia-credits {
+  font-size: 0.9em;
+  position: relative;
+  top: -84px;
+  text-align: right;
+  padding: 0px 44px;
+  color: #2e2e2e;
+}
+.algolia-credits img {
+  width: 55px;
+  top: 2px;
+  position: relative;
+}
