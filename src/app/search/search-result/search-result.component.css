@@ -17,18 +17,37 @@ i[hidden] {
   display: none;
 }
 
-.mat-cart-content {
+.mat-card {
+  background: #f9716f;
+  color: white;
+}
+
+.mat-card-content {
   max-height: 100px;
   height: 100px;
   overflow: scroll;
 }
 
 .mat-card-header ::ng-deep em {
-  background-color: #fdca6d;
-  padding: 1px 2px;
-  border-radius: 3px;
+  color: black;
   font-style: normal;
   box-shadow: 0px 1px 0px grey;
+}
+
+.mat-card-footer {
+  padding: 8px;
+}
+
+.mat-card-footer i {
+  font-size: 1.1em;
+  top: 1.5px;
+  position: relative;
+  margin: 0 4px;
+}
+
+.mat-card-footer span {
+  padding: 0 10px;
+  display: inline-block;
 }
 
 img + i {
