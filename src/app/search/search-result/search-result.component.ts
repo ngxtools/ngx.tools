@@ -1,6 +1,8 @@
 import { AlgoliaService } from './../../core/algolia/algolia.service';
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, Input, SimpleChange, OnChanges } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { trigger, state, style, transition, animate, keyframes, stagger, query } from '@angular/animations';
+import { Observable } from 'rxjs';
 
 export interface ObjectLiteral {
   [key: string]: string;
@@ -63,20 +65,43 @@ export interface PackageType {
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.css']
+  // animations: [
+  //   trigger('listAnimation', [
+  //     transition('* => *', [
+  //       query(':enter', style({}), { optional: true }),
+
+  //       query(
+  //         ':enter',
+  //         stagger('100ms', [animate('200ms ease-in', keyframes([style({ offset: 0 }), style({ offset: 0.3 }), style({ offset: 1.0 })]))]),
+  //         { optional: true }
+  //       ),
+
+  //       query(
+  //         ':leave',
+  //         stagger('100ms', [animate('200ms ease-in', keyframes([style({ offset: 0 }), style({ offset: 0.3 }), style({ offset: 1.0 })]))]),
+  //         { optional: true }
+  //       )
+  //     ])
+  //   ])
+  // ]
 })
 export class SearchResultComponent implements OnInit {
   packages: PackageType[] = [];
   isInvalidAvatar = false;
   constructor(private algolia: AlgoliaService, private renderer: Renderer2) {
     this.algolia.searchState.result$.subscribe(results => {
-      console.log(results);
-      this.packages = results.hits;
+      console.log(results.query.trim(), results);
+      if (results.query.trim() === '') {
+        this.packages = [];
+      } else {
+        this.packages = results.hits;
+      }
     });
   }
 
   ngOnInit() {}
 
-  trackByName(pack: PackageType) {
+  packageName(pack: PackageType) {
     return pack.name;
   }
 

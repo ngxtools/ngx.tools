@@ -80,13 +80,11 @@ export class AlgoliaService {
    * @param query The user query used for search.
    */
   private search(indexName: string, query: string) {
-    if (query.trim() !== '') {
-      this.indices[this.indexName]
-        .setIndex(indexName)
-        .setQueryParameter('query', query)
-        .setQueryParameter('filters', '(keywords:ngx OR keywords:angular)')
-        .search();
-    }
+    this.indices[this.indexName]
+      .setIndex(indexName)
+      .setQueryParameter('query', query)
+      .setQueryParameter('filters', '(keywords:ngx OR keywords:angular)')
+      .search();
   }
 
   /**
@@ -107,7 +105,6 @@ export class AlgoliaService {
     }
   }
   sortByRelevance(query?: string) {
-    query = query || this.indices[this.indexName].state.query;
     this.search(this.indexName, query);
   }
 }

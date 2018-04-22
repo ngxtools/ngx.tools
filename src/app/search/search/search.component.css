@@ -7,7 +7,12 @@ section {
 mat-form-field {
   font-size: 1.5em;
   width: 90vw;
+  max-width: 900px;
   padding: 50px 0;
+}
+
+mat-form-field.mat-focused {
+  color: black;
 }
 
 .search-result {
@@ -18,10 +23,11 @@ mat-form-field {
 .algolia-credits {
   font-size: 0.9em;
   position: relative;
-  top: -84px;
+  top: -28px;
   text-align: right;
   padding: 0px 44px;
   color: #2e2e2e;
+  right: -30px;
 }
 .algolia-credits img {
   width: 55px;

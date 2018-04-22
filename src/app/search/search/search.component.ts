@@ -1,6 +1,7 @@
+import { query } from '@angular/animations';
 import { AlgoliaService } from './../../core/algolia/algolia.service';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -18,8 +19,6 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.searchForm.valueChanges.subscribe(controls => {
-      console.log(controls);
-
       this.algolia.sortByRelevance(controls.query);
     });
   }

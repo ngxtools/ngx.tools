@@ -12,3 +12,16 @@ mat-toolbar {
   background-repeat: no-repeat;
   margin-top: -10px;
 }
+
+.header__logo:after {
+  content: 'beta';
+  background: #f57375;
+  color: #fae9bc;
+  padding: 3px 5px;
+  border-radius: 4px;
+  font-size: 14px;
+  position: relative;
+  top: 11px;
+  right: -113px;
+  text-transform: uppercase;
+}

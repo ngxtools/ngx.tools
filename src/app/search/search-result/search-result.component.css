@@ -18,8 +18,9 @@ i[hidden] {
 }
 
 .mat-card {
-  background: #f9716f;
-  color: white;
+  background: #fbc87a;
+  color: black;
+  vertical-align: top;
 }
 
 .mat-card-content {
@@ -28,10 +29,10 @@ i[hidden] {
   overflow: scroll;
 }
 
-.mat-card-header ::ng-deep em {
-  color: black;
+.mat-card ::ng-deep em {
   font-style: normal;
-  box-shadow: 0px 1px 0px grey;
+  font-weight: bold;
+  box-shadow: 0px 1px 0px gray;
 }
 
 .mat-card-footer {
@@ -54,4 +55,5 @@ img + i {
   display: none;
   font-size: 3em;
   margin: -5px;
+  color: #f57375;
 }
