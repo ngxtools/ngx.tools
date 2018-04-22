@@ -19,11 +19,11 @@ export class DeeplinkService {
    * "q" queryParams changes, the "query" FormControl (of the given FormGroup instance) will be updated, reflecting the same value.
    * @param form The given FormGroup to register.
    */
-  registerFormGroup(form: FormGroup) {
+  registerFormGroup(form: FormGroup, controlName: string) {
     this.route.queryParams.subscribe((query: QueryParams) => {
       if (query.q) {
         form.setValue({
-          query: query.q
+          [controlName]: query.q
         });
       }
     });

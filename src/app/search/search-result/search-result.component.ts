@@ -90,7 +90,6 @@ export class SearchResultComponent implements OnInit {
   isInvalidAvatar = false;
   constructor(private algolia: AlgoliaService, private renderer: Renderer2) {
     this.algolia.searchState.result$.subscribe(results => {
-      console.log(results.query.trim(), results);
       if (results.query.trim() === '') {
         this.packages = [];
       } else {
