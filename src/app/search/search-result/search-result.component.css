@@ -1,8 +1,11 @@
 mat-card {
-  width: 330px;
+  width: 350px;
   margin: 10px;
   display: inline-block;
   text-align: left;
+  background: #fbc87a;
+  color: black;
+  vertical-align: top;
 }
 
 .header-image img {
@@ -17,16 +20,16 @@ i[hidden] {
   display: none;
 }
 
-.mat-card {
-  background: #fbc87a;
-  color: black;
-  vertical-align: top;
-}
-
 .mat-card-content {
   max-height: 100px;
-  height: 100px;
   overflow: scroll;
+}
+
+.mat-card-actions {
+  background: #f57375;
+  width: 378px;
+  margin-left: -24px;
+  padding: 7px 10px;
 }
 
 .mat-card ::ng-deep em {

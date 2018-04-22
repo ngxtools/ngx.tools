@@ -8,21 +8,34 @@
       </div>
       <mat-card-title [innerHtml]="package._highlightResult.name?.value">{{ package.name }}</mat-card-title>
       <mat-card-subtitle [innerHtml]="package._highlightResult.owner?.name?.value">{{ package.owner.name }}</mat-card-subtitle>
-      <mat-card-subtitle>{{ package.version }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <p [innerHTML]="package._highlightResult.description?.value">{{ package.description }}</p>
     </mat-card-content>
     <mat-card-footer>
       <span>
-        <i class="material-icons">monetization_on</i>{{package.license || 'N/A'}}</span>
+        <i class="material-icons">info_outline</i>{{package.version}}
+      </span>
+      <span>
+        <i class="material-icons">copyright</i>{{package.license || 'N/A'}}</span>
       <span title="The number of Downloads for the last 30 Days">
         <i class="material-icons">cloud_download</i>{{package.humanDownloadsLast30Days}}</span>
     </mat-card-footer>
-    <!-- <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
-    </mat-card-actions> -->
+    <mat-card-actions>
+      <a mat-button href="{{package.lastPublisher.link}}" target="__blank" title="Visit the publisher page">
+        <i class="material-icons">account_box</i>
+      </a>
+      <a *ngIf="package.repository" mat-button href="{{package.repository.url}}" target="__blank" title="Visit the Github project page">
+        <i class="material-icons">code</i>
+      </a>
+      <a *ngIf="package.repository" mat-button href="{{package.repository.url}}/issues" target="__blank" title="Visit the Github issues page">
+        <i class="material-icons">bug_report</i>
+      </a>
+      <a *ngIf="package.repository" mat-button href="https://stackblitz.com/github/{{package.repository.user}}/{{package.repository.project}}"
+        target="__blank" title="Open package in StackBlitz">
+        <i class="material-icons">mode_edit</i>
+      </a>
+    </mat-card-actions>
   </mat-card>
 
 </section>

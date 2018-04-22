@@ -21,13 +21,14 @@ mat-form-field.mat-focused {
 }
 
 .algolia-credits {
-  font-size: 0.9em;
+  font-size: 0.7em;
   position: relative;
   top: -28px;
   text-align: right;
-  padding: 0px 44px;
   color: #2e2e2e;
-  right: -30px;
+  width: 100%;
+  text-align: right;
+  right: 10px;
 }
 .algolia-credits img {
   width: 55px;
