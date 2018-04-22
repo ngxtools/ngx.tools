@@ -1,20 +1,27 @@
-<mat-card *ngFor="let package of packages; trackBy: trackByName">
-  <mat-card-header>
-    <div mat-card-avatar class="header-image">
-      <img #avatarImage (error)="onAvatarImageError(avatarImage, avatarIcon)" src="{{package.owner.avatar}}" alt="{{package.owner.name}} ">
-      <i #avatarIcon class="material-icons">account_circle</i>
-    </div>
-    <mat-card-title [innerHtml]="package._highlightResult.name.value">{{ package.name }}</mat-card-title>
-    <mat-card-subtitle>{{ package.owner.name }}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <p [innerHTML]="package.description"></p>
-  </mat-card-content>
-  <mat-card-footer>
-    {{package.license}} {{package.humanDownloadsLast30Days}}
-  </mat-card-footer>
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
-  </mat-card-actions>
-</mat-card>
+<section *ngIf="packages.length > 0">
+
+  <mat-card *ngFor="let package of packages; trackBy: trackByName">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image">
+        <img #avatarImage (error)="onAvatarImageError(avatarImage, avatarIcon)" src="{{package.owner.avatar}}" alt="{{package.owner.name}} ">
+        <i #avatarIcon class="material-icons">account_circle</i>
+      </div>
+      <mat-card-title [innerHtml]="package._highlightResult.name.value">{{ package.name }}</mat-card-title>
+      <mat-card-subtitle>{{ package.owner.name }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p [innerHTML]="package.description"></p>
+    </mat-card-content>
+    <mat-card-footer>
+      <span>
+        <i class="material-icons">monetization_on</i>{{package.license}}</span>
+      <span>
+        <i class="material-icons">cloud_download</i>{{package.humanDownloadsLast30Days}}</span>
+    </mat-card-footer>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
+
+</section>
