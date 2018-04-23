@@ -46,6 +46,12 @@ export class SearchComponent implements OnInit, AfterContentInit {
         this.packages = results.hits;
         if (results.hits.length === 0) {
           this.resultContainerRef.nativeElement.classList.add('no-package-found');
+          window['ga']('send', {
+            hitType: 'event',
+            eventCategory: 'Search',
+            eventAction: 'query',
+            eventLabel: results.query
+          });
         } else {
           this.resultContainerRef.nativeElement.classList.remove('no-package-found');
         }
