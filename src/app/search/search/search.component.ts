@@ -37,6 +37,7 @@ export class SearchComponent implements OnInit, AfterContentInit {
 
         if (value === '') {
           this.resultContainerRef.nativeElement.classList.remove('no-package-found');
+          this.packages = [];
         }
       });
     this.algolia.searchState.result$.subscribe(results => {
