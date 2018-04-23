@@ -60,3 +60,12 @@ img + i {
   margin: -5px;
   color: #f57375;
 }
+
+.license__truncate {
+  max-width: 90px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  bottom: -4px;
+  position: relative;
+}

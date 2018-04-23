@@ -1,6 +1,9 @@
 <section class="palette__color-2">
   <mat-form-field [formGroup]="searchForm">
     <input formControlName="query" matInput placeholder="Search for Angular packages, eg. compodoc, material, schematics...">
+    <button mat-button *ngIf="searchForm.controls.query.value" matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-form-field>
   <p class="algolia-credits">Powered by
     <a href="https://www.algolia.com" target="__blank">
@@ -10,6 +13,6 @@
   </p>
 </section>
 
-<section class="palette__color-5 search-result">
-  <app-search-result></app-search-result>
+<section class="palette__color-5 search-result" #resultContainerRef>
+  <app-search-result [packages]="packages"></app-search-result>
 </section>

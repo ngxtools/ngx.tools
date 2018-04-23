@@ -2,6 +2,16 @@ section {
   width: 100%;
   height: 210px;
   text-align: center;
+  height: 100%;
+  padding: 40px 0;
+  min-height: 100px;
+}
+
+.no-package-found {
+  background-image: url(/assets/no_packages_found.png);
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 mat-form-field {
@@ -18,6 +28,7 @@ mat-form-field.mat-focused {
 .search-result {
   height: 100%;
   padding: 40px 0;
+  min-height: 100px;
 }
 
 .algolia-credits {

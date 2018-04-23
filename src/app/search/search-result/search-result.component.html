@@ -13,26 +13,32 @@
       <p [innerHTML]="package._highlightResult.description?.value">{{ package.description }}</p>
     </mat-card-content>
     <mat-card-footer>
-      <span>
+      <span matTooltip="Current version" matTooltipPosition="above">
         <i class="material-icons">info_outline</i>{{package.version}}
       </span>
-      <span>
+      <span class="license__truncate" matTooltip="License or copyright" matTooltipPosition="above">
         <i class="material-icons">copyright</i>{{package.license || 'N/A'}}</span>
-      <span title="The number of Downloads for the last 30 Days">
+      <span matTooltip="The number of Downloads for the last 30 Days" matTooltipPosition="above">
         <i class="material-icons">cloud_download</i>{{package.humanDownloadsLast30Days}}</span>
     </mat-card-footer>
     <mat-card-actions>
-      <a mat-button href="{{package.lastPublisher.link}}" target="__blank" title="Visit the publisher page">
-        <i class="material-icons">account_box</i>
+      <a mat-button href="{{package.lastPublisher.link}}" target="__blank" matTooltip="Visit the publisher's page on NPM" matTooltipPosition="above">
+        <i class="material-icons">
+          <img width="35" src="assets/npm.png" />
+        </i>
       </a>
-      <a *ngIf="package.repository" mat-button href="{{package.repository.url}}" target="__blank" title="Visit the Github project page">
-        <i class="material-icons">code</i>
+      <a *ngIf="package.repository" mat-button href="{{package.repository.url}}" target="__blank" matTooltip="Visit the Github project page"
+        matTooltipPosition="above">
+        <i class="material-icons">
+          <img width="24" src="assets/GitHub-Mark-32px.png" />
+        </i>
       </a>
-      <a *ngIf="package.repository" mat-button href="{{package.repository.url}}/issues" target="__blank" title="Visit the Github issues page">
+      <a *ngIf="package.repository" mat-button href="{{package.repository.url}}/issues" target="__blank" matTooltip="Visit the Github issues page"
+        matTooltipPosition="above">
         <i class="material-icons">bug_report</i>
       </a>
       <a *ngIf="package.repository" mat-button href="https://stackblitz.com/github/{{package.repository.user}}/{{package.repository.project}}"
-        target="__blank" title="Open package in StackBlitz">
+        target="__blank" matTooltip="Open package in StackBlitz" matTooltipPosition="above">
         <i class="material-icons">mode_edit</i>
       </a>
     </mat-card-actions>
