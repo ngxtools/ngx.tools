@@ -25,3 +25,19 @@ mat-toolbar {
   right: -113px;
   text-transform: uppercase;
 }
+
+footer {
+  padding: 10px;
+  background: #fbc87a;
+  color: #f57375;
+  position: fixed;
+  bottom: 0;
+  border-top: 4px solid #9dcbb6;
+  width: 100%;
+}
+
+footer a {
+  color: #f57375;
+  font-weight: bold;
+  text-decoration: underline;
+}
