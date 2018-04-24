@@ -2,7 +2,7 @@ section {
   width: 100%;
   height: 167px;
   text-align: center;
-  padding: 40px 0;
+  padding: 40px 0 0;
   min-height: 100px;
 }
 
@@ -13,15 +13,39 @@ section {
   background-repeat: no-repeat;
 }
 
-mat-form-field {
+form {
   font-size: 1.5em;
   width: 90vw;
   max-width: 900px;
-  padding: 50px 0;
+  margin: 30px auto 80px auto;
+  padding: 0;
+  border-bottom: 3px solid #96ccb6;
+  color: #fec97c;
+  position: relative;
 }
 
-mat-form-field.mat-focused {
-  color: black;
+.input__search {
+  padding: 10px 40px 10px 10px;
+  border: 0 none;
+  font-size: 1.1em;
+  background: transparent;
+  color: #fec97c;
+  min-width: 300px;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.button__clear {
+  position: absolute;
+  right: -2px;
+  top: 8px;
+  color: #fec97c;
+}
+
+.button__clear[hidden] {
+  visibility: hidden;
 }
 
 .search-result {

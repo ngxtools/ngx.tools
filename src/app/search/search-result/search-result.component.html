@@ -13,32 +13,30 @@
       <p [innerHTML]="package._highlightResult.description?.value">{{ package.description }}</p>
     </mat-card-content>
     <mat-card-footer>
-      <span matTooltip="Current version" matTooltipPosition="above">
+      <span>
         <i class="material-icons">info_outline</i>{{package.version}}
       </span>
-      <span class="license__truncate" matTooltip="License or copyright" matTooltipPosition="above">
+      <span class="license__truncate">
         <i class="material-icons">copyright</i>{{package.license || 'N/A'}}</span>
-      <span matTooltip="The number of Downloads for the last 30 Days" matTooltipPosition="above">
+      <span>
         <i class="material-icons">cloud_download</i>{{package.humanDownloadsLast30Days}}</span>
     </mat-card-footer>
     <mat-card-actions>
-      <a mat-button href="{{package.lastPublisher.link}}" target="__blank" matTooltip="Visit the publisher's page on NPM" matTooltipPosition="above">
+      <a mat-button href="{{package.lastPublisher.link}}" target="__blank">
         <i class="material-icons">
           <img width="35" src="assets/npm.png" />
         </i>
       </a>
-      <a *ngIf="package.repository" mat-button href="{{package.repository.url}}" target="__blank" matTooltip="Visit the Github project page"
-        matTooltipPosition="above">
+      <a *ngIf="package.repository" mat-button href="{{package.repository.url}}" target="__blank">
         <i class="material-icons">
           <img width="24" src="assets/GitHub-Mark-32px.png" />
         </i>
       </a>
-      <a *ngIf="package.repository" mat-button href="{{package.repository.url}}/issues" target="__blank" matTooltip="Visit the Github issues page"
-        matTooltipPosition="above">
+      <a *ngIf="package.repository" mat-button href="{{package.repository.url}}/issues" target="__blank">
         <i class="material-icons">bug_report</i>
       </a>
       <a *ngIf="package.repository" mat-button href="https://stackblitz.com/github/{{package.repository.user}}/{{package.repository.project}}"
-        target="__blank" matTooltip="Open package in StackBlitz" matTooltipPosition="above">
+        target="__blank">
         <i class="material-icons">mode_edit</i>
       </a>
     </mat-card-actions>
