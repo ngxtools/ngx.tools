@@ -12,15 +12,6 @@
     <mat-card-content>
       <p [innerHTML]="package._highlightResult.description?.value">{{ package.description }}</p>
     </mat-card-content>
-    <mat-card-footer>
-      <span>
-        <i class="material-icons">info_outline</i>{{package.version}}
-      </span>
-      <span class="license__truncate">
-        <i class="material-icons">copyright</i>{{package.license || 'N/A'}}</span>
-      <span>
-        <i class="material-icons">cloud_download</i>{{package.humanDownloadsLast30Days}}</span>
-    </mat-card-footer>
     <mat-card-actions>
       <a mat-button href="{{package.lastPublisher.link}}" target="__blank">
         <i class="material-icons">
@@ -40,6 +31,20 @@
         <i class="material-icons">mode_edit</i>
       </a>
     </mat-card-actions>
+    <mat-card-footer>
+      <p>
+        <span>
+          <i class="material-icons">label</i>{{package.version}}
+        </span>
+        <span class="license__truncate">
+          <i class="material-icons">copyright</i>{{package.license || 'N/A'}}</span>
+        <span>
+          <i class="material-icons">cloud_download</i>{{package.humanDownloadsLast30Days}}</span>
+      </p>
+      <p class="keywords">
+        <span (click)="searchByKeyword(keyword)" *ngFor="let keyword of package.keywords">{{ keyword }}</span>
+      </p>
+    </mat-card-footer>
   </mat-card>
 
 </section>

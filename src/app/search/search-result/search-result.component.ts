@@ -1,7 +1,5 @@
-import { AlgoliaService } from './../../core/algolia/algolia.service';
 import { Component, OnInit, Renderer2, Input } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { DeeplinkService } from './../deeplink.service';
 
 export interface ObjectLiteral {
   [key: string]: string;
@@ -68,7 +66,7 @@ export interface PackageType {
 export class SearchResultComponent implements OnInit {
   @Input() packages: PackageType[] = [];
   isInvalidAvatar = false;
-  constructor(private algolia: AlgoliaService, private renderer: Renderer2) {}
+  constructor(private deeplink: DeeplinkService, private renderer: Renderer2) {}
 
   ngOnInit() {}
 
@@ -79,5 +77,12 @@ export class SearchResultComponent implements OnInit {
   onAvatarImageError(avatarImage: HTMLImageElement, avatarIcon: HTMLElement) {
     this.renderer.setStyle(avatarImage, 'display', 'none');
     this.renderer.setStyle(avatarIcon, 'display', 'block');
+  }
+
+  searchByKeyword(keyword: string) {
+    this.deeplink.syncUrl({
+      q: keyword
+    });
+    window.scroll(0, 0);
   }
 }

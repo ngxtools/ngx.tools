@@ -70,3 +70,11 @@ img + i {
   bottom: -4px;
   position: relative;
 }
+
+.keywords span {
+  display: inline-block;
+  border: 1px solid #fc737a;
+  margin: 4px;
+  border-radius: 30px;
+  padding: 4px 11px;
+}
