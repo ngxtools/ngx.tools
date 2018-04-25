@@ -7,7 +7,7 @@
         <i #avatarIcon class="material-icons">account_circle</i>
       </div>
       <mat-card-title [innerHtml]="package._highlightResult.name?.value">{{ package.name }}</mat-card-title>
-      <mat-card-subtitle [innerHtml]="package._highlightResult.owner?.name?.value">{{ package.owner.name }}</mat-card-subtitle>
+      <mat-card-subtitle (click)="searchByKeyword(package.owner.name)" [innerHtml]="package._highlightResult.owner?.name?.value">{{ package.owner.name }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <p [innerHTML]="package._highlightResult.description?.value">{{ package.description }}</p>
