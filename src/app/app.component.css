@@ -14,13 +14,13 @@ mat-toolbar {
 .header__logo {
   background-image: url(/assets/ngx-tools-logo.png);
   display: inline-block;
-  width: 220px;
+  width: 152px;
   margin: auto;
-  height: 105px;
+  height: 75px;
   background-size: cover;
   background-repeat: no-repeat;
-  margin-top: -10px;
-  z-index: 9;
+  margin-top: 9px;
+  z-index: 2;
 }
 
 .header__logo:after {
@@ -32,7 +32,7 @@ mat-toolbar {
   font-size: 14px;
   position: relative;
   top: 11px;
-  right: -113px;
+  right: -96px;
   text-transform: uppercase;
 }
 
