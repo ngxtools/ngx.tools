@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, Input } from '@angular/core';
+import { Component, Renderer2, Input, OnChanges } from '@angular/core';
 import { DeeplinkService } from './../deeplink.service';
 
 export interface ObjectLiteral {
@@ -63,12 +63,17 @@ export interface PackageType {
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.css']
 })
-export class SearchResultComponent implements OnInit {
+export class SearchResultComponent implements OnChanges {
   @Input() packages: PackageType[] = [];
   isInvalidAvatar = false;
   constructor(private deeplink: DeeplinkService, private renderer: Renderer2) {}
 
-  ngOnInit() {}
+  ngOnChanges() {
+    this.packages = this.packages.map(pack => {
+      pack.keywords = pack.keywords.slice(0, 5);
+      return pack;
+    });
+  }
 
   packageName(pack: PackageType) {
     return pack.name;

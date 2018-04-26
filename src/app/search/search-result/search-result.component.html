@@ -1,10 +1,10 @@
 <section *ngIf="packages.length > 0">
 
-  <mat-card *ngFor="let package of packages; trackBy: packageName">
+  <mat-card *ngFor="let package of packages; trackBy: packageName" class="ngxtools-palette-accent">
     <mat-card-header>
       <div mat-card-avatar class="header-image">
         <img #avatarImage (error)="onAvatarImageError(avatarImage, avatarIcon)" src="{{package.owner.avatar}}" alt="{{package.owner.name}} ">
-        <i #avatarIcon class="material-icons">account_circle</i>
+        <i #avatarIcon class="material-icons ngxtools-palette-primary-text">account_circle</i>
       </div>
       <mat-card-title [innerHtml]="package._highlightResult.name?.value">{{ package.name }}</mat-card-title>
       <mat-card-subtitle (click)="searchByKeyword(package.owner.name)" [innerHtml]="package._highlightResult.owner?.name?.value">{{ package.owner.name }}</mat-card-subtitle>
@@ -12,7 +12,7 @@
     <mat-card-content>
       <p [innerHTML]="package._highlightResult.description?.value">{{ package.description }}</p>
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions class="ngxtools-palette-warn">
       <a mat-button href="{{package.lastPublisher.link}}" target="__blank">
         <i class="material-icons">
           <img width="35" src="assets/npm.png" />
@@ -41,7 +41,7 @@
         <span>
           <i class="material-icons">cloud_download</i>{{package.humanDownloadsLast30Days}}</span>
       </p>
-      <p class="keywords">
+      <p class="keywords ngxtools-palette-warn-text">
         <span (click)="searchByKeyword(keyword)" *ngFor="let keyword of package.keywords">{{ keyword }}</span>
       </p>
     </mat-card-footer>

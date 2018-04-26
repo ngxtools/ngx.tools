@@ -1,7 +1,8 @@
-<section class="palette__color-2">
-  <form [formGroup]="searchForm">
-    <input class="input__search" formControlName="query" placeholder="Search for Angular packages, eg. compodoc, material, schematics...">
-    <button class="button__clear" mat-button [hidden]="!searchForm.controls.query.value" mat-icon-button aria-label="Clear" (click)="clear()">
+<section class="ngxtools-palette-warn">
+  <form [formGroup]="searchForm" class="ngxtools-palette-primary-border ngxtools-palette-primary-text">
+    <input aria-label="Enter your search query" class="input__search ngxtools-palette-accent-text" formControlName="query" placeholder="Search for Angular packages, eg. compodoc, material, schematics...">
+    <button class="button__clear ngxtools-palette-accent-text" mat-button [hidden]="!searchForm.controls.query.value" mat-icon-button
+      aria-label="Clear" (click)="clear()">
       <mat-icon>close</mat-icon>
     </button>
   </form>
@@ -13,6 +14,6 @@
   </p>
 </section>
 
-<section class="palette__color-5 search-result" #resultContainerRef>
+<section class="ngxtools-palette-primary search-result" #resultContainerRef>
   <app-search-result [packages]="packages"></app-search-result>
 </section>

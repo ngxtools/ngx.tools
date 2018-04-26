@@ -1,7 +1,16 @@
+section {
+}
+
+section span {
+  display: block;
+  padding: 10px;
+}
+
 mat-toolbar {
   text-align: center;
-  border-bottom: 5px #9dcbb6 solid;
+  border-bottom: 5px solid;
 }
+
 .header__logo {
   background-image: url(/assets/ngx-tools-logo.png);
   display: inline-block;
@@ -11,6 +20,7 @@ mat-toolbar {
   background-size: cover;
   background-repeat: no-repeat;
   margin-top: -10px;
+  z-index: 9;
 }
 
 .header__logo:after {
@@ -28,17 +38,24 @@ mat-toolbar {
 
 footer {
   padding: 10px;
-  background: #fbc87a;
-  color: #f57375;
   position: fixed;
   bottom: 0;
-  border-top: 4px solid #9dcbb6;
+  border-top: 4px solid;
   width: 100%;
   font-size: 0.8em;
+  background-color: white;
 }
 
 footer a {
-  color: #f57375;
   font-weight: bold;
   text-decoration: underline;
+}
+
+mat-sidenav {
+  border-right: 6px solid;
+  padding: 4px;
+}
+
+.menu_button {
+  position: absolute;
 }

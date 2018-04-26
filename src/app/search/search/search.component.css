@@ -19,8 +19,7 @@ form {
   max-width: 900px;
   margin: 30px auto 80px auto;
   padding: 0;
-  border-bottom: 3px solid #96ccb6;
-  color: #fec97c;
+  border-bottom: 3px solid;
   position: relative;
 }
 
@@ -29,7 +28,6 @@ form {
   border: 0 none;
   font-size: 1.1em;
   background: transparent;
-  color: #fec97c;
   min-width: 300px;
   width: 100%;
   position: relative;
@@ -37,11 +35,27 @@ form {
   outline: none;
 }
 
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: black;
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: black;
+}
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: black;
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: black;
+}
+
 .button__clear {
   position: absolute;
   right: -2px;
   top: 8px;
-  color: #fec97c;
 }
 
 .button__clear[hidden] {

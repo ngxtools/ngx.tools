@@ -1,8 +1,30 @@
-<mat-toolbar class="palette__color-3">
-  <span class="header__logo"></span>
+<mat-toolbar class="ngxtools-palette-accent ngxtools-palette-primary-border">
+  <button mat-icon-button (click)="snav.toggle()" class="menu_button">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="header__logo ngxtools-palette-primary-text"></span>
 </mat-toolbar>
-<router-outlet></router-outlet>
-<footer>
-  Built with ❤ by
-  <a href="https://twitter.com/manekinekko">Wassim Chegham — @manekinekko</a>
-</footer>
+<mat-sidenav-container>
+  <mat-sidenav #snav mode="side" class="ngxtools-palette-accent ngxtools-palette-primary-border">
+    <mat-nav-list>
+      <mat-accordion>
+        <mat-expansion-panel class="ngxtools-palette-accent ngxtools-palette-primary-border">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Themes
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-theme-chooser></app-theme-chooser>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content (click)="snav.close()">
+    <router-outlet></router-outlet>
+    <footer class="ngxtools-palette-accent ngxtools-palette-warn-text ngxtools-palette-primary-border">
+      Built with ❤ by
+      <a class="ngxtools-palette-warn-text" href="https://twitter.com/manekinekko">Wassim Chegham — @manekinekko</a>
+    </footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

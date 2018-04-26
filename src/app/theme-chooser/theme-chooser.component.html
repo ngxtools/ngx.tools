@@ -1,0 +1,5 @@
+<a class="theme-chooser" mat-list-item (click)="setTheme(theme.id)" *ngFor="let theme of themes; trackBy: themeId">
+  <span aria-label="theme-chooser ngxtools-palette-primary" class="theme-sample {{theme.id}}_ngxtools-palette-primary-chooser"></span>
+  <span aria-label="theme-chooser ngxtools-palette-acent" class="theme-sample {{theme.id}}_ngxtools-palette-accent-chooser"></span>
+  <span aria-label="theme-chooser ngxtools-palette-warn" class="theme-sample {{theme.id}}_ngxtools-palette-warn-chooser"></span>
+</a>

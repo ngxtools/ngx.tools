@@ -1,0 +1,8 @@
+:host() .theme-chooser .theme-sample {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  margin: 1px;
+  border: 1px solid gray;
+}
