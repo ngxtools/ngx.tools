@@ -1,6 +1,6 @@
 <section class="ngxtools-palette-warn">
   <form [formGroup]="searchForm" class="ngxtools-palette-primary-border ngxtools-palette-primary-text">
-    <input aria-label="Enter your search query" class="input__search ngxtools-palette-accent-text" formControlName="query" placeholder="Search for Angular packages, eg. compodoc, material, schematics...">
+    <input aria-label="Enter your search query" class="input__search ngxtools-palette-accent-text" formControlName="query" placeholder="search packages">
     <button class="button__clear ngxtools-palette-accent-text" mat-button [hidden]="!searchForm.controls.query.value" mat-icon-button
       aria-label="Clear" (click)="clear()">
       <mat-icon>close</mat-icon>
