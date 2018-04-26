@@ -59,3 +59,9 @@ mat-sidenav {
 .menu_button {
   position: absolute;
 }
+
+mat-sidenav-container ::ng-deep .mat-drawer-backdrop {
+  height: 100%;
+  min-width: 100%;
+  position: fixed;
+}
