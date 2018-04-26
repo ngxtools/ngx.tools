@@ -1,7 +1,7 @@
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit, EventEmitter, AfterContentInit, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import { distinctUntilChanged, map, debounceTime } from 'rxjs/operators';
 import { PackageType } from './../search-result/search-result.component';
 import { DeeplinkService } from './../deeplink.service';
 import { AlgoliaService } from './../../core/algolia/algolia.service';
@@ -26,6 +26,7 @@ export class SearchComponent implements OnInit, AfterContentInit {
     this.searchForm.valueChanges
       .pipe(
         // prettier-ignore
+        debounceTime(50),
         map(event => event.query),
         distinctUntilChanged()
       )
