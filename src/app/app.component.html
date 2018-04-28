@@ -1,11 +1,5 @@
-<mat-toolbar class="ngxtools-palette-accent ngxtools-palette-primary-border">
-  <button mat-icon-button (click)="snav.toggle()" class="menu_button">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span class="header__logo ngxtools-palette-primary-text"></span>
-</mat-toolbar>
 <mat-sidenav-container>
-  <mat-sidenav #snav fixedInViewport="true" mode="over" class="ngxtools-palette-accent ngxtools-palette-primary-border">
+  <mat-sidenav #snav fixedInViewport="true" mode="push" class="ngxtools-palette-accent ngxtools-palette-primary-border">
     <mat-nav-list>
       <mat-accordion>
         <mat-expansion-panel class="ngxtools-palette-accent ngxtools-palette-primary-border">
@@ -20,7 +14,13 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-sidenav-content (click)="snav.close()">
+  <mat-sidenav-content>
+    <mat-toolbar class="ngxtools-palette-accent ngxtools-palette-primary-border">
+      <button mat-icon-button (click)="snav.toggle()" class="menu_button">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="header__logo ngxtools-palette-primary-text"></span>
+    </mat-toolbar>
     <router-outlet></router-outlet>
     <footer class="ngxtools-palette-accent ngxtools-palette-warn-text ngxtools-palette-primary-border">
       Built with ❤ by
