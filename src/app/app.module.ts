@@ -1,4 +1,3 @@
-import { PromptUpdateService } from './prompt-update.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,11 +20,7 @@ import { ThemeChooserComponent } from './theme-chooser/theme-chooser.component';
     AppRoutingModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [PromptUpdateService],
+  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  constructor(private update: PromptUpdateService) {
-    update.check();
-  }
-}
+export class AppModule {}
