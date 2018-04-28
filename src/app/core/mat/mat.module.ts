@@ -7,10 +7,20 @@ import {
   MatIconModule,
   MatSidenavModule,
   MatListModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatSnackBarModule
 } from '@angular/material';
 
-const MAT_MODULES = [MatExpansionModule, MatListModule, MatSidenavModule, MatIconModule, MatToolbarModule, MatCardModule, MatButtonModule];
+const MAT_MODULES = [
+  MatSnackBarModule,
+  MatExpansionModule,
+  MatListModule,
+  MatSidenavModule,
+  MatIconModule,
+  MatToolbarModule,
+  MatCardModule,
+  MatButtonModule
+];
 
 @NgModule({
   imports: MAT_MODULES,
