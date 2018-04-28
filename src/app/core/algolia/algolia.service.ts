@@ -81,7 +81,7 @@ export class AlgoliaService {
    */
   private search(indexName: string, query: string) {
     this.indices[this.indexName]
-      .setIndex('npm-search-relevance-test')
+      .setIndex(indexName)
       .setQueryParameter('query', query)
       .setQueryParameter('filters', '(keywords:ngx OR keywords:angular) AND (NOT keywords:angularjs)')
       .search();
