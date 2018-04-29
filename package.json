@@ -12,7 +12,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build:prod": "npm run build -- --prod",
-    "test": "ng test --watch=false --single-run=true --browser=ChromeHeadless",
+    "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "deploy": "firebase deploy --non-interactive",
