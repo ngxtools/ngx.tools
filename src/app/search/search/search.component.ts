@@ -74,4 +74,13 @@ export class SearchComponent implements OnInit, AfterContentInit {
   isThereAnyPackage() {
     return this.searchForm.controls.query.value && this.packages.length === 0;
   }
+
+  /**
+   * Kill the Enter keypress
+   * @param keypressEvent The keypress DOM event.
+   */
+  noop(keypressEvent: Event) {
+    keypressEvent.preventDefault();
+    keypressEvent.stopPropagation();
+  }
 }
