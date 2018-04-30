@@ -29,6 +29,7 @@ i[hidden] {
   width: 378px;
   margin-left: -24px;
   padding: 7px 10px;
+  text-align: center;
 }
 
 mat-card-subtitle {
@@ -79,4 +80,46 @@ img + i {
   border-radius: 30px;
   padding: 4px 11px;
   cursor: pointer;
+}
+
+@media (min-width: 299px) {
+  mat-card.mat-card {
+    width: 277px;
+  }
+  .mat-card-actions {
+    width: 309px;
+    padding: 4px 2px;
+    margin-left: -16px;
+  }
+  .mat-card-actions .mat-button,
+  .mat-card-actions .mat-raised-button {
+    width: 70px;
+  }
+}
+
+@media (min-width: 500px) {
+  mat-card.mat-card {
+    width: 440px;
+  }
+  .mat-card-actions {
+    width: 378px;
+    margin-left: -16px;
+    padding: 7px 47px;
+  }
+}
+
+@media (min-width: 600px) {
+  .mat-card-actions {
+    margin-left: -24px;
+    padding: 7px 55px;
+  }
+}
+
+@media (min-width: 900px) {
+  mat-card.mat-card {
+    width: 370px;
+  }
+  .mat-card-actions {
+    padding: 7px 20px;
+  }
 }
