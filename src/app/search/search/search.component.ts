@@ -82,5 +82,6 @@ export class SearchComponent implements OnInit, AfterContentInit {
   noop(keypressEvent: Event) {
     keypressEvent.preventDefault();
     keypressEvent.stopPropagation();
+    return false;
   }
 }
