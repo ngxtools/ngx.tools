@@ -88,12 +88,12 @@ img + i {
   }
   .mat-card-actions {
     width: 309px;
-    padding: 4px 2px;
+    padding: 4px 0;
     margin-left: -16px;
   }
   .mat-card-actions .mat-button,
   .mat-card-actions .mat-raised-button {
-    width: 70px;
+    min-width: 70px;
   }
 }
 
