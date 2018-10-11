@@ -15,5 +15,5 @@
 </section>
 
 <section class="ngxtools-palette-primary search-result" #resultContainerRef>
-  <app-search-result [packages]="packages"></app-search-result>
+  <app-search-result [packages]="packages" (scrollReachedBottom)="loadNextPage()"></app-search-result>
 </section>

@@ -1,4 +1,4 @@
-<section *ngIf="packages.length > 0">
+<section *ngIf="packages.length > 0" app-infinite-scroll (scroll)="onScroll()">
 
   <mat-card *ngFor="let package of packages; trackBy: packageName" class="ngxtools-palette-accent">
     <mat-card-header>
