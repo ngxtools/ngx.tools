@@ -1,3 +1,10 @@
+<a name="1.1.0"></a>
+# 1.1.0 (2018-10-11)
+
+### Features
+
+* promote official packages ([#12](https://github.com/ngxtools/ngx.tools/issues/12)) ([7303b06](https://github.com/ngxtools/ngx.tools/commit/7303b06))
+
 <a name="1.0.0"></a>
 # 1.0.0 (2018-10-11)
 
@@ -13,7 +20,6 @@
 * make the logo show behind the sidenav backdrop ([c52702d](https://github.com/ngxtools/ngx.tools/commit/c52702d))
 * nav side bar fixedInViewport ([9203e86](https://github.com/ngxtools/ngx.tools/commit/9203e86))
 * overflow-y auto ([ddbad80](https://github.com/ngxtools/ngx.tools/commit/ddbad80))
-* promote official packages ([#12](https://github.com/ngxtools/ngx.tools/issues/12)) ([7303b06](https://github.com/ngxtools/ngx.tools/commit/7303b06))
 * reduce the logo size ([56013a9](https://github.com/ngxtools/ngx.tools/commit/56013a9))
 * search area height ([77c260f](https://github.com/ngxtools/ngx.tools/commit/77c260f))
 
