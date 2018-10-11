@@ -84,6 +84,7 @@ export class AlgoliaService {
       .setIndex(indexName)
       .setQueryParameter('query', query)
       .setQueryParameter('filters', '(keywords:ngx OR keywords:angular) AND (NOT keywords:angularjs)')
+      .setQueryParameter('optionalFilters', 'owner.name:angular')
       .search();
   }
 
