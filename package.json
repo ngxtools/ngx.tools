@@ -16,7 +16,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "deploy": "firebase deploy --non-interactive",
-    "release": "npm run test && npm run build:prod && npm run deploy"
+    "release": "npm run changelog && npm run test && npm run build:prod && npm run deploy",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
   "private": true,
   "dependencies": {
@@ -42,15 +43,15 @@
     "zone.js": "^0.8.24"
   },
   "devDependencies": {
-    "@angular/compiler-cli": "^6.0.0-rc.5",
     "@angular-devkit/build-angular": "~0.5.0",
-    "typescript": "~2.7.2",
     "@angular/cli": "~6.0.0-rc.5",
+    "@angular/compiler-cli": "^6.0.0-rc.5",
     "@angular/language-service": "^6.0.0-rc.5",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
+    "conventional-changelog-cli": "^2.0.5",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
@@ -60,6 +61,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.3.0",
     "ts-node": "~5.0.1",
-    "tslint": "~5.9.1"
+    "tslint": "~5.9.1",
+    "typescript": "~2.7.2"
   }
 }
