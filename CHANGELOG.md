@@ -1,3 +1,10 @@
+<a name="1.2.0"></a>
+# 1.2.0 (2018-10-12)
+
+### Features
+
+* add infinite scroll on search result ([#15](https://github.com/ngxtools/ngx.tools/issues/15)) ([f647159]
+
 <a name="1.1.0"></a>
 # 1.1.0 (2018-10-11)
 
