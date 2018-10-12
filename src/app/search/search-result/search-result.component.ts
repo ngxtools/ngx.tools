@@ -1,4 +1,4 @@
-import { Component, Renderer2, Input, OnChanges } from '@angular/core';
+import { Component, Renderer2, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { DeeplinkService } from './../deeplink.service';
 
 export interface ObjectLiteral {
@@ -65,6 +65,7 @@ export interface PackageType {
 })
 export class SearchResultComponent implements OnChanges {
   @Input() packages: PackageType[] = [];
+  @Output() scrollReachedBottom: EventEmitter<void> = new EventEmitter();
   isInvalidAvatar = false;
   constructor(private deeplink: DeeplinkService, private renderer: Renderer2) {}
 
@@ -89,5 +90,9 @@ export class SearchResultComponent implements OnChanges {
       q: keyword
     });
     window.scroll(0, 0);
+  }
+
+  onScroll(){
+    this.scrollReachedBottom.emit();
   }
 }
