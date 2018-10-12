@@ -14,6 +14,8 @@ import { AlgoliaService } from './../../core/algolia/algolia.service';
 export class SearchComponent implements OnInit, AfterContentInit {
   searchForm: FormGroup;
   packages: PackageType[] = [];
+  currentQuery: string;
+  hasReachedLastPage = false;
 
   @ViewChild('resultContainerRef') resultContainerRef: ElementRef;
   constructor(private algolia: AlgoliaService, private route: ActivatedRoute, private deeplink: DeeplinkService) {
@@ -42,10 +44,17 @@ export class SearchComponent implements OnInit, AfterContentInit {
         }
       });
     this.algolia.searchState.result$.subscribe(results => {
+      this.hasReachedLastPage = results.page + 1 === results.nbPages;
+
+      if(results.query !== this.currentQuery){
+        this.currentQuery = results.query;
+        this.packages = [];
+      }
+
       if (results.query.trim() === '') {
         this.packages = [];
       } else {
-        this.packages = results.hits;
+        this.packages = this.packages.concat(results.hits);
         if (results.hits.length === 0) {
           this.resultContainerRef.nativeElement.classList.add('no-package-found');
           window['ga']('send', {
@@ -73,6 +82,12 @@ export class SearchComponent implements OnInit, AfterContentInit {
 
   isThereAnyPackage() {
     return this.searchForm.controls.query.value && this.packages.length === 0;
+  }
+
+  loadNextPage(){
+    if(!this.hasReachedLastPage) {
+      this.algolia.nextPage();
+    }
   }
 
   /**

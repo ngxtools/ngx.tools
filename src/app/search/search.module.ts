@@ -6,10 +6,11 @@ import { MatModule } from './../core/mat/mat.module';
 import { SearchComponent } from './search/search.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { DeeplinkService } from './deeplink.service';
+import { InfiniteScrollDirective } from './infinite-scroll.directive';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, MatModule, SearchRoutingModule],
-  declarations: [SearchComponent, SearchResultComponent],
-  providers: [DeeplinkService]
+  declarations: [SearchComponent, SearchResultComponent, InfiniteScrollDirective],
+  providers: [DeeplinkService],
 })
 export class SearchModule {}
