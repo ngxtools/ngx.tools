@@ -1,12 +1,12 @@
 <section *ngIf="packages.length > 0" app-infinite-scroll (scroll)="onScroll()">
 
-  <mat-card *ngFor="let package of packages; trackBy: packageName" class="ngxtools-palette-accent" aria-labelledby="{{package.name}}">
-    <mat-card-header aria-label="Package header">
+  <mat-card *ngFor="let package of packages; trackBy: packageName" class="ngxtools-palette-accent">
+    <mat-card-header>
       <div mat-card-avatar class="header-image">
         <img #avatarImage (error)="onAvatarImageError(avatarImage, avatarIcon)" src="{{package.owner.avatar}}" alt="{{package.owner.name}} ">
         <i #avatarIcon class="material-icons ngxtools-palette-primary-text">account_circle</i>
       </div>
-      <mat-card-title id="{{package.name}}">{{ package.name }}</mat-card-title>
+      <mat-card-title>{{ package.name }}</mat-card-title>
       <mat-card-subtitle (click)="searchByKeyword(package.owner.name)" [innerHtml]="package._highlightResult.owner?.name?.value">{{ package.owner.name }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
