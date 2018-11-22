@@ -18,6 +18,8 @@ export class SearchComponent implements OnInit, AfterContentInit {
   hasReachedLastPage = false;
 
   @ViewChild('resultContainerRef') resultContainerRef: ElementRef;
+  @ViewChild('queryInput') queryInput: ElementRef;
+
   constructor(private algolia: AlgoliaService, private route: ActivatedRoute, private deeplink: DeeplinkService) {
     this.searchForm = new FormGroup({
       query: new FormControl('')
@@ -46,7 +48,7 @@ export class SearchComponent implements OnInit, AfterContentInit {
     this.algolia.searchState.result$.subscribe(results => {
       this.hasReachedLastPage = results.page + 1 === results.nbPages;
 
-      if(results.query !== this.currentQuery){
+      if (results.query !== this.currentQuery) {
         this.currentQuery = results.query;
         this.packages = [];
       }
@@ -84,8 +86,8 @@ export class SearchComponent implements OnInit, AfterContentInit {
     return this.searchForm.controls.query.value && this.packages.length === 0;
   }
 
-  loadNextPage(){
-    if(!this.hasReachedLastPage) {
+  loadNextPage() {
+    if (!this.hasReachedLastPage) {
       this.algolia.nextPage();
     }
   }
@@ -99,4 +101,12 @@ export class SearchComponent implements OnInit, AfterContentInit {
     keypressEvent.stopPropagation();
     return false;
   }
+
+  /**
+   * Close keyboard on mobile device
+   */
+  closeMobileBeyboard() {
+    this.queryInput.nativeElement.blur();
+  }
+
 }
