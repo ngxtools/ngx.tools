@@ -1,3 +1,17 @@
+<a name="2.0.0"></a>
+# 2.0.0 (2018-11-27)
+
+### Features
+
+* close keyboard after Enter/Next on mobile device ([#19](https://github.com/ngxtools/ngx.tools/issues/19)) ([45c79bc](https://github.com/ngxtools/ngx.tools/commit/45c79bc))
+* add accessibility support ([#20](https://github.com/ngxtools/ngx.tools/issues/20)) ([7af13f8](https://github.com/ngxtools/ngx.tools/commit/7af13f8))
+* add infinite scroll on search result ([#15](https://github.com/ngxtools/ngx.tools/issues/15)) ([f647159](https://github.com/ngxtools/ngx.tools/commit/f647159))
+
+
+### Bug Fixes
+
+* fix lazy loading issues after upgrading to angular v7.1.0 ([#22](https://github.com/ngxtools/ngx.tools/issues/22)) ([5cf65bd](https://github.com/ngxtools/ngx.tools/commit/5cf65bd))
+
 <a name="1.1.0"></a>
 # 1.1.0 (2018-10-11)
 
