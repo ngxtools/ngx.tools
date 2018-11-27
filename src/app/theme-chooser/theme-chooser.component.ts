@@ -7,7 +7,7 @@ import { DOCUMENT } from '@angular/platform-browser';
   styleUrls: ['./theme-chooser.component.css']
 })
 export class ThemeChooserComponent implements OnInit {
-  themes = Array(10)
+  themes = Array(12) // n+1
     .fill(1)
     .map((e, i) => ({
       id: `ngxtools-theme-${i}`,
@@ -20,17 +20,17 @@ export class ThemeChooserComponent implements OnInit {
 
   ngOnInit() {
     this.body = this.document.querySelector('body');
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme = parseInt(localStorage.getItem('theme'), 10);
     if (savedTheme) {
       this.setTheme(savedTheme);
     }
   }
 
-  setTheme(themeId) {
+  setTheme(themeId: number) {
     this.body.removeAttribute('class');
     this.body.classList.add(`${themeId}`);
     this.body.classList.add(`ngxtools-palette-primary`);
-    localStorage.setItem('theme', themeId);
+    localStorage.setItem('theme', `${themeId}`);
   }
 
   themeId(theme) {

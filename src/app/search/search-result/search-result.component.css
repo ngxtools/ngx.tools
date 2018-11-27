@@ -1,6 +1,6 @@
 mat-card {
   width: 350px;
-  margin: 10px;
+  margin: 10px 16px;
   display: inline-block;
   text-align: left;
   color: black;
@@ -30,6 +30,8 @@ i[hidden] {
   margin-left: -24px;
   padding: 7px 10px;
   text-align: center;
+  border-width: 1px;
+  border-style: groove;
 }
 
 mat-card-subtitle {
@@ -80,6 +82,7 @@ img + i {
   border-radius: 30px;
   padding: 4px 11px;
   cursor: pointer;
+  font-size: 10px;
 }
 
 @media (min-width: 299px) {
@@ -110,7 +113,7 @@ img + i {
 
 @media (min-width: 600px) {
   .mat-card-actions {
-    margin-left: -24px;
+    margin-left: -26px;
     padding: 7px 55px;
   }
 }

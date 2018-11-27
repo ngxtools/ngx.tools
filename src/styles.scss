@@ -62,11 +62,17 @@ $themes: (
       ngxtools-palette-warn: (color: #5ac5bf, background-color: #5ac5bf, border-color: #5ac5bf),
       ngxtools-palette-accent: (color: #e5df56, background-color: #e5df56, border-color: #e5df56)
     ),
-  ngxtools-ngxtools-theme-10:
+  ngxtools-theme-10:
     (
       ngxtools-palette-primary: (color: #cb696a, background-color: #cb696a, border-color: #cb696a),
       ngxtools-palette-warn: (color: #32425b, background-color: #32425b, border-color: #32425b),
       ngxtools-palette-accent: (color: #92adb9, background-color: #92adb9, border-color: #92adb9)
+    ),
+  ngxtools-theme-11:
+    (
+      ngxtools-palette-primary: (color: black, background-color: white, border-color: black),
+      ngxtools-palette-warn: (color: black, background-color: #f5f3f3, border-color: black),
+      ngxtools-palette-accent: (color: black, background-color: white, border-color: white)
     )
 );
 

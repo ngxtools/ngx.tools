@@ -1,6 +1,6 @@
 <section *ngIf="packages.length > 0" app-infinite-scroll (scroll)="onScroll()">
 
-  <mat-card *ngFor="let package of packages; trackBy: packageName" class="ngxtools-palette-accent">
+  <mat-card *ngFor="let package of packages; trackBy: packageName" class="ngxtools-palette-accent mat-elevation-z4">
     <mat-card-header>
       <div mat-card-avatar class="header-image">
         <img #avatarImage (error)="onAvatarImageError(avatarImage, avatarIcon)" src="{{package.owner.avatar}}" alt="{{package.owner.name}} ">
