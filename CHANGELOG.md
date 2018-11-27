@@ -1,3 +1,10 @@
+<a name="2.1.0"></a>
+# 2.1.0 (2018-11-27)
+
+### Features
+
+* add a low constrast black and white theme ([6f93e3e](https://github.com/ngxtools/ngx.tools/commit/6f93e3e))
+
 <a name="2.0.0"></a>
 # 2.0.0 (2018-11-27)
 
