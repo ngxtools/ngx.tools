@@ -22,7 +22,7 @@ i[hidden] {
 .mat-card-content {
   max-height: 100px;
   min-height: 25px;
-  overflow-y: scroll;
+  overflow: auto;
 }
 
 .mat-card-actions {
