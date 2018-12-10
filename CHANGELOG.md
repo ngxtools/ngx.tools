@@ -1,3 +1,11 @@
+<a name="2.2.1"></a>
+# 2.2.1 (2018-12-10)
+
+### Bug Fixes
+
+* prompt a message when a new ServiceWorker is avaiable ([ad16e51](https://github.com/ngxtools/ngx.tools/commit/ad16e51))
+* fix(search-result) scrolling visibility ([24b7937](https://github.com/ngxtools/ngx.tools/commit/24b7937))
+
 <a name="2.2.0"></a>
 # 2.2.0 (2018-11-27)
 
