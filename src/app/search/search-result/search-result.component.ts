@@ -92,7 +92,7 @@ export class SearchResultComponent implements OnChanges {
     window.scroll(0, 0);
   }
 
-  onScroll(){
+  onScroll() {
     this.scrollReachedBottom.emit();
   }
 }

@@ -80,7 +80,7 @@ export class AlgoliaService {
    * @param query The user query used for search.
    */
   private search(indexName: string, query: string, extra = '') {
-    
+
     console.log(query, extra);
 
     this.indices[this.indexName]
