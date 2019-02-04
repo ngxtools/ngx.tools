@@ -111,7 +111,7 @@ img + i {
   }
   .mat-card-actions .mat-button,
   .mat-card-actions .mat-raised-button {
-    min-width: 70px;
+    min-width: 55px;
   }
 }
 
