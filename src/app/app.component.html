@@ -1,8 +1,17 @@
 <mat-sidenav-container>
-  <mat-sidenav #snav fixedInViewport="true" mode="push" class="ngxtools-palette-accent ngxtools-palette-primary-border">
+  <mat-sidenav
+    #snav
+    fixedInViewport="true"
+    mode="push"
+    fixedBottomGap="0"
+    autoFocus="true"
+    class="ngxtools-palette-accent ngxtools-palette-primary-border"
+  >
     <mat-nav-list>
       <mat-accordion>
-        <mat-expansion-panel class="ngxtools-palette-accent ngxtools-palette-primary-border">
+        <mat-expansion-panel
+          class="ngxtools-palette-accent ngxtools-palette-primary-border"
+        >
           <mat-expansion-panel-header>
             <mat-panel-title>
               Themes
@@ -11,24 +20,47 @@
           <app-theme-chooser></app-theme-chooser>
         </mat-expansion-panel>
       </mat-accordion>
+      <a mat-list-item target="__blank" href="https://github.com/ngxtools/ngx.tools/issues" rel="noopener">Contribute</a>
     </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar class="ngxtools-palette-accent ngxtools-palette-primary-border">
+    <mat-toolbar
+      class="ngxtools-palette-accent ngxtools-palette-primary-border"
+    >
       <button mat-icon-button (click)="snav.toggle()" class="menu_button">
         <mat-icon>menu</mat-icon>
       </button>
       <span class="header__logo ngxtools-palette-primary-text"></span>
-      <a mat-icon-button target="__blank" href="https://github.com/ngxtools/ngx.tools/issues">
+      <a
+        mat-icon-button
+        target="__blank"
+        href="https://github.com/ngxtools/ngx.tools/issues"
+      >
         <mat-icon>bug_report</mat-icon>
       </a>
     </mat-toolbar>
     <router-outlet></router-outlet>
-    <footer class="ngxtools-palette-accent ngxtools-palette-warn-text ngxtools-palette-primary-border">
-      Built with ❤ by
-      <a class="ngxtools-palette-warn-text" href="https://twitter.com/manekinekko">Wassim Chegham — @manekinekko</a>
-      &nbsp;<span>// Build: {{ version }}</span>
+    <footer
+      class="ngxtools-palette-accent ngxtools-palette-warn-text ngxtools-palette-primary-border"
+    >
+      <span>
+          Built with ❤ by
+          <a
+            class="ngxtools-palette-warn-text"
+            href="https://twitter.com/manekinekko"
+            >Wassim Chegham — @manekinekko</a
+          >
+          and the real-time search by 
+          <a href="https://www.algolia.com" target="__blank">
+            <img
+              width="55"
+              src="https://www.algolia.com/static_assets/images/press/downloads/algolia-logo-light.png"
+              alt="algolia logo"
+            />
+          </a>
+      </span>
+      &nbsp;&nbsp;<span>// Build: {{ version }}</span>
     </footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

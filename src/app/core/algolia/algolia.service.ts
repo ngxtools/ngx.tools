@@ -79,11 +79,17 @@ export class AlgoliaService {
    * @param indexName The index name to be used.
    * @param query The user query used for search.
    */
-  private search(indexName: string, query: string) {
+  private search(indexName: string, query: string, extra = '') {
+    
+    console.log(query, extra);
+
     this.indices[this.indexName]
       .setIndex(indexName)
       .setQueryParameter('query', query)
-      .setQueryParameter('filters', '(keywords:ngx OR keywords:angular) AND (NOT keywords:angularjs)')
+      .setQueryParameter(
+        'filters',
+        `(keywords:ngx OR keywords:angular) AND (NOT keywords:angularjs) ${extra}`
+      )
       .setQueryParameter('optionalFilters', 'owner.name:angular')
       .search();
   }
@@ -105,7 +111,13 @@ export class AlgoliaService {
       this.indices[this.indexName].nextPage().search();
     }
   }
-  sortByRelevance(query?: string) {
+  sortByRelevance(query: string) {
+    // query = query || this.indices[this.indexName].state.query;
     this.search(this.indexName, query);
+  }
+
+  filterBySchematics(query: string) {
+    // query = query || this.indices[this.indexName].state.query;
+    this.search(this.indexName, query, 'AND (computedKeywords:angular-cli-schematic)');
   }
 }

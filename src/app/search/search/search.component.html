@@ -1,17 +1,29 @@
 <section class="ngxtools-palette-warn" aria-label="Search for package by name">
   <form [formGroup]="searchForm" class="ngxtools-palette-primary-border ngxtools-palette-primary-text">
-    <input (keydown.enter)="closeMobileBeyboard();noop($event);" aria-label="Enter your search query" class="input__search ngxtools-palette-accent-text" formControlName="query" placeholder="search packages..." #queryInput>
+    <!-- <mat-select (selectionChange)="filterSelectionChange($event)" placeholder="Packages" formControlName="filter" disableRipple>
+      <mat-option *ngFor="let filter of filters" [value]="filter.value">
+        {{filter.viewValue}}
+      </mat-option>
+    </mat-select> -->
+    <input (keydown.enter)="closeMobileBeyboard();noop($event);" aria-label="Enter your search query" class="input__search ngxtools-palette-accent-text" formControlName="query" placeholder="search packages/schematics/libraries..." #queryInput>
     <button class="button__clear ngxtools-palette-accent-text" mat-button [hidden]="!searchForm.controls.query.value" mat-icon-button
       aria-label="Clear" (click)="clear()">
       <mat-icon>close</mat-icon>
     </button>
   </form>
-  <p class="algolia-credits">Real-time search
-    <a href="https://www.algolia.com" target="__blank">
-      <img width="55" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-logo-light.png" alt="algolia logo"
-      />
-    </a>
-  </p>
+</section>
+
+<section *ngIf="packages.length > 0" class="ngxtools-palette-warn control-filters__shrink" aria-label="filter results">
+  <p>
+      <mat-button-toggle-group value='search_all' (change)="onFilterOptionsChange($event)" #group="matButtonToggleGroup" appearance="legacy">
+        <mat-button-toggle value="search_all">
+          All packages
+        </mat-button-toggle>
+        <mat-button-toggle value="search_schematics">
+          Angular Schematics
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </p>
 </section>
 
 <section class="ngxtools-palette-primary search-result" #resultContainerRef aria-label="Search results">

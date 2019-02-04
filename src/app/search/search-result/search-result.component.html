@@ -1,6 +1,10 @@
 <section *ngIf="packages.length > 0" app-infinite-scroll (scroll)="onScroll()">
 
-  <mat-card *ngFor="let package of packages; trackBy: packageName" class="ngxtools-palette-accent mat-elevation-z4">
+  <mat-card 
+    *ngFor="let package of packages; trackBy: packageName" 
+    class="ngxtools-palette-accent mat-elevation-z4"
+    [ngClass]="{ 'is-schematic': package.computedMetadata?.schematics }"
+    >
     <mat-card-header>
       <div mat-card-avatar class="header-image">
         <img #avatarImage (error)="onAvatarImageError(avatarImage, avatarIcon)" src="{{package.owner.avatar}}" alt="{{package.owner.name}} ">
@@ -13,21 +17,21 @@
       <p [innerHTML]="package._highlightResult.description?.value">{{ package.description }}</p>
     </mat-card-content>
     <mat-card-actions class="ngxtools-palette-warn">
-      <a mat-button href="{{package.lastPublisher.link}}" target="__blank">
+      <a mat-button href="{{package.lastPublisher.link}}" target="__blank" rel="noopener">
         <i class="material-icons">
           <img width="35" src="assets/npm.png" />
         </i>
       </a>
-      <a *ngIf="package.repository" mat-button href="{{package.repository.url}}" target="__blank">
+      <a *ngIf="package.repository" mat-button href="{{package.repository.url}}" target="__blank" rel="noopener">
         <i class="material-icons">
           <img width="24" src="assets/GitHub-Mark-32px.png" />
         </i>
       </a>
-      <a *ngIf="package.repository" mat-button href="{{package.repository.url}}/issues" target="__blank">
+      <a *ngIf="package.repository" mat-button href="{{package.repository.url}}/issues" target="__blank" rel="noopener">
         <i class="material-icons">bug_report</i>
       </a>
       <a *ngIf="package.repository" mat-button href="https://stackblitz.com/github/{{package.repository.user}}/{{package.repository.project}}"
-        target="__blank">
+        target="__blank" rel="noopener">
         <i class="material-icons">mode_edit</i>
       </a>
     </mat-card-actions>

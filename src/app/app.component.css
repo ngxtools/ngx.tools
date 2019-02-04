@@ -41,11 +41,18 @@ footer {
   width: 100%;
   font-size: 0.8em;
   background-color: white;
+  display: flex;
 }
 
 footer a {
   font-weight: bold;
   text-decoration: underline;
+}
+
+footer a img {
+  top: 2px;
+  display: inline-block;
+  position: relative;
 }
 
 mat-sidenav {

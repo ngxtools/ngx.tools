@@ -1,10 +1,16 @@
-import { FormGroup, FormControl } from '@angular/forms';
-import { Component, OnInit, EventEmitter, AfterContentInit, ElementRef, ViewChild, Renderer2 } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { distinctUntilChanged, map, debounceTime } from 'rxjs/operators';
-import { PackageType } from './../search-result/search-result.component';
-import { DeeplinkService } from './../deeplink.service';
+import {
+  AfterContentInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { AlgoliaService } from './../../core/algolia/algolia.service';
+import { DeeplinkService } from './../deeplink.service';
+import { PackageType } from './../search-result/search-result.component';
+import { MatSelectChange, MatButtonToggleChange } from '@angular/material';
 
 @Component({
   selector: 'app-search',
@@ -16,11 +22,15 @@ export class SearchComponent implements OnInit, AfterContentInit {
   packages: PackageType[] = [];
   currentQuery: string;
   hasReachedLastPage = false;
+  filterOptions = 'search_all';
 
   @ViewChild('resultContainerRef') resultContainerRef: ElementRef;
   @ViewChild('queryInput') queryInput: ElementRef;
 
-  constructor(private algolia: AlgoliaService, private route: ActivatedRoute, private deeplink: DeeplinkService) {
+  constructor(
+    private search: AlgoliaService,
+    private deeplink: DeeplinkService
+  ) {
     this.searchForm = new FormGroup({
       query: new FormControl('')
     });
@@ -35,17 +45,19 @@ export class SearchComponent implements OnInit, AfterContentInit {
         distinctUntilChanged()
       )
       .subscribe(value => {
-        this.algolia.sortByRelevance(value);
+        this.search.sortByRelevance(value);
         this.deeplink.syncUrl({
           q: value || null
         });
 
         if (value === '') {
-          this.resultContainerRef.nativeElement.classList.remove('no-package-found');
+          this.resultContainerRef.nativeElement.classList.remove(
+            'no-package-found'
+          );
           this.packages = [];
         }
       });
-    this.algolia.searchState.result$.subscribe(results => {
+    this.search.searchState.result$.subscribe(results => {
       this.hasReachedLastPage = results.page + 1 === results.nbPages;
 
       if (results.query !== this.currentQuery) {
@@ -56,9 +68,12 @@ export class SearchComponent implements OnInit, AfterContentInit {
       if (results.query.trim() === '') {
         this.packages = [];
       } else {
-        this.packages = this.packages.concat(results.hits);
+        this.packages = results.hits;
+
         if (results.hits.length === 0) {
-          this.resultContainerRef.nativeElement.classList.add('no-package-found');
+          this.resultContainerRef.nativeElement.classList.add(
+            'no-package-found'
+          );
           window['ga']('send', {
             hitType: 'event',
             eventCategory: 'Search',
@@ -66,7 +81,9 @@ export class SearchComponent implements OnInit, AfterContentInit {
             eventLabel: results.query
           });
         } else {
-          this.resultContainerRef.nativeElement.classList.remove('no-package-found');
+          this.resultContainerRef.nativeElement.classList.remove(
+            'no-package-found'
+          );
         }
       }
     });
@@ -76,8 +93,20 @@ export class SearchComponent implements OnInit, AfterContentInit {
     this.deeplink.registerFormGroup(this.searchForm, 'query');
   }
 
+  onFilterOptionsChange(changeEvent: MatButtonToggleChange) {
+    const query = this.searchForm.get('query').value;
+    switch (changeEvent.value) {
+      case 'search_schematics':
+        this.search.filterBySchematics(query);
+        break;
+      case 'search_all':
+      default:
+        this.search.sortByRelevance(query);
+    }
+  }
+
   clear() {
-    this.searchForm.setValue({
+    this.searchForm.patchValue({
       query: ''
     });
   }
@@ -88,7 +117,7 @@ export class SearchComponent implements OnInit, AfterContentInit {
 
   loadNextPage() {
     if (!this.hasReachedLastPage) {
-      this.algolia.nextPage();
+      this.search.nextPage();
     }
   }
 
@@ -108,5 +137,4 @@ export class SearchComponent implements OnInit, AfterContentInit {
   closeMobileBeyboard() {
     this.queryInput.nativeElement.blur();
   }
-
 }

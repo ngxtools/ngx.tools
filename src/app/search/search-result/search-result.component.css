@@ -38,6 +38,21 @@ mat-card-subtitle {
   cursor: pointer;
 }
 
+.is-schematic:after {
+  position: absolute;
+  padding: 2em;
+  background: #C90831;
+  content: '';
+  margin: -2em;
+  top: 0;
+  right: 0;
+  transform: rotate(45deg);
+}
+
+.mat-card {
+  overflow: hidden;
+}
+
 .mat-card ::ng-deep em {
   font-style: normal;
   font-weight: bold;
