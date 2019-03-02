@@ -6,11 +6,12 @@ import {
   ViewChild
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatButtonToggleChange, MatSnackBar } from '@angular/material';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { MetricsService } from 'src/app/shared/metrics.service';
 import { AlgoliaService } from './../../core/algolia/algolia.service';
 import { DeeplinkService } from './../deeplink.service';
 import { PackageType } from './../search-result/search-result.component';
-import { MatSelectChange, MatButtonToggleChange } from '@angular/material';
 
 @Component({
   selector: 'app-search',
@@ -22,14 +23,17 @@ export class SearchComponent implements OnInit, AfterContentInit {
   packages: PackageType[] = [];
   currentQuery: string;
   hasReachedLastPage = false;
-  filterOptions = 'search_all';
+  shouldAppendResults = false;
+  filterOption = 'schematics';
 
   @ViewChild('resultContainerRef') resultContainerRef: ElementRef;
   @ViewChild('queryInput') queryInput: ElementRef;
 
   constructor(
     private search: AlgoliaService,
-    private deeplink: DeeplinkService
+    private deeplink: DeeplinkService,
+    private metrics: MetricsService,
+    private snackBar: MatSnackBar
   ) {
     this.searchForm = new FormGroup({
       query: new FormControl('')
@@ -45,7 +49,8 @@ export class SearchComponent implements OnInit, AfterContentInit {
         distinctUntilChanged()
       )
       .subscribe(value => {
-        this.search.sortByRelevance(value);
+
+        // sync'ing the URL state will trigger the search process
         this.deeplink.syncUrl({
           q: value || null
         });
@@ -57,6 +62,7 @@ export class SearchComponent implements OnInit, AfterContentInit {
           this.packages = [];
         }
       });
+
     this.search.searchState.result$.subscribe(results => {
       this.hasReachedLastPage = results.page + 1 === results.nbPages;
 
@@ -68,18 +74,19 @@ export class SearchComponent implements OnInit, AfterContentInit {
       if (results.query.trim() === '') {
         this.packages = [];
       } else {
-        this.packages = results.hits;
+        // get the actual result
+        if (this.shouldAppendResults) {
+          this.packages = this.packages.concat(results.hits);
+        } else {
+          this.packages = results.hits;
+        }
 
         if (results.hits.length === 0) {
           this.resultContainerRef.nativeElement.classList.add(
             'no-package-found'
           );
-          window['ga']('send', {
-            hitType: 'event',
-            eventCategory: 'Search',
-            eventAction: 'query',
-            eventLabel: results.query
-          });
+
+          this.metrics.send(results);
         } else {
           this.resultContainerRef.nativeElement.classList.remove(
             'no-package-found'
@@ -91,17 +98,38 @@ export class SearchComponent implements OnInit, AfterContentInit {
 
   ngAfterContentInit() {
     this.deeplink.registerFormGroup(this.searchForm, 'query');
+    this.deeplink.registerState('t').subscribe(state => {
+      this.filterOption = state;
+
+      const changeEvent = { value: state } as MatButtonToggleChange;
+      const query = this.searchForm.get('query').value;
+      switch (changeEvent.value) {
+        case 'schematics':
+          this.search.filterBySchematics(query);
+          break;
+        case 'library':
+        default:
+          this.search.filterByRelevance(query);
+      }
+    });
   }
 
   onFilterOptionsChange(changeEvent: MatButtonToggleChange) {
+    this.deeplink.syncUrl({
+      t: changeEvent.value
+    });
+    this.shouldAppendResults = false;
+  }
+
+  onSortOptionsChange(changeEvent: MatButtonToggleChange) {
     const query = this.searchForm.get('query').value;
     switch (changeEvent.value) {
-      case 'search_schematics':
-        this.search.filterBySchematics(query);
+      case 'best_match':
+        this.search.sortByBestMatch(query);
         break;
-      case 'search_all':
+      case 'most_downloaded':
       default:
-        this.search.sortByRelevance(query);
+        this.search.sortByMostDownloaded(query);
     }
   }
 
@@ -117,7 +145,14 @@ export class SearchComponent implements OnInit, AfterContentInit {
 
   loadNextPage() {
     if (!this.hasReachedLastPage) {
+      this.shouldAppendResults = true;
       this.search.nextPage();
+      this.snackBar.open('Loading Packages...', null, {
+        duration: 2000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+        panelClass: ['ngxtools-palette-warn', 'ngxtools-palette-warn-text']
+      });
     }
   }
 

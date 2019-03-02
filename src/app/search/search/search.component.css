@@ -43,20 +43,16 @@ form {
 }
 
 ::-webkit-input-placeholder {
-  /* Chrome/Opera/Safari */
-  color: lightgray;
+  color: #999;
 }
 ::-moz-placeholder {
-  /* Firefox 19+ */
-  color: lightgray;
+  color: #999;
 }
 :-ms-input-placeholder {
-  /* IE 10+ */
-  color: lightgray;
+  color: #999;
 }
 :-moz-placeholder {
-  /* Firefox 18- */
-  color: lightgray;
+  color: #999;
 }
 
 .button__clear {
@@ -77,13 +73,19 @@ form {
 
 .algolia-credits {
   position: relative;
-  top: 35px;
+  top: 37px;
 }
-
-.algolia-credits img {
-  position: relative;
+@media (max-width: 420px) {
+  .algolia-credits {
+    top: 37px;
+    right: 30px;
+  }
 }
 
 .mat-select {
   width: 180px;
+}
+
+.mat-button-toggle-group {
+  margin: 5px;
 }
