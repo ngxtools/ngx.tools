@@ -8,6 +8,21 @@ import {
 } from '@angular/core';
 import { DeeplinkService } from './../deeplink.service';
 
+export interface SearchResult {
+  exhaustiveFacetsCount: boolean;
+  exhaustiveNbHits: boolean;
+  facets: any;
+  hits: PackageType[];
+  hitsPerPage: number;
+  index: string;
+  nbHits: number;
+  nbPages: number;
+  page: number;
+  params: string;
+  processingTimeMS: number;
+  query: string;
+}
+
 export interface ObjectLiteral {
   [key: string]: string;
 }
