@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Ngx.tools</title>
+  <title>ngx.tools: Angular Packages Discovery</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,27 +12,70 @@
   <link rel="manifest" href="./assets/manifest.json">
   <meta name="Description" content="ngx.tools: find Angular packages">
   <meta name="theme-color" content="#FBC87A">
+
+  <!-- facebook meta -->
+  <meta property="og:title" content="ngx.tools: Angular Packages Discovery">
+  <meta property="og:description" content="Discover Angular packages, libraries and schematics">
+  <meta property="og:url" content="https://ngx.tools/">
+  <meta property="og:image" content="/assets/icons/icon-512x512.png">
+  <meta property="og:image:alt" content="ngx.tools - Angular Packages Discovery">
+  <meta property="og:image:height" content="512">
+  <meta property="og:image:width" content="512">
+
+  <!-- linkedin meta -->
+  <meta property="og:title" content="ngx.tools: Angular Packages Discovery">
+  <meta property="og:type" content="https://ngx.tools">
+  <meta property="og:image" content="/assets/icons/icon-512x512.png">
+  <meta property="og:description" content="Discover Angular packages, libraries and schematics">
+  <meta name="author" content="Wassim Chegham">
+
+  <!-- twitter meta -->
+  <meta name="twitter:card" content="Discover Angular packages, libraries and schematics">
+  <meta name="twitter:title" content="ngx.tools: Angular Packages Discovery">
+  <meta name="twitter:description" content="Discover Angular packages, libraries and schematics">
+  <meta name="twitter:image" content="/assets/icons/icon-512x512.png">
+  <meta name="twitter:image:alt" content="Discover Angular packages, libraries and schematics">
+  <meta name="twitter:site" content="https://ngx.tools">
+  <meta name="twitter:creator" content="@manekinekko">
+
   <style>
-    img.loading {
+    .loading {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      width: 100%;
+      text-align: center;
+    }
+    .hidden {
+      visibility: hidden;
     }
   </style>
 </head>
 
 <body class="ngxtools-theme-11 ngxtools-palette-warn-scrollbar ngxtools-palette-primary layout__fix-height">
   <app-root class="layout__fix-height">
-    <img src="assets/loading.svg" alt="loading" class="loading">
+    <main class="loading">
+        <img src="assets/loading.svg" alt="loading">
+        <p id="hard-refresh" class="hidden">Please hold down <b>Ctrl and Click the Reload</b> button to reload the app!
+        </p>
+    </main>
   </app-root>
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118005494-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-118005494-1');
+  </script>
+  <script>
+    window.onload = function() {
+      setTimeout(() => {
+        try {
+          document.querySelector('#hard-refresh').classList.remove('hidden');
+        } catch(e) {}
+      }, 3000);
+    }
   </script>
 
 </body>
