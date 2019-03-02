@@ -95,6 +95,20 @@ img + i {
   text-align: center;
 }
 
+.verified {
+  background: transparent;
+  display: inline-block;
+  font-style: normal;
+  vertical-align: baseline;
+  position: relative;
+}
+
+.verified i {
+  font-size: 18px;
+  top: 2px;
+  position: relative;
+}
+
 @media (min-width: 299px) {
   mat-card.mat-card {
     width: 346px;

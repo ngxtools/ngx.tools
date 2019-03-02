@@ -3,7 +3,10 @@
     *ngFor="let package of packages; trackBy: packageName"
     class="ngxtools-palette-accent mat-elevation-z4"
   >
-    <span class="ngxtools-palette-warn" [ngClass]="{ 'is-schematic': package.computedMetadata?.schematics }"></span>
+    <span
+      class="ngxtools-palette-warn"
+      [ngClass]="{ 'is-schematic': package.computedMetadata?.schematics }"
+    ></span>
     <mat-card-header>
       <div mat-card-avatar class="header-image">
         <img
@@ -16,12 +19,18 @@
           >account_circle</i
         >
       </div>
-      <mat-card-title>{{ package.name }}</mat-card-title>
+      <mat-card-title
+        >{{ package.name }}
+        <span *ngIf="package.owner.name === 'angular'" class="verified">
+          <i class="material-icons">verified_user</i>  
+        </span
+      ></mat-card-title>
       <mat-card-subtitle
         (click)="searchByKeyword(package.owner.name)"
         [innerHtml]="package._highlightResult.owner?.name?.value"
-        >{{ package.owner.name }}</mat-card-subtitle
       >
+        {{ package.owner.name }}
+      </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <p [innerHTML]="package._highlightResult.description?.value">
@@ -73,7 +82,9 @@
       <a
         class="twitter-share-button"
         mat-button
-        href="https://twitter.com/intent/tweet?text={{buildTweetText(package)}}"
+        href="https://twitter.com/intent/tweet?text={{
+          buildTweetText(package)
+        }}"
         target="__blank"
         rel="noopener"
       >
@@ -82,10 +93,26 @@
     </mat-card-actions>
     <mat-card-footer>
       <p>
-        <span title="Latest version {{ package.version }}"><i class="material-icons">label</i>{{ package.version }}</span>
-        <span title="License {{package.license || 'N/A'}}" class="license__truncate"><i class="material-icons">copyright</i>{{ package.license || 'N/A' }}</span>
-        <span title="Total downloads for the last 30 days {{package.humanDownloadsLast30Days}}"><i class="material-icons">cloud_download</i>{{ package.humanDownloadsLast30Days }}</span>
-        <span title="Last Update on {{package.modified | date:'fullTime'}}"><i class="material-icons">calendar_today</i>{{ package.modified | date:'shortDate' }}</span>
+        <span title="Latest version {{ package.version }}"
+          ><i class="material-icons">label</i>{{ package.version }}</span
+        >
+        <span
+          title="License {{ package.license || 'N/A' }}"
+          class="license__truncate"
+          ><i class="material-icons">copyright</i
+          >{{ package.license || 'N/A' }}</span
+        >
+        <span
+          title="Total downloads for the last 30 days {{
+            package.humanDownloadsLast30Days
+          }}"
+          ><i class="material-icons">cloud_download</i
+          >{{ package.humanDownloadsLast30Days }}</span
+        >
+        <span title="Last Update on {{ package.modified | date: 'fullTime' }}"
+          ><i class="material-icons">calendar_today</i
+          >{{ package.modified | date: 'shortDate' }}</span
+        >
       </p>
       <p class="keywords">
         <span
