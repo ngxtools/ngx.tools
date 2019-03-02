@@ -52,7 +52,6 @@ export class DeeplinkService {
       }
     }
 
-    console.log(queryParams);
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams
