@@ -1,16 +1,16 @@
-<mat-sidenav-container>
+<mat-sidenav-container class="layout__fix-height">
   <mat-sidenav
     #snav
     fixedInViewport="true"
     mode="push"
     fixedBottomGap="0"
     autoFocus="true"
-    class="ngxtools-palette-accent ngxtools-palette-primary-border"
+    class="ngxtools-palette-accent ngxtools-palette-accent-border layout__fix-height"
   >
-    <mat-nav-list>
+    <mat-nav-list class="ngxtools-palette-accent-text">
       <mat-accordion>
         <mat-expansion-panel
-          class="ngxtools-palette-accent ngxtools-palette-primary-border"
+          class="ngxtools-palette-accent ngxtools-palette-accent-border"
         >
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -20,11 +20,17 @@
           <app-theme-chooser></app-theme-chooser>
         </mat-expansion-panel>
       </mat-accordion>
-      <a mat-list-item target="__blank" href="https://github.com/ngxtools/ngx.tools/issues" rel="noopener">Contribute</a>
+      <a
+        mat-list-item
+        target="__blank"
+        href="https://github.com/ngxtools/ngx.tools/issues"
+        rel="noopener"
+        >Contribute</a
+      >
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-sidenav-content>
+  <mat-sidenav-content class="layout__fix-height">
     <mat-toolbar
       class="ngxtools-palette-accent ngxtools-palette-primary-border"
     >
@@ -40,20 +46,23 @@
         <mat-icon>bug_report</mat-icon>
       </a>
     </mat-toolbar>
-    <router-outlet></router-outlet>
+
+    <main class="layout__fix-height">
+      <router-outlet></router-outlet>
+    </main>
+
     <footer
       class="ngxtools-palette-accent ngxtools-palette-warn-text ngxtools-palette-primary-border"
     >
       <span>
-          Built with ❤ by
-          <a
-            class="ngxtools-palette-warn-text"
-            href="https://twitter.com/manekinekko"
-            >Wassim Chegham — @manekinekko</a
-          >
+        Built with ❤ by
+        <a
+          class="ngxtools-palette-warn-text"
+          href="https://twitter.com/manekinekko"
+          >Wassim Chegham</a
+        >
       </span>
       &nbsp;&nbsp;<span>// Build: {{ version }}</span>
-      
     </footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
