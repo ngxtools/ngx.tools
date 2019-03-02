@@ -23,7 +23,7 @@
         <span *ngIf="shouldShowVerifiedBadge(package)" class="title-badge" matTooltip="Official Package">
           <i class="material-icons">verified_user</i>
         </span>
-        <span *ngIf="shouldShowWarningBadge(package)" class="title-badge" matTooltip="This package seems to refer to Angular JS">
+        <span *ngIf="shouldShowWarningBadge(package)" class="title-badge" matTooltip="This package may refer to AngularJS">
           <i class="material-icons">warning</i>  
         </span>
         <span *ngIf="isDeprecated(package)" class="title-badge" matTooltip="This package has been deprecated">
@@ -120,13 +120,11 @@
           >{{ package.modified | date: 'shortDate' }}</span
         >
       </p>
-      <p class="keywords">
-        <span
+      <mat-chip-list>
+        <mat-chip
           (click)="searchByKeyword(keyword)"
-          *ngFor="let keyword of package.keywords"
-          >{{ keyword }}</span
-        >
-      </p>
+          *ngFor="let keyword of package.keywords">{{ keyword }}</mat-chip>
+      </mat-chip-list>
     </mat-card-footer>
   </mat-card>
 </section>

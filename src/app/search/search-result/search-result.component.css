@@ -89,18 +89,6 @@ img + i {
   position: relative;
 }
 
-.keywords span {
-  display: inline-block;
-  border: 1px solid;
-  border-radius: 30px;
-  padding: 2px 4px;
-  cursor: pointer;
-  font-size: 11px;
-  margin: 0 2px;
-  min-width: 20px;
-  text-align: center;
-}
-
 .title-badge {
   background: transparent;
   display: inline-block;
