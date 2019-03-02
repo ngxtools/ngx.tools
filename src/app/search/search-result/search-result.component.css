@@ -24,6 +24,10 @@ i[hidden] {
   overflow: auto;
 }
 
+.mat-card-header-text {
+  margin: 0 10px;
+}
+
 .mat-card-actions {
   width: 378px;
   margin-left: -24px;
@@ -49,8 +53,10 @@ mat-card-subtitle {
 
 .mat-card ::ng-deep em {
   font-style: normal;
-  font-weight: bold;
-  box-shadow: 0px 1px 0px gray;
+  background: #ffea00;
+  border-radius: 4px;
+  padding: 0 2px;
+  border: 1px solid #e5d303;
 }
 
 .mat-card-footer {
@@ -95,7 +101,7 @@ img + i {
   text-align: center;
 }
 
-.verified {
+.title-badge {
   background: transparent;
   display: inline-block;
   font-style: normal;
@@ -103,11 +109,12 @@ img + i {
   position: relative;
 }
 
-.verified i {
+.title-badge i {
   font-size: 18px;
   top: 2px;
   position: relative;
 }
+
 
 @media (min-width: 299px) {
   mat-card.mat-card {

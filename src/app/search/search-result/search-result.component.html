@@ -15,16 +15,22 @@
           src="{{ package.owner.avatar }}"
           alt="{{ package.owner.name }} "
         />
-        <i #avatarIcon class="material-icons ngxtools-palette-primary-text"
-          >account_circle</i
-        >
+        <i #avatarIcon class="material-icons ngxtools-palette-primary-text">account_circle</i>
       </div>
-      <mat-card-title
-        >{{ package.name }}
-        <span *ngIf="package.owner.name === 'angular'" class="verified">
-          <i class="material-icons">verified_user</i>  
-        </span
-      ></mat-card-title>
+      <mat-card-title>
+        {{ package.name }}
+      
+        <span *ngIf="shouldShowVerifiedBadge(package)" class="title-badge" matTooltip="Official Package">
+          <i class="material-icons">verified_user</i>
+        </span>
+        <span *ngIf="shouldShowWarningBadge(package)" class="title-badge" matTooltip="This package seems to refer to Angular JS">
+          <i class="material-icons">warning</i>  
+        </span>
+        <span *ngIf="isDeprecated(package)" class="title-badge" matTooltip="This package has been deprecated">
+          <i class="material-icons">error_outline</i>
+        </span>
+          
+      </mat-card-title>
       <mat-card-subtitle
         (click)="searchByKeyword(package.owner.name)"
         [innerHtml]="package._highlightResult.owner?.name?.value"

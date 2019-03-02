@@ -119,6 +119,21 @@ export class SearchResultComponent implements OnChanges {
     this.scrollReachedBottom.emit();
   }
 
+  shouldShowVerifiedBadge(pkg: PackageType) {
+    return pkg.owner.name === 'angular';
+  }
+
+  shouldShowWarningBadge(pkg: PackageType) {
+    return pkg.name.toLocaleLowerCase().includes('angularjs') ||
+      (pkg.keywords || []).map(k => k.toLowerCase()).includes('angularjs') ||
+      (pkg.description || '').toLocaleLowerCase().includes('angularjs');
+  }
+
+  isDeprecated(pkg: PackageType) {
+    return pkg.deprecated ||
+      (pkg.description || '').toLocaleLowerCase().includes('deprecated');
+  }
+
   buildTweetText(pkg: PackageType) {
     const packageName = pkg.name;
     const packageType = pkg.computedMetadata.schematics ? 'schematics' : 'library';
