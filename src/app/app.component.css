@@ -6,6 +6,13 @@ section span {
 mat-toolbar {
   text-align: center;
   border-bottom: 5px solid;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+
+main {
+  padding-top: 20px;
 }
 
 .header__logo {
@@ -34,7 +41,7 @@ mat-toolbar {
 }
 
 footer {
-  padding: 10px;
+  padding: 10px 0;
   position: fixed;
   bottom: 0;
   border-top: 4px solid;
@@ -42,6 +49,7 @@ footer {
   font-size: 0.8em;
   background-color: white;
   display: flex;
+  justify-content: center;
 }
 
 footer a {
