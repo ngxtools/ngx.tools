@@ -1,31 +1,25 @@
-import { Observable, Subject } from 'rxjs';
-import { Injectable, Inject } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import algoliasearchHelper from 'algoliasearch-helper';
-import { ALGOLIA_APPLICATION_ID, ALGOLIA_SEARCH_API_KEY, ALGOLIA_INDEX } from './injection-tokens';
+import { Observable } from 'rxjs';
+import { ALGOLIA_APPLICATION_ID, ALGOLIA_INDEX, ALGOLIA_SEARCH_API_KEY } from './injection-tokens';
+import { SearchResult } from 'src/app/search/search-result/search-result.component';
 
 export interface SearchState {
   search$: Observable<any>;
-  result$: Observable<any>;
+  result$: Observable<SearchResult>;
   change$: Observable<any>;
   error$: Observable<any>;
 }
 
-/**
- * The Algolia search strategy. This implementtion uses three indices based on the sort options:
- * - `applications_by_price_asc`: used for retreiving entries sorted by price (in ascending order), ie. Free apps first.
- * - `applications_by_rating_desc`: used for retreiving entries sorted by rating (in descending order), ie. Popular apps first.
- * - `applications` (default): used for retreiving entries sorted by the default Algolia ranking algorithm, ie. Relevance.
- */
 @Injectable({
   providedIn: 'root'
 })
 export class AlgoliaService {
   indices = {
-    applications: algoliasearchHelper,
-    applications_by_rating_desc: algoliasearchHelper,
-    applications_by_price_asc: algoliasearchHelper
+    'npm-search': algoliasearchHelper
   };
-  client;
+
+  client: any;
 
   /**
    * A map of the different search states: `search$`, `result$`, `change$`, `error$`.
@@ -33,11 +27,11 @@ export class AlgoliaService {
   searchState: SearchState;
 
   constructor(
-    @Inject(ALGOLIA_APPLICATION_ID) private applicationID,
-    @Inject(ALGOLIA_SEARCH_API_KEY) private searchApiKey,
-    @Inject(ALGOLIA_INDEX) private indexName
+    @Inject(ALGOLIA_APPLICATION_ID) private applicationID: string,
+    @Inject(ALGOLIA_SEARCH_API_KEY) private searchApiKey: string,
+    @Inject(ALGOLIA_INDEX) private indexName: string
   ) {
-    this.client = window['algoliasearch'](applicationID, searchApiKey);
+    this.client = window['algoliasearch'](this.applicationID, this.searchApiKey);
 
     this.searchState = {} as any;
 
@@ -51,7 +45,12 @@ export class AlgoliaService {
    */
   private configureMasterIndex(indexName: string) {
     this.indices[indexName] = algoliasearchHelper(this.client, indexName, {
-      disjunctiveFacets: []
+      facets: ['downloadsLast30Days'],
+      hierarchicalFacets: [{
+        name: 'products',
+        attributes: ['downloadsLast30Days'],
+        sortBy: ['count:desc', 'name:asc'] // first show the most common values, then sort by name
+      }]
     });
 
     this.searchState = {} as SearchState;
@@ -103,7 +102,7 @@ export class AlgoliaService {
   }
 
   /**
-   * Search the next page (used for the inifinite scroll feature)
+   * Search the next page (used for the infinite scrolling feature)
    */
   nextPage() {
     // request the next page only if the current query is not empty!
@@ -111,7 +110,7 @@ export class AlgoliaService {
       this.indices[this.indexName].nextPage().search();
     }
   }
-  sortByRelevance(query: string) {
+  filterByRelevance(query: string) {
     // query = query || this.indices[this.indexName].state.query;
     this.search(this.indexName, query);
   }
@@ -119,5 +118,13 @@ export class AlgoliaService {
   filterBySchematics(query: string) {
     // query = query || this.indices[this.indexName].state.query;
     this.search(this.indexName, query, 'AND (computedKeywords:angular-cli-schematic)');
+  }
+
+  sortByBestMatch(query: string) {
+    this.search(this.indexName, query);
+  }
+
+  sortByMostDownloaded(query: string) {
+    this.search(this.indexName, query);
   }
 }
