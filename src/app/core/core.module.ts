@@ -1,8 +1,7 @@
-import { AlgoliaModule } from './algolia/algolia.module';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatModule } from './mat/mat.module';
 import { environment } from '../../environments/environment';
+import { AlgoliaModule } from './algolia/algolia.module';
+import { MatModule } from './mat/mat.module';
 
 @NgModule({
   imports: [
