@@ -1,4 +1,11 @@
-import { Component, Renderer2, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Renderer2,
+  Input,
+  OnChanges,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { DeeplinkService } from './../deeplink.service';
 
 export interface ObjectLiteral {
@@ -67,6 +74,7 @@ export class SearchResultComponent implements OnChanges {
   @Input() packages: PackageType[] = [];
   @Output() scrollReachedBottom: EventEmitter<void> = new EventEmitter();
   isInvalidAvatar = false;
+
   constructor(private deeplink: DeeplinkService, private renderer: Renderer2) {}
 
   ngOnChanges() {
@@ -94,5 +102,20 @@ export class SearchResultComponent implements OnChanges {
 
   onScroll() {
     this.scrollReachedBottom.emit();
+  }
+
+  buildTweetText(pkg: PackageType) {
+    const packageName = pkg.name;
+    const packageType = pkg.computedMetadata.schematics ? 'schematics' : 'library';
+    const origin = `${location.origin}/#/search?q=${packageName}&t=${packageType}`;
+
+    const pkgKeywords = new Set(pkg.keywords.concat(['angular', 'ngxtools', 'javascript']));
+    const keywords = Array.from(pkgKeywords).map(k => `#${k.replace(/\s/g, '_')}`).join(' ');
+
+    return encodeURIComponent(
+      `Check out this cool @angular ${packageType}: "${pkg.name}".\n\n` +
+      `🔗 ${origin}\n\n` +
+      `${keywords}`
+    );
   }
 }
