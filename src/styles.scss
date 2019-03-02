@@ -4,105 +4,96 @@
 $themes: (
   ngxtools-theme-0:
     (
-      ngxtools-palette-primary: (color: #414040, background-color: #414040, border-color: #414040),
-      ngxtools-palette-warn: (color: #797878, background-color: #797878, border-color: #797878),
-      ngxtools-palette-accent: (color: #fff, background-color: #fff, border-color: #fff)
+      ngxtools-palette-primary: (color: #000, background-color: #8ed6b2, border-color: #8ed6b2),
+      ngxtools-palette-warn: (color: #000, background-color: #f9716f, border-color: #f9716f),
+      ngxtools-palette-accent: (color: #000, background-color: #fdca6d, border-color: #fdca6d)
     ),
   ngxtools-theme-1:
     (
-      ngxtools-palette-primary: (color: #8ed6b2, background-color: #8ed6b2, border-color: #8ed6b2),
-      ngxtools-palette-warn: (color: #f9716f, background-color: #f9716f, border-color: #f9716f),
-      ngxtools-palette-accent: (color: #fdca6d, background-color: #fdca6d, border-color: #fdca6d)
+      ngxtools-palette-primary: (color: #000, background-color: #e8dfe0, border-color: #e8dfe0),
+      ngxtools-palette-warn: (color: #fff, background-color: #a147c5, border-color: #a147c5),
+      ngxtools-palette-accent: (color: #fff, background-color: #4939ee, border-color: #4939ee)
     ),
   ngxtools-theme-2:
     (
-      ngxtools-palette-primary: (color: #e8dfe0, background-color: #e8dfe0, border-color: #e8dfe0),
-      ngxtools-palette-warn: (color: #a147c5, background-color: #a147c5, border-color: #a147c5),
-      ngxtools-palette-accent: (color: #4939ee, background-color: #4939ee, border-color: #4939ee)
+      ngxtools-palette-primary: (color: #000, background-color: #55baad, border-color: #55baad),
+      ngxtools-palette-warn: (color: #fff, background-color: #f94c36, border-color: #f94c36),
+      ngxtools-palette-accent: (color: #000, background-color: #f4b54e, border-color: #f4b54e)
     ),
   ngxtools-theme-3:
     (
-      ngxtools-palette-primary: (color: #55baad, background-color: #55baad, border-color: #55baad),
-      ngxtools-palette-warn: (color: #f94c36, background-color: #f94c36, border-color: #f94c36),
-      ngxtools-palette-accent: (color: #f4b54e, background-color: #f4b54e, border-color: #f4b54e)
+      ngxtools-palette-primary: (color: #fff, background-color: #1e78b1, border-color: #1e78b1),
+      ngxtools-palette-warn: (color: #fff, background-color: #18764c, border-color: #18764c),
+      ngxtools-palette-accent: (color: #000, background-color: #fccd43, border-color: #fccd43)
     ),
   ngxtools-theme-4:
     (
-      ngxtools-palette-primary: (color: #1e78b1, background-color: #1e78b1, border-color: #1e78b1),
-      ngxtools-palette-warn: (color: #18764c, background-color: #18764c, border-color: #18764c),
-      ngxtools-palette-accent: (color: #fccd43, background-color: #fccd43, border-color: #fccd43)
+      ngxtools-palette-primary: (color: #000, background-color: #e0733a, border-color: #e0733a),
+      ngxtools-palette-warn: (color: #fff, background-color: #23899c, border-color: #23899c),
+      ngxtools-palette-accent: (color: #000, background-color: #6bbabd, border-color: #6bbabd)
     ),
   ngxtools-theme-5:
     (
-      ngxtools-palette-primary: (color: #bfb088, background-color: #bfb088, border-color: #bfb088),
-      ngxtools-palette-warn: (color: #ded1c3, background-color: #ded1c3, border-color: #ded1c3),
-      ngxtools-palette-accent: (color: #383838, background-color: #383838, border-color: #383838)
+      ngxtools-palette-primary: (color: #fff, background-color: #c1d8d2, border-color: #c1d8d2),
+      ngxtools-palette-warn: (color: #000, background-color: #da7456, border-color: #da7456),
+      ngxtools-palette-accent: (color: #000, background-color: #dcaf4f, border-color: #dcaf4f)
     ),
   ngxtools-theme-6:
     (
-      ngxtools-palette-primary: (color: #e0733a, background-color: #e0733a, border-color: #e0733a),
-      ngxtools-palette-warn: (color: #23899c, background-color: #23899c, border-color: #23899c),
-      ngxtools-palette-accent: (color: #6bbabd, background-color: #6bbabd, border-color: #6bbabd)
+      ngxtools-palette-primary: (color: #fff, background-color: #218e95, border-color: #218e95),
+      ngxtools-palette-warn: (color: #fff, background-color: #df504a, border-color: #df504a),
+      ngxtools-palette-accent: (color: #000, background-color: #e7ae39, border-color: #e7ae39)
     ),
   ngxtools-theme-7:
     (
-      ngxtools-palette-primary: (color: #218e95, background-color: #c1d8d2, border-color: #c1d8d2),
-      ngxtools-palette-warn: (color: #da7456, background-color: #da7456, border-color: #da7456),
-      ngxtools-palette-accent: (color: #dcaf4f, background-color: #dcaf4f, border-color: #dcaf4f)
+      ngxtools-palette-primary: (color: #000, background-color: #e85b6f, border-color: #e85b6f),
+      ngxtools-palette-warn: (color: #000, background-color: #5ac5bf, border-color: #5ac5bf),
+      ngxtools-pal8ette-accent: (color: #000, background-color: #e5df56, border-color: #e5df56)
     ),
   ngxtools-theme-8:
     (
-      ngxtools-palette-primary: (color: #218e95, background-color: #218e95, border-color: #218e95),
-      ngxtools-palette-warn: (color: #df504a, background-color: #df504a, border-color: #df504a),
-      ngxtools-palette-accent: (color: #e7ae39, background-color: #e7ae39, border-color: #e7ae39)
-    ),
-  ngxtools-theme-9:
-    (
-      ngxtools-palette-primary: (color: #e85b6f, background-color: #e85b6f, border-color: #e85b6f),
-      ngxtools-palette-warn: (color: #5ac5bf, background-color: #5ac5bf, border-color: #5ac5bf),
-      ngxtools-palette-accent: (color: #e5df56, background-color: #e5df56, border-color: #e5df56)
-    ),
-  ngxtools-theme-10:
-    (
-      ngxtools-palette-primary: (color: #cb696a, background-color: #cb696a, border-color: #cb696a),
-      ngxtools-palette-warn: (color: #32425b, background-color: #32425b, border-color: #32425b),
-      ngxtools-palette-accent: (color: #92adb9, background-color: #92adb9, border-color: #92adb9)
-    ),
-  ngxtools-theme-11:
-    (
-      ngxtools-palette-primary: (color: black, background-color: white, border-color: black),
-      ngxtools-palette-warn: (color: black, background-color: #f5f3f3, border-color: black),
-      ngxtools-palette-accent: (color: black, background-color: white, border-color: white)
+      ngxtools-palette-primary: (color: #000, background-color: white, border-color: black),
+      ngxtools-palette-warn: (color: #000, background-color: #c4c4c4, border-color: black),
+      ngxtools-palette-accent: (color: #000, background-color: white, border-color: white)
     )
 );
 
 @each $theme, $colors in $themes {
   @each $color, $map in $colors {
-    // ex: .ngxtools-ngxtools-theme-1.ngxtools-palette-primary
-    .#{$theme}.#{$color} {
-      background-color: map-get($map, background-color);
-      transition: background-color 1s;
-    }
-    // ex: .ngxtools-ngxtools-theme-1 .ngxtools-palette-primary
+    // ex: .ngxtools-theme-1.ngxtools-palette-primary
     .#{$theme} .#{$color} {
       background-color: map-get($map, background-color);
       transition: background-color 1s;
     }
-    // ex: .ngxtools-ngxtools-theme-1 .ngxtools-palette-primary-text
+
+    // ex: .ngxtools-theme-1 .ngxtools-palette-primary-text
     .#{$theme} .#{$color}-text {
       color: map-get($map, color);
       transition: color 1s;
     }
-    // ex: .ngxtools-ngxtools-theme-1 .ngxtools-palette-primary-border
+
+    // ex: .ngxtools-theme-1 .ngxtools-palette-primary-border
     .#{$theme} .#{$color}-border {
       border-color: map-get($map, border-color);
       transition: border-color 1s;
     }
-
-    .#{$theme}_#{$color}-chooser {
+    
+    // ex: .ngxtools-theme-1__ngxtools-palette-primary-chooser
+    .#{$theme}__#{$color}-chooser {
       background-color: map-get($map, border-color);
       transition: border-color 1s;
     }
+    
+    // // ex: body.ngxtools-theme-1.ngxtools-palette-primary-scrollbar
+    // body.#{$theme}.#{$color}-scrollbar::-webkit-scrollbar-track {
+    //   background: map-get($map, background-color);
+    // }
+    
+    // // ex: body.ngxtools-theme-1.ngxtools-palette-primary-scrollbar
+    // body.#{$theme}.#{$color}-scrollbar::-webkit-scrollbar-thumb {
+    //   background-color: map-get($map, color);
+    //   border-radius: 55px;
+    // }
   }
 }
 
@@ -114,3 +105,13 @@ body {
   min-height: 100%;
   position: relative;
 }
+
+.layout__fix-height {
+  position: relative;
+  height: 100%;
+  min-height: 100%;
+}
+
+// body::-webkit-scrollbar {
+//   width: 1em;
+// }

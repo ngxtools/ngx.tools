@@ -1,39 +1,51 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 
+export interface Theme {
+  id: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-theme-chooser',
   templateUrl: './theme-chooser.component.html',
   styleUrls: ['./theme-chooser.component.css']
 })
 export class ThemeChooserComponent implements OnInit {
-  themes = Array(12) // n+1
+  storageKey = 'ngxtools-theme';
+  themes: Theme[] = Array(9) // n+1
     .fill(1)
-    .map((e, i) => ({
-      id: `ngxtools-theme-${i}`,
+    .map((_e, i) => ({
+      id: `${i}`,
       name: `Theme #${i}`
     }));
 
   body: HTMLBodyElement;
 
-  constructor(@Inject(DOCUMENT) private document) {}
+  constructor(@Inject(DOCUMENT) private document:  HTMLDocument) {}
 
   ngOnInit() {
     this.body = this.document.querySelector('body');
-    const savedTheme = parseInt(localStorage.getItem('theme'), 10);
-    if (savedTheme) {
+    const savedTheme = parseInt(localStorage.getItem(this.storageKey), 10);
+    if (isNaN(savedTheme) === false) {
       this.setTheme(savedTheme);
     }
   }
 
   setTheme(themeId: number) {
-    this.body.removeAttribute('class');
-    this.body.classList.add(`${themeId}`);
-    this.body.classList.add(`ngxtools-palette-primary`);
-    localStorage.setItem('theme', `${themeId}`);
+
+    let currentClassName = '';
+    this.body.classList.forEach(className => {
+      if (className.startsWith('ngxtools-theme-')) {
+        currentClassName = className;
+      }
+    });
+
+    this.body.classList.replace(currentClassName, `ngxtools-theme-${themeId}`);
+    localStorage.setItem(this.storageKey, `${themeId}`);
   }
 
-  themeId(theme) {
+  themeId(theme: Theme) {
     return theme.id;
   }
 }
