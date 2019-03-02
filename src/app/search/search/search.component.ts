@@ -24,7 +24,7 @@ export class SearchComponent implements OnInit, AfterContentInit {
   currentQuery: string;
   hasReachedLastPage = false;
   shouldAppendResults = false;
-  filterOption = 'schematics';
+  filterOption = 'library';
 
   @ViewChild('resultContainerRef') resultContainerRef: ElementRef;
   @ViewChild('queryInput') queryInput: ElementRef;
@@ -99,7 +99,7 @@ export class SearchComponent implements OnInit, AfterContentInit {
   ngAfterContentInit() {
     this.deeplink.registerFormGroup(this.searchForm, 'query');
     this.deeplink.registerState('t').subscribe(state => {
-      this.filterOption = state;
+      this.filterOption = state || this.filterOption;
 
       const changeEvent = { value: state } as MatButtonToggleChange;
       const query = this.searchForm.get('query').value;
@@ -169,7 +169,8 @@ export class SearchComponent implements OnInit, AfterContentInit {
   /**
    * Close keyboard on mobile device
    */
-  closeMobileBeyboard() {
+  closeMobileBeyboard(event: Event) {
     this.queryInput.nativeElement.blur();
+    return this.noop(event);
   }
 }

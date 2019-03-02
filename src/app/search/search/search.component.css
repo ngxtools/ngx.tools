@@ -2,7 +2,6 @@ section {
   width: 100%;
   text-align: center;
   padding: 40px 0 0;
-  min-height: 100px;
 }
 
 .control-filters__shrink {
@@ -22,7 +21,7 @@ form {
   font-size: 1.5em;
   width: 90vw;
   max-width: 900px;
-  margin: 30px auto 80px auto;
+  margin: 30px auto 0 auto;
   padding: 0;
   border-bottom: 3px solid;
   position: relative;
@@ -69,6 +68,7 @@ form {
   height: 100%;
   padding: 40px 0;
   min-height: 100px;
+  margin-top: -16px;
 }
 
 .algolia-credits {
