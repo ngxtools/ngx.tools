@@ -1,7 +1,7 @@
 <section class="ngxtools-palette-primary layout__fix-height" aria-label="Search for package by name">
   <form [formGroup]="searchForm" class="ngxtools-palette-warn-border ngxtools-palette-primary-text">
     
-    <input (keydown.enter)="closeMobileBeyboard();" aria-label="Enter your search query"
+    <input (keydown.enter)="closeMobileBeyboard($event);" aria-label="Enter your search query"
       class="input__search ngxtools-palette-accent-text" formControlName="query"
       placeholder="search packages/schematics/libraries..." #queryInput>
     
