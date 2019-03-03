@@ -7,10 +7,11 @@ import { SearchComponent } from './search/search.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { DeeplinkService } from './deeplink.service';
 import { InfiniteScrollDirective } from './infinite-scroll.directive';
+import { HumanDatePipe } from './humain-date.pipe';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, MatModule, SearchRoutingModule],
-  declarations: [SearchComponent, SearchResultComponent, InfiniteScrollDirective],
+  declarations: [SearchComponent, SearchResultComponent, InfiniteScrollDirective, HumanDatePipe],
   providers: [DeeplinkService],
 })
 export class SearchModule {}
