@@ -19,6 +19,7 @@
     "deploy": "firebase deploy --non-interactive",
     "changelog": "conventional-changelog -p angular -u | tail -n +3",
     "changelog.write": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "prerelease": "npm run build -- --prod",
     "release": "release-it --config .release-it.json"
   },
   "private": true,
