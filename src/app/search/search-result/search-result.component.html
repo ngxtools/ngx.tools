@@ -99,23 +99,23 @@
     </mat-card-actions>
     <mat-card-footer>
       <p>
-        <span title="Latest version {{ package.version }}"
+        <span matTooltip="Latest version: {{ package.version }}"
           ><i class="material-icons">label</i>{{ package.version }}</span
         >
         <span
-          title="License {{ package.license || 'N/A' }}"
+          matTooltip="License {{ package.license || 'N/A' }}"
           class="license__truncate"
           ><i class="material-icons">copyright</i
           >{{ package.license || 'N/A' }}</span
         >
         <span
-          title="Total downloads for the last 30 days {{
+          matTooltip="Downloads for the last 30 days: {{
             package.humanDownloadsLast30Days
           }}"
           ><i class="material-icons">cloud_download</i
           >{{ package.humanDownloadsLast30Days }}</span
         >
-        <span title="Last Update on {{ package.modified | date: 'fullTime' }}"
+        <span matTooltip="Last Update: {{ package.modified | date: 'fullTime' }}"
           ><i class="material-icons">calendar_today</i
           >{{ package.modified | humanDate }}</span
         >
