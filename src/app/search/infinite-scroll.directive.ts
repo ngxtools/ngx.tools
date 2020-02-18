@@ -5,7 +5,7 @@ import {
   Inject,
   Output
 } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
 import { fromEvent } from 'rxjs/internal/observable/fromEvent';
 import { debounceTime, filter, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
