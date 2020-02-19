@@ -1,5 +1,7 @@
 # [9.0.0](https://github.com/ngxtools/ngx.tools/compare/2.7.1...9.0.0) (2020-02-19)
 
+* Upgrade to Angular v9
+
 <a name="2.2.1"></a>
 # 2.2.1 (2018-12-10)
 
