@@ -1,7 +1,7 @@
-import { DOCUMENT } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
 import { Injectable, Inject } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'

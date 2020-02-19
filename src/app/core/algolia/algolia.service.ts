@@ -1,12 +1,15 @@
 import { Inject, Injectable } from '@angular/core';
-import algoliasearchHelper from 'algoliasearch-helper';
+import * as algoliasearchHelper from 'algoliasearch-helper';
 import { Observable } from 'rxjs';
 import { ALGOLIA_APPLICATION_ID, ALGOLIA_INDEX, ALGOLIA_SEARCH_API_KEY } from './injection-tokens';
 import { SearchResult } from 'src/app/search/search-result/search-result.component';
 
 export interface SearchState {
   search$: Observable<any>;
-  result$: Observable<SearchResult>;
+  result$: Observable<{
+    results: SearchResult,
+    state: algoliasearchHelper.SearchParameters
+  }>;
   change$: Observable<any>;
   error$: Observable<any>;
 }
@@ -46,11 +49,11 @@ export class AlgoliaService {
   private configureMasterIndex(indexName: string) {
     this.indices[indexName] = algoliasearchHelper(this.client, indexName, {
       facets: ['downloadsLast30Days'],
-      hierarchicalFacets: [{
-        name: 'products',
-        attributes: ['downloadsLast30Days'],
-        sortBy: ['count:desc', 'name:asc'] // first show the most common values, then sort by name
-      }]
+      // hierarchicalFacets: [{
+      //   name: 'products',
+      //   attributes: ['downloadsLast30Days'],
+        // sortBy: ['count:desc', 'name:asc'] // first show the most common values, then sort by name
+      // }]
     });
 
     this.searchState = {} as SearchState;

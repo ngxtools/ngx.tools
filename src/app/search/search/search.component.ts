@@ -6,12 +6,13 @@ import {
   ViewChild
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatButtonToggleChange, MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { MetricsService } from 'src/app/shared/metrics.service';
 import { AlgoliaService } from './../../core/algolia/algolia.service';
 import { DeeplinkService } from './../deeplink.service';
-import { PackageType } from './../search-result/search-result.component';
+import { PackageType, SearchResult } from './../search-result/search-result.component';
 
 @Component({
   selector: 'app-search',
@@ -63,7 +64,8 @@ export class SearchComponent implements OnInit, AfterContentInit {
         }
       });
 
-    this.search.searchState.result$.subscribe(results => {
+    this.search.searchState.result$.subscribe(data => {
+      const results = data.results;
       this.hasReachedLastPage = results.page + 1 === results.nbPages;
 
       if (results.query !== this.currentQuery) {

@@ -1,6 +1,5 @@
 import { AlgoliaService } from './../core/algolia/algolia.service';
 import { FormGroup } from '@angular/forms';
-import { QueryParams } from './deeplink.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { map } from 'rxjs/operators';
