@@ -1,4 +1,9 @@
-# Ngx.Tools [![buddy pipeline](https://app.buddy.works/manekinekko-1/ngx-tools/pipelines/pipeline/135110/badge.svg?token=cee6a291d42aeeb701176104f8623d429614bf77cb0c7d7b68bc5a342e49ffe9 "buddy pipeline")](https://app.buddy.works/manekinekko-1/ngx-tools/pipelines/pipeline/135110)
+# Ngx.tools
+
+This project is the source code of the https://ngx.tools search engine.
+
+
+# Contributions
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
 
