@@ -1,5 +1,4 @@
 {
-  "increment": "conventional:angular",
   "script": {
     "changelog": "npm run changelog",
     "beforeStage": "npm run changelog.write"
@@ -19,5 +18,11 @@
   },
   "npm": {
     "publish": false
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": "angular",
+      "infile": "CHANGELOG.md"
+    }
   }
 }
