@@ -30,7 +30,6 @@
     "@angular/compiler": "~13.3.5",
     "@angular/core": "~13.3.5",
     "@angular/forms": "~13.3.5",
-    "@angular/http": "^7.2.16",
     "@angular/material": "^13.3.5",
     "@angular/platform-browser": "~13.3.5",
     "@angular/platform-browser-dynamic": "~13.3.5",
