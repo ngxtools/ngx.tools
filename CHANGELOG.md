@@ -1,3 +1,12 @@
+
+
+# [13.0.0](https://github.com/ngxtools/ngx.tools/compare/9.0.0...13.0.0) (2022-05-08)
+
+
+### Bug Fixes
+
+* update service worker ([2ca5379](https://github.com/ngxtools/ngx.tools/commit/2ca5379cccc0958dc83ba96fca3f00523b0156ca))
+
 # [9.0.0](https://github.com/ngxtools/ngx.tools/compare/2.7.1...9.0.0) (2020-02-19)
 
 * Upgrade to Angular v9
@@ -72,6 +81,3 @@
 * add search tracking ([41c5d3c](https://github.com/ngxtools/ngx.tools/commit/41c5d3c))
 * add support for keywords searching ([3e188cf](https://github.com/ngxtools/ngx.tools/commit/3e188cf))
 * search by author ([25449cc](https://github.com/ngxtools/ngx.tools/commit/25449cc))
-
-
-
