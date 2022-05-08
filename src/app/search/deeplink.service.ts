@@ -24,10 +24,10 @@ export class DeeplinkService {
    * @param form The given FormGroup to register.
    */
   registerFormGroup(form: FormGroup, controlName: string) {
-    this.route.queryParams.subscribe((query: QueryParams) => {
-      if (query.q) {
+    this.route.queryParams.subscribe((query: Params) => {
+      if (query['q']) {
         form.patchValue({
-          [controlName]: query.q
+          [controlName]: query['q']
         });
       }
     });
@@ -43,11 +43,11 @@ export class DeeplinkService {
    * @param queryParams A given Params object containing the queryParams to set.
    */
   syncUrl(queryParams: Params) {
-    if (!queryParams.t) {
-      queryParams.t = this.route.snapshot.queryParams.t;
+    if (!queryParams['t']) {
+      queryParams['t'] = this.route.snapshot.queryParams['t'];
     } else {
-      if (!queryParams.q) {
-        queryParams.q = this.route.snapshot.queryParams.q;
+      if (!queryParams['q']) {
+        queryParams['q'] = this.route.snapshot.queryParams['q'];
       }
     }
 

@@ -22,13 +22,13 @@ import { PackageType, SearchResult } from './../search-result/search-result.comp
 export class SearchComponent implements OnInit, AfterContentInit {
   searchForm: FormGroup;
   packages: PackageType[] = [];
-  currentQuery: string;
+  currentQuery!: string;
   hasReachedLastPage = false;
   shouldAppendResults = false;
   filterOption = 'library';
 
-  @ViewChild('resultContainerRef') resultContainerRef: ElementRef;
-  @ViewChild('queryInput') queryInput: ElementRef;
+  @ViewChild('resultContainerRef') resultContainerRef!: ElementRef;
+  @ViewChild('queryInput') queryInput!: ElementRef;
 
   constructor(
     private search: AlgoliaService,
@@ -104,7 +104,7 @@ export class SearchComponent implements OnInit, AfterContentInit {
       this.filterOption = state || this.filterOption;
 
       const changeEvent = { value: state } as MatButtonToggleChange;
-      const query = this.searchForm.get('query').value;
+      const query = this.searchForm.get('query')?.value;
       switch (changeEvent.value) {
         case 'schematics':
           this.search.filterBySchematics(query);
@@ -124,7 +124,7 @@ export class SearchComponent implements OnInit, AfterContentInit {
   }
 
   onSortOptionsChange(changeEvent: MatButtonToggleChange) {
-    const query = this.searchForm.get('query').value;
+    const query = this.searchForm.get('query')?.value;
     switch (changeEvent.value) {
       case 'best_match':
         this.search.sortByBestMatch(query);
@@ -142,14 +142,14 @@ export class SearchComponent implements OnInit, AfterContentInit {
   }
 
   isThereAnyPackage() {
-    return this.searchForm.controls.query.value && this.packages.length === 0;
+    return this.searchForm.controls['query'].value && this.packages.length === 0;
   }
 
   loadNextPage() {
     if (!this.hasReachedLastPage) {
       this.shouldAppendResults = true;
       this.search.nextPage();
-      this.snackBar.open('Loading Packages...', null, {
+      this.snackBar.open('Loading Packages...', undefined, {
         duration: 2000,
         horizontalPosition: 'center',
         verticalPosition: 'bottom',

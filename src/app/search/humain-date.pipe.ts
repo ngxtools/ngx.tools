@@ -15,7 +15,7 @@ export class HumanDatePipe implements PipeTransform {
         return 'Just now';
       }
 
-      const dates = {
+      const dates: {[key:string]: number} = {
         'year': 31536000,
         'month': 2592000,
         'week': 604800,
