@@ -14,7 +14,7 @@
     "release": true,
     "releaseName": "ngx.tools ${version}",
     "draft": false,
-    "tokenRef": "GITHUB_TOKEN"
+    "tokenRef": "GITHUB_TOKEN_RELEASE_IT"
   },
   "npm": {
     "publish": false
