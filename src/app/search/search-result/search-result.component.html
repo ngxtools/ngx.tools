@@ -5,7 +5,7 @@
   >
     <span
       class="ngxtools-palette-warn"
-      [ngClass]="{ 'is-schematic': package.computedMetadata?.schematics }"
+      [ngClass]="{ 'is-schematic': package.computedMetadata?.['schematics'] }"
     ></span>
     <mat-card-header>
       <div mat-card-avatar class="header-image">
@@ -19,27 +19,27 @@
       </div>
       <mat-card-title>
         {{ package.name }}
-      
+
         <span *ngIf="shouldShowVerifiedBadge(package)" class="title-badge" matTooltip="Official Package">
           <i class="material-icons">verified_user</i>
         </span>
         <span *ngIf="shouldShowWarningBadge(package)" class="title-badge" matTooltip="This package may refer to AngularJS">
-          <i class="material-icons">warning</i>  
+          <i class="material-icons">warning</i>
         </span>
         <span *ngIf="isDeprecated(package)" class="title-badge" matTooltip="This package has been deprecated">
           <i class="material-icons">error_outline</i>
         </span>
-          
+
       </mat-card-title>
       <mat-card-subtitle
         (click)="searchByKeyword(package.owner.name)"
-        [innerHtml]="package._highlightResult.owner?.name?.value"
+        [innerHtml]="package._highlightResult?.['owner']?.name?.value"
       >
         {{ package.owner.name }}
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <p [innerHTML]="package._highlightResult.description?.value">
+      <p [innerHTML]="package._highlightResult?.['description']?.value">
         {{ package.description }}
       </p>
     </mat-card-content>

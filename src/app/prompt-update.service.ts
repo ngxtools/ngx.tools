@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root'
 })
 export class PromptUpdateService {
-  constructor(@Inject(DOCUMENT) private document, private updates: SwUpdate, private snackBar: MatSnackBar) {}
+  constructor(@Inject(DOCUMENT) private document: Document, private updates: SwUpdate, private snackBar: MatSnackBar) {}
 
   check() {
     console.log('check for updates?');

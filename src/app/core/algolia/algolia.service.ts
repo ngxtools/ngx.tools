@@ -18,7 +18,7 @@ export interface SearchState {
   providedIn: 'root'
 })
 export class AlgoliaService {
-  indices = {
+  indices: { [key: string]: any } = {
     'npm-search': algoliasearchHelper
   };
 
@@ -34,7 +34,7 @@ export class AlgoliaService {
     @Inject(ALGOLIA_SEARCH_API_KEY) private searchApiKey: string,
     @Inject(ALGOLIA_INDEX) private indexName: string
   ) {
-    this.client = window['algoliasearch'](this.applicationID, this.searchApiKey);
+    this.client = (window as any)['algoliasearch'](this.applicationID, this.searchApiKey);
 
     this.searchState = {} as any;
 
@@ -52,16 +52,16 @@ export class AlgoliaService {
       // hierarchicalFacets: [{
       //   name: 'products',
       //   attributes: ['downloadsLast30Days'],
-        // sortBy: ['count:desc', 'name:asc'] // first show the most common values, then sort by name
+      // sortBy: ['count:desc', 'name:asc'] // first show the most common values, then sort by name
       // }]
     });
 
-    this.searchState = {} as SearchState;
+    this.searchState = {} as any;
 
     // map algolia's events to observables
-    ['search', 'result', 'change', 'error'].forEach(eventName => {
-      this.searchState[`${eventName}$`] = new Observable(observer => {
-        const handler = e => observer.next(e);
+    ['search', 'result', 'change', 'error'].forEach((eventName: string) => {
+      (this.searchState as any)[eventName + `$`] = new Observable(observer => {
+        const handler = (event: any) => observer.next(event);
         this.indices[indexName].on(eventName, handler);
         return () => this.indices[indexName].removeListener(eventName, handler);
       });
@@ -72,7 +72,7 @@ export class AlgoliaService {
    * Set an initial search parameters to be used by the search method.
    * @param options
    */
-  setQueryParameter(options) {
+  setQueryParameter(options: any) {
     this.indices[this.indexName].setQueryParameter(options);
   }
 

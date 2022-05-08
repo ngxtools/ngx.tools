@@ -21,7 +21,7 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "tsConfig": "tsconfig.app.json",
             "assets": [
               {
                 "glob": "favicon.ico",
@@ -38,7 +38,8 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/algoliasearch/dist/algoliasearch.umd.js"
+              "node_modules/algoliasearch/dist/algoliasearch.umd.js",
+              "node_modules/algoliasearch-helper/dist/algoliasearch.helper.min.js"
             ]
           },
           "configurations": {

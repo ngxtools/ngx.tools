@@ -44,7 +44,16 @@ export interface AuthorInformation {
 }
 
 export interface PackageType {
-  _highlightResult?: ObjectLiteral;
+  _highlightResult?: ObjectLiteral & {
+    description: {
+      value: string;
+    },
+    owner: {
+      name: {
+        value: string;
+      }
+    }
+  };
   changelogFilename: string;
   computedKeywords: string[];
   computedMetadata: ObjectLiteral;
@@ -99,7 +108,7 @@ export class SearchResultComponent implements OnChanges {
     });
   }
 
-  packageName(pack: PackageType) {
+  packageName(_index: number, pack: PackageType) {
     return pack.name;
   }
 
@@ -136,7 +145,7 @@ export class SearchResultComponent implements OnChanges {
 
   buildTweetText(pkg: PackageType) {
     const packageName = pkg.name;
-    const packageType = pkg.computedMetadata.schematics ? 'schematics' : 'library';
+    const packageType = pkg.computedMetadata['schematics'] ? 'schematics' : 'library';
     const origin = `${location.origin}/#/search?q=${packageName}&t=${packageType}`;
 
     const pkgKeywords = new Set(pkg.keywords.concat(['angular', 'ngxtools', 'javascript']));

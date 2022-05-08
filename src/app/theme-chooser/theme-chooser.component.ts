@@ -20,32 +20,38 @@ export class ThemeChooserComponent implements OnInit {
       name: `Theme #${i}`
     }));
 
-  body: HTMLBodyElement;
+  body!: HTMLBodyElement | null;
 
-  constructor(@Inject(DOCUMENT) private document:  HTMLDocument) {}
+  constructor(@Inject(DOCUMENT) private document: HTMLDocument) { }
 
   ngOnInit() {
     this.body = this.document.querySelector('body');
-    const savedTheme = parseInt(localStorage.getItem(this.storageKey), 10);
-    if (isNaN(savedTheme) === false) {
-      this.setTheme(savedTheme);
+    const theme = localStorage.getItem(this.storageKey);
+    if (theme) {
+      const savedTheme = parseInt(theme, 10);
+      if (isNaN(savedTheme) === false) {
+        this.setTheme(savedTheme);
+      }
+    }
+    else {
+      this.setTheme(0);
     }
   }
 
-  setTheme(themeId: number) {
+  setTheme(themeId: number | string) {
 
     let currentClassName = '';
-    this.body.classList.forEach(className => {
+    this.body?.classList.forEach(className => {
       if (className.startsWith('ngxtools-theme-')) {
         currentClassName = className;
       }
     });
 
-    this.body.classList.replace(currentClassName, `ngxtools-theme-${themeId}`);
+    this.body?.classList.replace(currentClassName, `ngxtools-theme-${themeId}`);
     localStorage.setItem(this.storageKey, `${themeId}`);
   }
 
-  themeId(theme: Theme) {
+  themeId(_index: number, theme: Theme) {
     return theme.id;
   }
 }

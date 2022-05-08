@@ -13,7 +13,7 @@ export interface AlgoliaConfiguration {
   providers: [AlgoliaService]
 })
 export class AlgoliaModule {
-  static forRoot(config: AlgoliaConfiguration): ModuleWithProviders {
+  static forRoot(config: AlgoliaConfiguration): ModuleWithProviders<AlgoliaModule> {
     return {
       ngModule: AlgoliaModule,
       providers: [
