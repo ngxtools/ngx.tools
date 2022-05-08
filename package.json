@@ -1,7 +1,7 @@
 {
   "name": "ngx.tools",
   "version": "13.0.0",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "author": {
     "name": "Wassim Chegham",
     "email": "github@wassimchegham.com",
@@ -16,11 +16,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "predeploy": "npm run build -- --prod",
+    "predeploy": "npm run build",
     "deploy": "firebase deploy --non-interactive",
     "changelog": "conventional-changelog -p angular -u | tail -n +3",
     "changelog.write": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "prerelease": "npm run build -- --prod",
+    "prerelease": "npm run build",
     "release": "release-it --config .release-it.json"
   },
   "private": true,
