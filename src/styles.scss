@@ -77,18 +77,18 @@ $themes: (
       border-color: map-get($map, border-color);
       transition: border-color 1s;
     }
-    
+
     // ex: .ngxtools-theme-1__ngxtools-palette-primary-chooser
     .#{$theme}__#{$color}-chooser {
       background-color: map-get($map, border-color);
       transition: border-color 1s;
     }
-    
+
     // // ex: body.ngxtools-theme-1.ngxtools-palette-primary-scrollbar
     // body.#{$theme}.#{$color}-scrollbar::-webkit-scrollbar-track {
     //   background: map-get($map, background-color);
     // }
-    
+
     // // ex: body.ngxtools-theme-1.ngxtools-palette-primary-scrollbar
     // body.#{$theme}.#{$color}-scrollbar::-webkit-scrollbar-thumb {
     //   background-color: map-get($map, color);
@@ -108,10 +108,4 @@ body {
 
 .layout__fix-height {
   position: relative;
-  height: 100%;
-  min-height: 100%;
 }
-
-// body::-webkit-scrollbar {
-//   width: 1em;
-// }

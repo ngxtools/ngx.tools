@@ -1,24 +1,41 @@
 import { DOCUMENT } from '@angular/common';
-import { Injectable, Inject } from '@angular/core';
-import { SwUpdate } from '@angular/service-worker';
+import { ApplicationRef, Inject, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SwUpdate } from '@angular/service-worker';
+import { concat, interval } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PromptUpdateService {
-  constructor(@Inject(DOCUMENT) private document: Document, private updates: SwUpdate, private snackBar: MatSnackBar) {}
+  constructor(@Inject(DOCUMENT) private document: Document, private appRef: ApplicationRef, private updates: SwUpdate, private snackBar: MatSnackBar) {
+    // Allow the app to stabilize first, before starting
+    // polling for updates with `interval()`.
+    const appIsStable$ = appRef.isStable.pipe(first(isStable => isStable === true));
+    const everySixHours$ = interval(6 * 60 * 60 * 1000);
+    const everySixHoursOnceAppIsStable$ = concat(appIsStable$, everySixHours$);
+
+    everySixHoursOnceAppIsStable$.subscribe(() => updates.checkForUpdate());
+  }
 
   check() {
     console.log('check for updates?');
-    this.updates.available.subscribe(event => {
+    this.updates.versionUpdates.subscribe(event => {
       console.log('update available...');
-
-      this.openSnackBar();
-    });
-    this.updates.activated.subscribe(event => {
-      console.log('old version was', event.previous);
-      console.log('new version is', event.current);
+      switch (event.type) {
+        case 'VERSION_DETECTED':
+          console.log(`Downloading new app version: ${event.version.hash}`);
+          this.openSnackBar();
+          break;
+        case 'VERSION_READY':
+          console.log(`Current app version: ${event.currentVersion.hash}`);
+          console.log(`New app version ready for use: ${event.latestVersion.hash}`);
+          break;
+        case 'VERSION_INSTALLATION_FAILED':
+          console.log(`Failed to install app version '${event.version.hash}': ${event.error}`);
+          break;
+      }
     });
   }
 
