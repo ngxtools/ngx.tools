@@ -4,8 +4,8 @@
   "license": "Apache-2.0",
   "author": {
     "name": "Wassim Chegham",
-    "email": "github@wassimchegham.com",
-    "url": "https://twitter.com/manekinekko"
+    "email": "github@wassim.dev",
+    "url": "https://wassim.dev"
   },
   "scripts": {
     "ng": "ng",
