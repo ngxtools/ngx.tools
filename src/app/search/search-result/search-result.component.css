@@ -1,5 +1,13 @@
-mat-card {
-  width: 350px;
+section {
+  max-width: 3740px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+}
+
+.mat-mdc-card {
+  width: 430px;
   margin: 10px 16px;
   display: inline-block;
   text-align: left;
@@ -18,25 +26,32 @@ i[hidden] {
   display: none;
 }
 
-.mat-card-content {
+.mat-mdc-card-content {
   max-height: 100px;
   min-height: 25px;
   overflow: auto;
 }
 
-.mat-card-header-text {
+.mat-mdc-card-content {
+  padding: 16px;
+}
+
+.mat-mdc-card-header-text {
   margin: 0 10px;
 }
 
-.mat-card-actions {
-  width: 378px;
-  margin-left: -24px;
-  padding: 7px 10px;
-  text-align: center;
+.mat-mdc-card-actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
-mat-card-subtitle {
+.mat-mdc-card-subtitle {
   cursor: pointer;
+}
+
+.mat-mdc-chip-set .mdc-evolution-chip-set__chips {
+  padding: 16px;;
 }
 
 .is-schematic {
@@ -47,11 +62,11 @@ mat-card-subtitle {
   transform: rotate(45deg);
 }
 
-.mat-card {
+.mat-mdc-card {
   overflow: hidden;
 }
 
-.mat-card ::ng-deep em {
+.mat-mdc-card ::ng-deep em {
   font-style: normal;
   background: #ffea00;
   border-radius: 4px;
@@ -59,18 +74,23 @@ mat-card-subtitle {
   border: 1px solid #e5d303;
 }
 
-.mat-card-footer {
-  padding: 0 8px;
+.mat-mdc-card-footer {
+  padding: 8px;
 }
 
-.mat-card-footer i {
+.mat-mdc-card-footer p {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.mat-mdc-card-footer i {
   font-size: 1.1em;
   top: 1.5px;
   position: relative;
   margin: 0 4px;
 }
 
-.mat-card-footer p {
+.mat-mdc-card-footer p {
   display: flex;
   justify-content: space-evenly;
 }
@@ -103,45 +123,49 @@ img + i {
   position: relative;
 }
 
-
-@media (min-width: 299px) {
-  mat-card.mat-card {
-    width: 346px;
-  }
-  .mat-card-actions {
-    width: 379px;
-    padding: 4px 0;
-    margin-left: -16px;
-  }
-  .mat-card-actions .mat-button,
-  .mat-card-actions .mat-raised-button {
-    min-width: 55px;
-  }
+mat-chip-listbox {
+  padding: 16px;
 }
 
-@media (min-width: 500px) {
-  mat-card.mat-card {
-    width: 440px;
-  }
-  .mat-card-actions {
-    width: 378px;
-    margin-left: -16px;
-    padding: 7px 47px;
-  }
-}
 
 @media (min-width: 600px) {
-  .mat-card-actions {
-    margin-left: -26px;
-    padding: 7px 55px;
+  section {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 
-@media (min-width: 900px) {
-  mat-card.mat-card {
-    width: 370px;
+@media (min-width: 930px) {
+  section {
+    grid-template-columns: repeat(2, 1fr);
   }
-  .mat-card-actions {
-    padding: 7px 20px;
+}
+
+@media (min-width: 1400px) {
+  section {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1890px) {
+  section {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 2380px) {
+  section {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 2940px) {
+  section {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (min-width: 3400px) {
+  section {
+    grid-template-columns: repeat(7, 1fr);
   }
 }
