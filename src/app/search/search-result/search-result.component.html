@@ -5,7 +5,7 @@
   >
     <span
       class="ngxtools-palette-warn"
-      [ngClass]="{ 'is-schematic': package.computedMetadata?.['schematics'] }"
+      [ngClass]="{ 'is-schematic': package?.computedMetadata?.['schematics'] }"
     ></span>
     <mat-card-header>
       <div mat-card-avatar class="header-image">
@@ -120,11 +120,11 @@
           >{{ package.modified | humanDate }}</span
         >
       </p>
-      <mat-chip-list>
+      <mat-chip-listbox>
         <mat-chip
           (click)="searchByKeyword(keyword)"
           *ngFor="let keyword of package.keywords">{{ keyword }}</mat-chip>
-      </mat-chip-list>
+      </mat-chip-listbox>
     </mat-card-footer>
   </mat-card>
 </section>

@@ -82,10 +82,10 @@ form {
   }
 }
 
-.mat-select {
+.mat-mdc-select {
   width: 180px;
 }
 
-.mat-button-toggle-group {
+.mat-mdc-button-toggle-group {
   margin: 5px;
 }
