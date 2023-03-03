@@ -5,7 +5,7 @@
       class="input__search ngxtools-palette-accent-text" formControlName="query"
       placeholder="search packages/schematics/libraries..." #queryInput>
 
-    <button class="button__clear" mat-button [hidden]="!searchForm.controls['query'].value" mat-icon-button aria-label="Clear" (click)="clear()">
+    <button class="button__clear" mat-icon-button [hidden]="!searchForm.controls['query'].value" mat-icon-button aria-label="Clear" (click)="clear()">
       <mat-icon>close</mat-icon>
     </button>
 
