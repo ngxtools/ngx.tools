@@ -22,7 +22,7 @@ export class ThemeChooserComponent implements OnInit {
 
   body!: HTMLBodyElement | null;
 
-  constructor(@Inject(DOCUMENT) private document: HTMLDocument) { }
+  constructor(@Inject(DOCUMENT) private document: Document)  { }
 
   ngOnInit() {
     this.body = this.document.querySelector('body');

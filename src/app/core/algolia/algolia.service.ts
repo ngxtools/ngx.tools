@@ -83,8 +83,6 @@ export class AlgoliaService {
    */
   private search(indexName: string, query: string, extra = '') {
 
-    console.log(query, extra);
-
     this.indices[this.indexName]
       .setIndex(indexName)
       .setQueryParameter('query', query)
