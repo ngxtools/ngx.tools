@@ -6,13 +6,13 @@ import {
   ViewChild
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { MetricsService } from 'src/app/shared/metrics.service';
 import { AlgoliaService } from './../../core/algolia/algolia.service';
 import { DeeplinkService } from './../deeplink.service';
-import { PackageType, SearchResult } from './../search-result/search-result.component';
+import { PackageType } from './../search-result/search-result.component';
 
 @Component({
   selector: 'app-search',
