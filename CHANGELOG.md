@@ -1,5 +1,16 @@
 
 
+# [15.0.0](https://github.com/ngxtools/ngx.tools/compare/13.0.0...15.0.0) (2023-03-04)
+
+### Changes
+
+* chore: update to angular cli v15 ([2376fe6](https://github.com/ngxtools/ngx.tools/commit/2376fe63424f6692b69ac988b08c869d1c837795))
+* chore: move to css grids ([bebf1c3](https://github.com/ngxtools/ngx.tools/commit/bebf1c3606d98c8ca5697b3b02b0f1e000d770a1))
+
+### Bug Fixes
+
+* exclude ga from sw ([18370fb](https://github.com/ngxtools/ngx.tools/commit/18370fb8340943a3584892b26a8937dd53198a35))
+
 # [13.0.0](https://github.com/ngxtools/ngx.tools/compare/9.0.0...13.0.0) (2022-05-08)
 
 
