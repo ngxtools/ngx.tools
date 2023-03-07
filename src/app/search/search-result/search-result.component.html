@@ -1,6 +1,6 @@
 <section
   *ngIf="packages.length > 0"
-  appInfiniteScroll
+  appInfiniteScroll="load-more"
   (scroll)="onScroll()"
 >
   <app-card
@@ -9,4 +9,5 @@
     [isFullMode]="false"
   >
   </app-card>
+  <div class="load-more"></div>
 </section>

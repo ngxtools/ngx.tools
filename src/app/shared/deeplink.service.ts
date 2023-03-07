@@ -1,4 +1,4 @@
-import { AlgoliaService } from './../core/algolia/algolia.service';
+import { AlgoliaService } from '../core/algolia/algolia.service';
 import { FormGroup } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';

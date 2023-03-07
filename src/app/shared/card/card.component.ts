@@ -9,7 +9,7 @@ import {
   Renderer2,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { DeeplinkService } from 'src/app/search/deeplink.service';
+import { DeeplinkService } from 'src/app/shared/deeplink.service';
 import {
   CSSStyleDeclarationWithViewTransitionAPI,
   DocumentWithViewTransitionAPI,
