@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import * as algoliasearchHelper from 'algoliasearch-helper';
 import { Observable } from 'rxjs';
+import { SearchResult } from 'src/typings';
 import { ALGOLIA_APPLICATION_ID, ALGOLIA_INDEX, ALGOLIA_SEARCH_API_KEY } from './injection-tokens';
-import { SearchResult } from 'src/app/search/search-result/search-result.component';
 
 export interface SearchState {
   search$: Observable<any>;
