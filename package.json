@@ -40,6 +40,7 @@
     "algoliasearch-helper": "^3.8.2",
     "hammerjs": "^2.0.8",
     "rxjs": "~7.5.0",
+    "showdown": "^2.1.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
@@ -51,6 +52,7 @@
     "@release-it/conventional-changelog": "^5.0.0",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
+    "@types/showdown": "^2.0.0",
     "conventional-changelog-cli": "^2.0.31",
     "jasmine-core": "~4.0.0",
     "jasmine-spec-reporter": "~4.2.1",
