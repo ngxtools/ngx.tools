@@ -4,6 +4,7 @@ section {
   display: grid;
   gap: 10px;
   justify-items: center;
+  padding-bottom: 80px;
 }
 
 app-card {
