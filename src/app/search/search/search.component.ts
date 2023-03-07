@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   OnInit,
+  signal,
   ViewChild
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -21,11 +22,11 @@ import { PackageType } from './../search-result/search-result.component';
 })
 export class SearchComponent implements OnInit, AfterContentInit {
   searchForm: FormGroup;
-  packages: PackageType[] = [];
-  currentQuery!: string;
-  hasReachedLastPage = false;
-  shouldAppendResults = false;
-  filterOption = 'library';
+  packages = signal<PackageType[]>([]);
+  currentQuery = signal('');
+  hasReachedLastPage = signal(false);
+  shouldAppendResults = signal(false);
+  filterOption = signal('library');
 
   @ViewChild('resultContainerRef') resultContainerRef!: ElementRef;
   @ViewChild('queryInput') queryInput!: ElementRef;
@@ -60,27 +61,30 @@ export class SearchComponent implements OnInit, AfterContentInit {
           this.resultContainerRef.nativeElement.classList.remove(
             'no-package-found'
           );
-          this.packages = [];
+          this.packages.set([]);
         }
       });
 
     this.search.searchState.result$.subscribe(data => {
       const results = data.results;
-      this.hasReachedLastPage = results.page + 1 === results.nbPages;
+      this.hasReachedLastPage.set(results.page + 1 === results.nbPages);
 
-      if (results.query !== this.currentQuery) {
-        this.currentQuery = results.query;
-        this.packages = [];
+      if (results.query !== this.currentQuery()) {
+        this.currentQuery.set(results.query);
+        this.packages.set([]);
       }
 
       if (results.query.trim() === '') {
-        this.packages = [];
+        this.packages.set([]);
       } else {
         // get the actual result
-        if (this.shouldAppendResults) {
-          this.packages = this.packages.concat(results.hits);
+        if (this.shouldAppendResults()) {
+          this.packages.mutate((packages: PackageType[]) => {
+            packages = [...packages, ...results.hits];
+          });
+
         } else {
-          this.packages = results.hits;
+          this.packages.set(results.hits);
         }
 
         if (results.hits.length === 0) {
@@ -101,7 +105,7 @@ export class SearchComponent implements OnInit, AfterContentInit {
   ngAfterContentInit() {
     this.deeplink.registerFormGroup(this.searchForm, 'query');
     this.deeplink.registerState('t').subscribe(state => {
-      this.filterOption = state || this.filterOption;
+      this.filterOption.set(state || this.filterOption());
 
       const changeEvent = { value: state } as MatButtonToggleChange;
       const query = this.searchForm.get('query')?.value;
@@ -120,7 +124,7 @@ export class SearchComponent implements OnInit, AfterContentInit {
     this.deeplink.syncUrl({
       t: changeEvent.value
     });
-    this.shouldAppendResults = false;
+    this.shouldAppendResults.set(false);
   }
 
   onSortOptionsChange(changeEvent: MatButtonToggleChange) {
@@ -142,12 +146,12 @@ export class SearchComponent implements OnInit, AfterContentInit {
   }
 
   isThereAnyPackage() {
-    return this.searchForm.controls['query'].value && this.packages.length === 0;
+    return this.searchForm.controls['query'].value && this.packages().length === 0;
   }
 
   loadNextPage() {
-    if (!this.hasReachedLastPage) {
-      this.shouldAppendResults = true;
+    if (!this.hasReachedLastPage()) {
+      this.shouldAppendResults.set(true);
       this.search.nextPage();
       this.snackBar.open('Loading Packages...', undefined, {
         duration: 2000,
