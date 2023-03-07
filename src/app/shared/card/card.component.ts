@@ -1,13 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  Component,
-  EventEmitter,
-  Inject,
-  Input,
-  NgZone,
-  Output,
-  Renderer2,
-} from '@angular/core';
+import { Component, Inject, Input, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { DeeplinkService } from 'src/app/shared/deeplink.service';
 import {
@@ -22,7 +14,6 @@ import {
   styleUrls: ['./card.component.css'],
 })
 export class CardComponent {
-
   @Input() package: PackageType | null = null;
 
   @Input() isFullMode = true;
@@ -30,7 +21,6 @@ export class CardComponent {
   constructor(
     private renderer: Renderer2,
     private deeplink: DeeplinkService,
-    private zone: NgZone,
     private router: Router,
     @Inject(DOCUMENT) private document: Document
   ) {}
@@ -88,32 +78,15 @@ export class CardComponent {
   }
 
   async navigateTo(pkg: PackageType, event: Event) {
-    const card = (event?.target as HTMLElement).closest<HTMLElement>(
-      'app-card'
-    );
-    if (!card) {
-      return;
-    }
-
-    (
-      card.style as CSSStyleDeclarationWithViewTransitionAPI
-    ).viewTransitionName = 'package-details-wide';
 
     this.#startViewTransition(
       () => {
-        this.zone.run(async () => {
-          await this.router.navigate([`pkg`, pkg.name], {
-            state: {
-              pkg,
-              query: this.deeplink.getState(),
-            },
-          });
+        this.router.navigate([`pkg`, pkg.name], {
+          state: {
+            pkg,
+            query: this.deeplink.getState(),
+          },
         });
-      },
-      () => {
-        (
-          card.style as CSSStyleDeclarationWithViewTransitionAPI
-        ).viewTransitionName = '';
       }
     );
   }

@@ -87,4 +87,5 @@ export interface PackageType {
   };
   version: string;
   versions: ObjectLiteral;
+  rev: string;
 }
