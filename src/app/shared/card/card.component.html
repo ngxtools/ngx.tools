@@ -44,12 +44,23 @@
       {{ package.owner.name }}
     </mat-card-subtitle>
   </mat-card-header>
+
   <mat-card-content>
     <p [innerHTML]="package._highlightResult?.['description']?.value">
       {{ package.description }}
     </p>
   </mat-card-content>
+
   <mat-card-actions>
+    <button
+      *ngIf="!isFullMode"
+      mat-button
+      (click)="navigateTo(package, $event)"
+    >
+      <i class="material-icons">
+        <i class="material-icons">fullscreen</i>
+      </i>
+    </button>
     <a
       mat-button
       href="{{ package.lastPublisher.link }}"
