@@ -13,7 +13,7 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { MetricsService } from 'src/app/shared/metrics.service';
 import { PackageType } from 'src/typings';
 import { AlgoliaService } from './../../core/algolia/algolia.service';
-import { DeeplinkService } from './../deeplink.service';
+import { DeeplinkService } from '../../shared/deeplink.service';
 
 @Component({
   selector: 'app-search',
@@ -81,8 +81,8 @@ export class SearchComponent implements OnInit, AfterContentInit {
       } else {
         // get the actual result
         if (this.shouldAppendResults()) {
-          this.packages.mutate((packages: PackageType[]) => {
-            packages = [...packages, ...results.hits];
+          this.packages.update((packages: PackageType[]) => {
+            return [...packages, ...results.hits];
           });
 
         } else {
@@ -155,7 +155,7 @@ export class SearchComponent implements OnInit, AfterContentInit {
     if (!this.hasReachedLastPage()) {
       this.shouldAppendResults.set(true);
       this.search.nextPage();
-      this.snackBar.open('Loading Packages...', undefined, {
+      this.snackBar.open('Loading more packages...', undefined, {
         duration: 2000,
         horizontalPosition: 'center',
         verticalPosition: 'bottom'

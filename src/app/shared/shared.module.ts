@@ -5,10 +5,11 @@ import { CardComponent } from './card/card.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { HumanDatePipe } from '../search/humain-date.pipe';
+import { HumanDatePipe } from './humain-date.pipe';
 import { MatChipsModule } from '@angular/material/chips';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { InfiniteScrollDirective } from './infinite-scroll.directive';
 
 const MAT_MODULES = [
   MatCardModule,
@@ -20,7 +21,7 @@ const MAT_MODULES = [
 
 @NgModule({
   imports: [CommonModule, RouterModule, ...MAT_MODULES],
-  declarations: [NotFoundComponent, CardComponent, HumanDatePipe],
-  exports: [CardComponent]
+  declarations: [NotFoundComponent, CardComponent, HumanDatePipe, InfiniteScrollDirective],
+  exports: [NotFoundComponent, CardComponent, HumanDatePipe, InfiniteScrollDirective]
 })
 export class SharedModule {}

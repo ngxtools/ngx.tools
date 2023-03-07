@@ -33,4 +33,5 @@ export class SearchResultComponent implements OnChanges {
   onScroll() {
     this.scrollReachedBottom.emit();
   }
+
 }
