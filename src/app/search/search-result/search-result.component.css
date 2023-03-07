@@ -2,131 +2,14 @@ section {
   max-width: 3740px;
   margin: 0 auto;
   display: grid;
-  gap: 1rem;
+  gap: 10px;
   justify-items: center;
 }
 
-.mat-mdc-card {
-  width: 430px;
-  margin: 10px 16px;
-  display: inline-block;
-  text-align: left;
-  color: black;
-  vertical-align: top;
-}
-
-.header-image img {
-  width: 40px;
-  height: 40px;
-  margin: 0px;
-}
-
-img[hidden],
-i[hidden] {
-  display: none;
-}
-
-.mat-mdc-card-content {
-  max-height: 100px;
-  min-height: 25px;
-  overflow: auto;
-}
-
-.mat-mdc-card-content {
-  padding: 16px;
-}
-
-.mat-mdc-card-header-text {
-  margin: 0 10px;
-}
-
-.mat-mdc-card-actions {
+app-card {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
+  max-width: 450px;
 }
-
-.mat-mdc-card-subtitle {
-  cursor: pointer;
-}
-
-.mat-mdc-chip-set .mdc-evolution-chip-set__chips {
-  padding: 16px;;
-}
-
-.is-schematic {
-  position: absolute;
-  padding: 2em;
-  top: -40px;
-  right: -40px;
-  transform: rotate(45deg);
-}
-
-.mat-mdc-card {
-  overflow: hidden;
-}
-
-.mat-mdc-card ::ng-deep em {
-  font-style: normal;
-  background: #ffea00;
-  border-radius: 4px;
-  padding: 0 2px;
-  border: 1px solid #e5d303;
-}
-
-.mat-mdc-card-footer {
-  padding: 8px;
-}
-
-.mat-mdc-card-footer p {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.mat-mdc-card-footer i {
-  font-size: 1.1em;
-  top: 1.5px;
-  position: relative;
-  margin: 0 4px;
-}
-
-.mat-mdc-card-footer p {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-img + i {
-  display: none;
-  font-size: 3em;
-  margin: -5px;
-}
-
-.license__truncate {
-  max-width: 66px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  position: relative;
-}
-
-.title-badge {
-  background: transparent;
-  display: inline-block;
-  font-style: normal;
-  vertical-align: baseline;
-  position: relative;
-}
-
-.title-badge i {
-  font-size: 18px;
-  top: 2px;
-  position: relative;
-}
-
-mat-chip-listbox {
-  padding: 16px;
-}
-
 
 @media (min-width: 600px) {
   section {
