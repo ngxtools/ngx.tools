@@ -18,11 +18,9 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "es2020",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
-    "useDefineForClassFields": false
+    "lib": ["es2020", "dom"],
+    "useDefineForClassFields": false,
+    "typeRoots": ["node_modules/@types", "src/typings.d.ts"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
