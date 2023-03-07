@@ -1,14 +1,11 @@
+:host {
+  display: block;
+  height: 100vh;
+}
+
 section span {
   display: block;
   padding: 10px;
-}
-
-mat-toolbar {
-  text-align: center;
-  border-bottom: 5px solid;
-  position: fixed;
-  top: 0;
-  z-index: 1;
 }
 
 main {
@@ -40,28 +37,38 @@ main {
   text-transform: uppercase;
 }
 
-footer {
+mat-toolbar {
+  text-align: center;
+  position: fixed;
+  top: 0;
+  z-index: 2;
   padding: 10px 0;
   position: fixed;
-  bottom: 0;
-  border-top: 4px solid;
+  border-bottom: 5px solid var(--logo-background-color);
   width: 100%;
   font-size: 0.8em;
-  background-color: white;
   display: flex;
-  justify-content: center;
-  z-index: 1;
+  justify-content: flex-start;
+  z-index: 10;
 }
 
-footer a {
+mat-toolbar a {
   font-weight: bold;
   text-decoration: underline;
 }
 
-footer a img {
+mat-toolbar a img {
   top: 2px;
   display: inline-block;
   position: relative;
+}
+
+mat-toolbar.main-footer {
+  top: unset;
+  bottom: 0;
+  justify-content: center;
+  border-top: 4px solid var(--logo-background-color);
+  border-bottom: unset;
 }
 
 mat-sidenav {
@@ -69,7 +76,12 @@ mat-sidenav {
   padding: 4px;
 }
 
-.menu_button {
+.button__menu {
+  position: absolute;
+}
+
+.button__back {
+  left: 40px;
   position: absolute;
 }
 
