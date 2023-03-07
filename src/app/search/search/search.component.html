@@ -39,7 +39,7 @@
 <section class="ngxtools-palette-primary" aria-label="filter results">
   <p>
     <mat-button-toggle-group
-      [value]="filterOption"
+      [value]="filterOption()"
       (change)="onFilterOptionsChange($event)"
       #group="matButtonToggleGroup"
       appearance="legacy"
@@ -71,7 +71,7 @@
   <hr class="ngxtools-palette-warn ngxtools-palette-warn-border" />
 
   <app-search-result
-    [packages]="packages"
+    [packages]="packages()"
     (scrollReachedBottom)="loadNextPage()"
   ></app-search-result>
 </section>
