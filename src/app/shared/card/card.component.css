@@ -1,0 +1,142 @@
+.mat-mdc-card {
+  width: 100%;
+  display: inline-block;
+  text-align: left;
+}
+
+.header-image img {
+  width: 40px;
+  height: 40px;
+  margin: 0px;
+}
+
+img[hidden],
+i[hidden] {
+  display: none;
+}
+
+.mat-mdc-card-content {
+  max-height: 100px;
+  min-height: 25px;
+  overflow: auto;
+}
+
+.mat-mdc-card-content {
+  padding: 16px;
+}
+
+.mat-mdc-card-title {
+  display: flex;
+}
+
+.mat-mdc-card-title h1 {
+  margin: 0;
+}
+
+.mat-mdc-card-header-text {
+  margin: 0 10px;
+}
+
+.mat-mdc-card-actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #e0e0e0;
+}
+
+.dark-theme .mat-mdc-card-actions {
+  background-color: #424242;
+}
+
+.mat-mdc-card-actions a {
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  display: flex;
+  text-decoration: none;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+  padding: 4px;
+  transition: 0.5s ease;
+  color: black;
+}
+
+.mat-mdc-card-actions a:hover {
+  background: #e5e5e550;
+  border-radius: 50%;
+}
+
+.mat-mdc-card-subtitle {
+  cursor: pointer;
+}
+
+.mat-mdc-chip-set .mdc-evolution-chip-set__chips {
+  padding: 16px;
+}
+
+.is-schematic {
+  position: absolute;
+  padding: 2em;
+  top: -40px;
+  right: -40px;
+  transform: rotate(45deg);
+}
+
+.mat-mdc-card {
+  overflow: hidden;
+}
+
+.mat-mdc-card-footer {
+  padding: 8px;
+}
+
+.mat-mdc-card-footer p {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.mat-mdc-card-footer i {
+  font-size: 1.1em;
+  top: 1.5px;
+  position: relative;
+  margin: 0 4px;
+}
+
+.mat-mdc-card-footer p {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+img + i {
+  display: none;
+  font-size: 3em;
+  margin: -5px;
+}
+
+.license__truncate {
+  max-width: 66px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+}
+
+.title-badge {
+  background: transparent;
+  display: inline-block;
+  font-style: normal;
+  vertical-align: baseline;
+  position: relative;
+}
+
+.title-badge i {
+  font-size: 18px;
+  top: 2px;
+  position: relative;
+}
+
+mat-chip-listbox {
+  padding: 16px;
+}
