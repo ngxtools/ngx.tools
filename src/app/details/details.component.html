@@ -1,0 +1,4 @@
+<app-card [package]="pkg()"></app-card>
+<mat-card class="package-details-readme" *ngIf="pkg()?.readme">
+  <mat-card-content [innerHTML]="readme()"></mat-card-content>
+</mat-card>
