@@ -37,6 +37,10 @@ export class DeeplinkService {
     return this.route.queryParams.pipe(map(query => query[queryParam]));
   }
 
+  getState() {
+    return this.route.snapshot.queryParams['q'];
+  }
+
   /**
    * This method is used to update the current URL queryParams.
    * It is used to keep both the URL and the formControl in sync.

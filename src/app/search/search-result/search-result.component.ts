@@ -1,93 +1,14 @@
+import { DOCUMENT } from '@angular/common';
 import {
-  Component,
-  Renderer2,
-  Input,
+  Component, EventEmitter,
+  Inject, Input,
+  NgZone,
   OnChanges,
-  Output,
-  EventEmitter
+  Output
 } from '@angular/core';
+import { Router } from '@angular/router';
+import { CSSStyleDeclarationWithViewTransitionAPI, DocumentWithViewTransitionAPI, PackageType } from 'src/typings';
 import { DeeplinkService } from './../deeplink.service';
-
-export interface SearchResult {
-  exhaustiveFacetsCount: boolean;
-  exhaustiveNbHits: boolean;
-  facets: any;
-  hits: PackageType[];
-  hitsPerPage: number;
-  index: string;
-  nbHits: number;
-  nbPages: number;
-  page: number;
-  params: string;
-  processingTimeMS: number;
-  query: string;
-}
-
-export interface ObjectLiteral {
-  [key: string]: string;
-}
-
-export interface Repository {
-  branch: string;
-  host: string;
-  path: string;
-  project: string;
-  url: string;
-  user: string;
-}
-
-export interface AuthorInformation {
-  avatar: string;
-  email?: string;
-  link: string;
-  name: string;
-}
-
-export interface PackageType {
-  _highlightResult?: ObjectLiteral & {
-    description: {
-      value: string;
-    },
-    owner: {
-      name: {
-        value: string;
-      }
-    }
-  };
-  changelogFilename: string;
-  computedKeywords: string[];
-  computedMetadata: ObjectLiteral;
-  created: number;
-  dependencies: ObjectLiteral;
-  dependents: number;
-  deprecated: boolean;
-  description: string;
-  devDependencies: ObjectLiteral;
-  downloadsLast30Days: number;
-  downloadsRatio: number;
-  gitHead: string;
-  githubRepo: Repository;
-  homepage: string;
-  humanDependents: string;
-  humanDownloadsLast30Days: string;
-  keywords: string[];
-  lastCrawl: string;
-  lastPublisher: AuthorInformation;
-  license: string;
-  modified: number;
-  name: string;
-  objectID: string;
-  owner: AuthorInformation;
-  owners: AuthorInformation[];
-  popular: boolean;
-  readme: string;
-  repository: Repository;
-  tags: {
-    latest: string;
-  };
-  version: string;
-  versions: ObjectLiteral;
-}
 
 @Component({
   selector: 'app-search-result',
@@ -99,7 +20,11 @@ export class SearchResultComponent implements OnChanges {
   @Output() scrollReachedBottom: EventEmitter<void> = new EventEmitter();
   isInvalidAvatar = false;
 
-  constructor(private deeplink: DeeplinkService, private renderer: Renderer2) {}
+  constructor(
+    private deeplink: DeeplinkService,
+    private router: Router,
+    private zone: NgZone,
+    @Inject(DOCUMENT) private document: Document) { }
 
   ngOnChanges() {
     this.packages = this.packages.map(pack => {
@@ -112,49 +37,41 @@ export class SearchResultComponent implements OnChanges {
     return pack.name;
   }
 
-  onAvatarImageError(avatarImage: HTMLImageElement, avatarIcon: HTMLElement) {
-    this.renderer.setStyle(avatarImage, 'display', 'none');
-    this.renderer.setStyle(avatarIcon, 'display', 'block');
-  }
-
-  searchByKeyword(keyword: string) {
-    this.deeplink.syncUrl({
-      q: keyword
-    });
-    window.scroll(0, 0);
-  }
-
   onScroll() {
     this.scrollReachedBottom.emit();
   }
 
-  shouldShowVerifiedBadge(pkg: PackageType) {
-    return pkg.owner.name === 'angular';
+  async navigateTo(pkg: PackageType, event: Event) {
+    const card = (event?.target as HTMLElement).closest<HTMLElement>('app-card');
+    if (!card) {
+      return;
+    }
+
+    (card.style as CSSStyleDeclarationWithViewTransitionAPI).viewTransitionName = 'package-details-wide';
+
+    this.#startViewTransition(() => {
+      this.zone.run(async() => {
+        await this.router.navigate([`pkg`, pkg.name], {
+          state: {
+            pkg,
+            query: this.deeplink.getState()
+          }
+        });
+      });
+    }, () => {
+      (card.style as CSSStyleDeclarationWithViewTransitionAPI).viewTransitionName = '';
+    });
+
   }
 
-  shouldShowWarningBadge(pkg: PackageType) {
-    return pkg.name.toLocaleLowerCase().includes('angularjs') ||
-      (pkg.keywords || []).map(k => k.toLowerCase()).includes('angularjs') ||
-      (pkg.description || '').toLocaleLowerCase().includes('angularjs');
+  #startViewTransition(onStart: () => void, onFinish: () => void = () => { }) {
+    if (!(this.document as DocumentWithViewTransitionAPI).startViewTransition) {
+      console.warn('View transition API is not available in this browser.');
+      return onStart();
+    }
+
+    const transition = (this.document as DocumentWithViewTransitionAPI).startViewTransition(onStart);
+    transition.finished.finally(onFinish);
   }
 
-  isDeprecated(pkg: PackageType) {
-    return pkg.deprecated ||
-      (pkg.description || '').toLocaleLowerCase().includes('deprecated');
-  }
-
-  buildTweetText(pkg: PackageType) {
-    const packageName = pkg.name;
-    const packageType = pkg.computedMetadata['schematics'] ? 'schematics' : 'library';
-    const origin = `${location.origin}/#/search?q=${packageName}&t=${packageType}`;
-
-    const pkgKeywords = new Set(pkg.keywords.concat(['angular', 'ngxtools', 'javascript']));
-    const keywords = Array.from(pkgKeywords).map(k => `#${k.replace(/\s/g, '_')}`).join(' ');
-
-    return encodeURIComponent(
-      `Check out this cool @angular ${packageType}: "${pkg.name}".\n\n` +
-      `🔗 ${origin}\n\n` +
-      `${keywords}`
-    );
-  }
 }
