@@ -10,6 +10,10 @@
   margin: 0px;
 }
 
+::ng-deep em {
+  font-style: normal;
+}
+
 img[hidden],
 i[hidden] {
   display: none;
@@ -48,7 +52,7 @@ i[hidden] {
   background-color: #424242;
 }
 
-.mat-mdc-card-actions a {
+.mat-mdc-card-actions .mat-mdc-button {
   height: 30px;
   width: 30px;
   text-align: center;
@@ -61,9 +65,10 @@ i[hidden] {
   padding: 4px;
   transition: 0.5s ease;
   color: black;
+  min-width: 36px;
 }
 
-.mat-mdc-card-actions a:hover {
+.mat-mdc-card-actions .mat-mdc-button:hover {
   background: #e5e5e550;
   border-radius: 50%;
 }

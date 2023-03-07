@@ -7,16 +7,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HumanDatePipe } from '../search/humain-date.pipe';
 import { MatChipsModule } from '@angular/material/chips';
+import { RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 const MAT_MODULES = [
   MatCardModule,
   MatIconModule,
   MatTooltipModule,
-  MatChipsModule
+  MatChipsModule,
+  MatButtonModule,
 ];
 
 @NgModule({
-  imports: [CommonModule, ...MAT_MODULES],
+  imports: [CommonModule, RouterModule, ...MAT_MODULES],
   declarations: [NotFoundComponent, CardComponent, HumanDatePipe],
   exports: [CardComponent]
 })
