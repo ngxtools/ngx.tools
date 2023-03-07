@@ -1,7 +1,20 @@
+:host {
+  display: block;
+  height: 100vh;
+}
+
 section {
   width: 100%;
   text-align: center;
   padding: 40px 0 0;
+}
+
+section.search-container {
+  position: sticky;
+  top: 20px;
+  z-index: 2;
+  background: white;
+  border-bottom: 1px solid black;
 }
 
 .control-filters__shrink {
@@ -23,7 +36,6 @@ form {
   max-width: 900px;
   margin: 30px auto 0 auto;
   padding: 0;
-  border-bottom: 3px solid;
   position: relative;
   display: flex;
   align-items: baseline;
@@ -69,17 +81,6 @@ form {
   padding: 40px 0;
   min-height: 100px;
   margin-top: -16px;
-}
-
-.algolia-credits {
-  position: relative;
-  top: 37px;
-}
-@media (max-width: 420px) {
-  .algolia-credits {
-    top: 37px;
-    right: 30px;
-  }
 }
 
 .mat-mdc-select {

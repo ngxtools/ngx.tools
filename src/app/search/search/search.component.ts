@@ -11,9 +11,9 @@ import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { MetricsService } from 'src/app/shared/metrics.service';
+import { PackageType } from 'src/typings';
 import { AlgoliaService } from './../../core/algolia/algolia.service';
 import { DeeplinkService } from './../deeplink.service';
-import { PackageType } from './../search-result/search-result.component';
 
 @Component({
   selector: 'app-search',
@@ -29,7 +29,7 @@ export class SearchComponent implements OnInit, AfterContentInit {
   filterOption = signal('library');
 
   @ViewChild('resultContainerRef') resultContainerRef!: ElementRef;
-  @ViewChild('queryInput') queryInput!: ElementRef;
+  @ViewChild('queryInput', { static: true }) queryInput!: ElementRef;
 
   constructor(
     private search: AlgoliaService,
@@ -43,6 +43,8 @@ export class SearchComponent implements OnInit, AfterContentInit {
   }
 
   ngOnInit() {
+    this.queryInput.nativeElement.focus();
+
     this.searchForm.valueChanges
       .pipe(
         // prettier-ignore
@@ -156,8 +158,7 @@ export class SearchComponent implements OnInit, AfterContentInit {
       this.snackBar.open('Loading Packages...', undefined, {
         duration: 2000,
         horizontalPosition: 'center',
-        verticalPosition: 'bottom',
-        panelClass: ['ngxtools-palette-warn', 'ngxtools-palette-warn-text']
+        verticalPosition: 'bottom'
       });
     }
   }
