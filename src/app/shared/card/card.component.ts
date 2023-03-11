@@ -1,12 +1,8 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, Input, Renderer2 } from '@angular/core';
+import { Component, Input, Renderer2, ViewChild, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { DeeplinkService } from 'src/app/shared/deeplink.service';
-import {
-  CSSStyleDeclarationWithViewTransitionAPI,
-  DocumentWithViewTransitionAPI,
-  PackageType,
-} from 'src/typings';
+import { PackageType } from 'src/typings';
+import { ViewTransitionDirective } from '../view-transition.directive';
 
 @Component({
   selector: 'app-card',
@@ -18,12 +14,25 @@ export class CardComponent {
 
   @Input() isFullMode = true;
 
+  @ViewChild(ViewTransitionDirective)
+  viewTransitionRef!: ViewTransitionDirective;
+
+  id = signal('');
+
   constructor(
     private renderer: Renderer2,
     private deeplink: DeeplinkService,
-    private router: Router,
-    @Inject(DOCUMENT) private document: Document
+
+    private router: Router
   ) {}
+
+  ngOnChanges() {
+    this.id.set('card-' + this.package!.rev + (this.isFullMode ? '-full' : ''));
+  }
+
+  ngAfterContentInit() {
+    debugger;
+  }
 
   onAvatarImageError(avatarImage: HTMLImageElement, avatarIcon: HTMLElement) {
     this.renderer.setStyle(avatarImage, 'display', 'none');
@@ -78,28 +87,17 @@ export class CardComponent {
   }
 
   async navigateTo(pkg: PackageType, event: Event) {
-
-    this.#startViewTransition(
-      () => {
-        this.router.navigate([`pkg`, pkg.name], {
-          state: {
-            pkg,
-            query: this.deeplink.getState(),
-          },
-        });
-      }
-    );
+    await this.viewTransitionRef.startViewTransition(async () => {
+      await this.onViewTransition(pkg);
+    });
   }
 
-  #startViewTransition(onStart: () => void, onFinish: () => void = () => {}) {
-    if (!(this.document as DocumentWithViewTransitionAPI).startViewTransition) {
-      console.warn('View transition API is not available in this browser.');
-      return onStart();
-    }
-
-    const transition = (
-      this.document as DocumentWithViewTransitionAPI
-    ).startViewTransition(onStart);
-    transition.finished.finally(onFinish);
+  async onViewTransition(pkg: PackageType) {
+    return await this.router.navigate([`pkg`, pkg.name], {
+      state: {
+        pkg,
+        query: this.deeplink.getState(),
+      },
+    });
   }
 }
