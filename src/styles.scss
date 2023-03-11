@@ -45,30 +45,20 @@ body {
 
 // View Transition API
 
-mat-toolbar {
-  view-transition-name: mat-toolbar;
-  contain: layout;
-}
-
 .package-details-readme {
   view-transition-name: package-details-readme;
   contain: layout;
 }
-::view-transition-old(package-details-readme) {
+html::view-transition-old(root) {
   animation: 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55) both slide-up;
 }
-::view-transition-new(package-details-readme) {
+html::view-transition-new(root) {
   animation: 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55) both slide-down;
 }
 
 .package-details-wide {
   view-transition-name: package-details-wide;
   contain: layout;
-}
-
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 300ms;
 }
 
 @keyframes slide-down {

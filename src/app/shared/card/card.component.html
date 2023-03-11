@@ -1,7 +1,10 @@
-<mat-card class="mat-elevation-z4" *ngIf="package" [ngStyle]="{
-  'view-transition-name': 'view-' + package.rev,
-  'contain': 'layout'
-}">
+<mat-card
+class="mat-elevation-z4"
+*ngIf="package"
+[id]="id()"
+appViewTransition
+#viewTransitionRef
+>
   <span
     [ngClass]="{ 'is-schematic': package.computedMetadata['schematics'] }"
   ></span>

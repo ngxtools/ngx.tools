@@ -10,6 +10,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { InfiniteScrollDirective } from './infinite-scroll.directive';
+import { ViewTransitionDirective } from './view-transition.directive';
 
 const MAT_MODULES = [
   MatCardModule,
@@ -21,7 +22,7 @@ const MAT_MODULES = [
 
 @NgModule({
   imports: [CommonModule, RouterModule, ...MAT_MODULES],
-  declarations: [NotFoundComponent, CardComponent, HumanDatePipe, InfiniteScrollDirective],
+  declarations: [NotFoundComponent, CardComponent, HumanDatePipe, InfiniteScrollDirective, ViewTransitionDirective],
   exports: [NotFoundComponent, CardComponent, HumanDatePipe, InfiniteScrollDirective]
 })
 export class SharedModule {}
