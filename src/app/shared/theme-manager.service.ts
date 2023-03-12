@@ -1,27 +1,31 @@
-
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeManagerService {
-  isDarkMode = false;
+  isDarkMode = signal(false);
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
-    this.isDarkMode = this.#readThemePreference('ngxtools-theme-mode') === 'dark';
-    if (this.isDarkMode) {
+  document = inject(DOCUMENT);
+
+  constructor() {
+    this.isDarkMode.set(
+      this.#readThemePreference('ngxtools-theme-mode') === 'dark'
+    );
+
+    if (this.isDarkMode()) {
       this.#enableDarkTheme();
     }
   }
 
   toggleDarkTheme() {
-    if (this.isDarkMode) {
+    if (this.isDarkMode()) {
       this.#disableDarkTheme();
     } else {
       this.#enableDarkTheme();
     }
 
-    this.isDarkMode = !this.isDarkMode;
-    this.#saveThemePreference('ngxtools-theme-mode', this.isDarkMode);
+    this.isDarkMode.update((isDarkMode) => !isDarkMode);
+    this.#saveThemePreference('ngxtools-theme-mode', this.isDarkMode());
   }
 
   #disableDarkTheme() {
@@ -51,7 +55,10 @@ export class ThemeManagerService {
   }
 
   #getLinkElementForKey(key: string) {
-    return this.#getExistingLinkElementByKey(key) || this.#createLinkElementWithKey(key);
+    return (
+      this.#getExistingLinkElementByKey(key) ||
+      this.#createLinkElementWithKey(key)
+    );
   }
 
   #getExistingLinkElementByKey(key: string) {

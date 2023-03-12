@@ -1,17 +1,36 @@
+import { DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
 import {
   Component,
   EventEmitter,
   Input,
   Output,
-  Renderer2
+  Renderer2,
+  inject,
 } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { DeeplinkService } from 'src/app/shared/deeplink.service';
 import { PackageType } from 'src/typings';
+import { HumanDatePipe } from '../humain-date.pipe';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
+  standalone: true,
+  imports: [
+    NgIf,
+    MatCardModule,
+    NgClass,
+    MatTooltipModule,
+    MatButtonModule,
+    MatChipsModule,
+    NgFor,
+    DatePipe,
+    HumanDatePipe,
+  ],
 })
 export class CardComponent {
   @Input() package: PackageType | null = null;
@@ -22,7 +41,8 @@ export class CardComponent {
     query: string;
   }>();
 
-  constructor(private renderer: Renderer2, private deeplink: DeeplinkService) {}
+  renderer = inject(Renderer2);
+  deeplink = inject(DeeplinkService);
 
   onAvatarImageError(avatarImage: HTMLImageElement, avatarIcon: HTMLElement) {
     this.renderer.setStyle(avatarImage, 'display', 'none');

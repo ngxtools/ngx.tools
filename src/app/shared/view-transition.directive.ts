@@ -2,26 +2,25 @@ import { DOCUMENT } from '@angular/common';
 import {
   Directive,
   ElementRef,
-  Inject,
   Input,
   NgZone,
   Renderer2,
+  inject,
   signal,
 } from '@angular/core';
 import { DocumentWithViewTransitionAPI } from 'src/typings';
 
 @Directive({
   selector: '[appViewTransition]',
+  standalone: true,
 })
 export class ViewTransitionDirective {
   @Input() appViewTransition!: string;
   id = signal('');
-  constructor(
-    private zone: NgZone,
-    @Inject(DOCUMENT) private document: Document,
-    private element: ElementRef<HTMLElement>,
-    private renderer: Renderer2
-  ) {}
+  zone = inject(NgZone);
+  document = inject(DOCUMENT);
+  element = inject(ElementRef<HTMLElement>);
+  renderer = inject(Renderer2);
 
   ngOnInit() {
     this.renderer.setStyle(this.element.nativeElement, 'contain', 'layout');
@@ -44,9 +43,11 @@ export class ViewTransitionDirective {
       return callback();
     }
 
-    return (this.document as DocumentWithViewTransitionAPI).startViewTransition(() => {
-      // TODO: patch zone.js to support view transition api callbacks
-      this.zone.run(async() => await callback());
-    });
+    return (this.document as DocumentWithViewTransitionAPI).startViewTransition(
+      () => {
+        // TODO: patch zone.js to support view transition api callbacks
+        this.zone.run(async () => await callback());
+      }
+    );
   }
 }

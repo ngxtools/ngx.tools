@@ -2,27 +2,44 @@ import {
   AfterContentInit,
   Component,
   ElementRef,
+  inject,
   OnInit,
   signal,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { MatButtonToggleChange } from '@angular/material/button-toggle';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import {
+  MatButtonToggleChange,
+  MatButtonToggleModule,
+} from '@angular/material/button-toggle';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { MetricsService } from 'src/app/shared/metrics.service';
-import { PackageType } from 'src/typings';
-import { AlgoliaService } from './../../core/algolia/algolia.service';
-import { DeeplinkService } from '../../shared/deeplink.service';
 import { ViewTransitionDirective } from 'src/app/shared/view-transition.directive';
-import { Router } from '@angular/router';
+import { PackageType } from 'src/typings';
+import { AlgoliaService } from '../../core/algolia/algolia.service';
+import { DeeplinkService } from '../../shared/deeplink.service';
+import { ViewTransitionDirective as ViewTransitionDirective_1 } from '../../shared/view-transition.directive';
+import { SearchResultComponent } from '../search-result/search-result.component';
 
 @Component({
   selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  templateUrl: './search-container.component.html',
+  styleUrls: ['./search-container.component.css'],
+  standalone: true,
+  imports: [
+    ViewTransitionDirective_1,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatButtonToggleModule,
+    SearchResultComponent,
+  ],
 })
-export class SearchComponent implements OnInit, AfterContentInit {
+export class SearchContainerComponent implements OnInit, AfterContentInit {
   searchForm: FormGroup;
   packages = signal<PackageType[]>([]);
   currentQuery = signal('');
@@ -30,19 +47,20 @@ export class SearchComponent implements OnInit, AfterContentInit {
   shouldAppendResults = signal(false);
   filterOption = signal('library');
 
+  search = inject(AlgoliaService);
+  deeplink = inject(DeeplinkService);
+  metrics = inject(MetricsService);
+  snackBar = inject(MatSnackBar);
+  router = inject(Router);
+
   @ViewChild('resultContainerRef') resultContainerRef!: ElementRef;
   @ViewChild('queryInput', { static: true }) queryInput!: ElementRef;
-  @ViewChild(ViewTransitionDirective) viewTransitionRef!: ViewTransitionDirective;
+  @ViewChild(ViewTransitionDirective)
+  viewTransitionRef!: ViewTransitionDirective;
 
-  constructor(
-    private search: AlgoliaService,
-    private deeplink: DeeplinkService,
-    private metrics: MetricsService,
-    private snackBar: MatSnackBar,
-    private router: Router
-  ) {
+  constructor() {
     this.searchForm = new FormGroup({
-      query: new FormControl('')
+      query: new FormControl(''),
     });
   }
 
@@ -53,14 +71,13 @@ export class SearchComponent implements OnInit, AfterContentInit {
       .pipe(
         // prettier-ignore
         debounceTime(50),
-        map(event => event.query),
+        map((event) => event.query),
         distinctUntilChanged()
       )
-      .subscribe(value => {
-
+      .subscribe((value) => {
         // sync'ing the URL state will trigger the search process
         this.deeplink.syncUrl({
-          q: value || null
+          q: value || null,
         });
 
         if (value === '') {
@@ -71,7 +88,7 @@ export class SearchComponent implements OnInit, AfterContentInit {
         }
       });
 
-    this.search.searchState.result$.subscribe(data => {
+    this.search.searchState.result$.subscribe((data) => {
       const results = data.results;
       this.hasReachedLastPage.set(results.page + 1 === results.nbPages);
 
@@ -88,7 +105,6 @@ export class SearchComponent implements OnInit, AfterContentInit {
           this.packages.update((packages: PackageType[]) => {
             return [...packages, ...results.hits];
           });
-
         } else {
           this.packages.set(results.hits);
         }
@@ -110,7 +126,7 @@ export class SearchComponent implements OnInit, AfterContentInit {
 
   ngAfterContentInit() {
     this.deeplink.registerFormGroup(this.searchForm, 'query');
-    this.deeplink.registerState('t').subscribe(state => {
+    this.deeplink.registerState('t').subscribe((state) => {
       this.filterOption.set(state || this.filterOption());
 
       const changeEvent = { value: state } as MatButtonToggleChange;
@@ -128,7 +144,7 @@ export class SearchComponent implements OnInit, AfterContentInit {
 
   onFilterOptionsChange(changeEvent: MatButtonToggleChange) {
     this.deeplink.syncUrl({
-      t: changeEvent.value
+      t: changeEvent.value,
     });
     this.shouldAppendResults.set(false);
   }
@@ -147,12 +163,14 @@ export class SearchComponent implements OnInit, AfterContentInit {
 
   clear() {
     this.searchForm.patchValue({
-      query: ''
+      query: '',
     });
   }
 
   isThereAnyPackage() {
-    return this.searchForm.controls['query'].value && this.packages().length === 0;
+    return (
+      this.searchForm.controls['query'].value && this.packages().length === 0
+    );
   }
 
   loadNextPage() {
@@ -162,7 +180,7 @@ export class SearchComponent implements OnInit, AfterContentInit {
       this.snackBar.open('Loading more packages...', undefined, {
         duration: 2000,
         horizontalPosition: 'center',
-        verticalPosition: 'bottom'
+        verticalPosition: 'bottom',
       });
     }
   }

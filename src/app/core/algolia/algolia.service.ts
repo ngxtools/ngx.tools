@@ -1,25 +1,29 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import * as algoliasearchHelper from 'algoliasearch-helper';
 import { Observable } from 'rxjs';
 import { SearchResult } from 'src/typings';
-import { ALGOLIA_APPLICATION_ID, ALGOLIA_INDEX, ALGOLIA_SEARCH_API_KEY } from './injection-tokens';
+import {
+  ALGOLIA_APPLICATION_ID,
+  ALGOLIA_INDEX,
+  ALGOLIA_SEARCH_API_KEY,
+} from './injection-tokens';
 
 export interface SearchState {
   search$: Observable<any>;
   result$: Observable<{
-    results: SearchResult,
-    state: algoliasearchHelper.SearchParameters
+    results: SearchResult;
+    state: algoliasearchHelper.SearchParameters;
   }>;
   change$: Observable<any>;
   error$: Observable<any>;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AlgoliaService {
   indices: { [key: string]: any } = {
-    'npm-search': algoliasearchHelper
+    'npm-search': algoliasearchHelper,
   };
 
   client: any;
@@ -29,16 +33,19 @@ export class AlgoliaService {
    */
   searchState: SearchState;
 
-  constructor(
-    @Inject(ALGOLIA_APPLICATION_ID) private applicationID: string,
-    @Inject(ALGOLIA_SEARCH_API_KEY) private searchApiKey: string,
-    @Inject(ALGOLIA_INDEX) private indexName: string
-  ) {
-    this.client = (window as any)['algoliasearch'](this.applicationID, this.searchApiKey);
+  applicationID = inject(ALGOLIA_APPLICATION_ID);
+  searchApiKey = inject(ALGOLIA_SEARCH_API_KEY);
+  indexName = inject(ALGOLIA_INDEX);
+
+  constructor() {
+    this.client = (window as any)['algoliasearch'](
+      this.applicationID,
+      this.searchApiKey
+    );
 
     this.searchState = {} as any;
 
-    this.configureMasterIndex(indexName);
+    this.configureMasterIndex(this.indexName);
   }
 
   /**
@@ -60,11 +67,14 @@ export class AlgoliaService {
 
     // map algolia's events to observables
     ['search', 'result', 'change', 'error'].forEach((eventName: string) => {
-      (this.searchState as any)[eventName + `$`] = new Observable(observer => {
-        const handler = (event: any) => observer.next(event);
-        this.indices[indexName].on(eventName, handler);
-        return () => this.indices[indexName].removeListener(eventName, handler);
-      });
+      (this.searchState as any)[eventName + `$`] = new Observable(
+        (observer) => {
+          const handler = (event: any) => observer.next(event);
+          this.indices[indexName].on(eventName, handler);
+          return () =>
+            this.indices[indexName].removeListener(eventName, handler);
+        }
+      );
     });
   }
 
@@ -82,7 +92,6 @@ export class AlgoliaService {
    * @param query The user query used for search.
    */
   private search(indexName: string, query: string, extra = '') {
-
     this.indices[this.indexName]
       .setIndex(indexName)
       .setQueryParameter('query', query)
@@ -99,7 +108,9 @@ export class AlgoliaService {
    * @param facet The facet name and query
    */
   toggleFacetRefinement(facet: { name: string; query: string } = {} as any) {
-    this.indices[this.indexName].toggleFacetRefinement(facet.name, facet.query).search();
+    this.indices[this.indexName]
+      .toggleFacetRefinement(facet.name, facet.query)
+      .search();
   }
 
   /**
@@ -118,7 +129,11 @@ export class AlgoliaService {
 
   filterBySchematics(query: string) {
     // query = query || this.indices[this.indexName].state.query;
-    this.search(this.indexName, query, 'AND (computedKeywords:angular-cli-schematic)');
+    this.search(
+      this.indexName,
+      query,
+      'AND (computedKeywords:angular-cli-schematic)'
+    );
   }
 
   sortByBestMatch(query: string) {
