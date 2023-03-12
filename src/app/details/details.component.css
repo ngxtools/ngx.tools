@@ -2,3 +2,7 @@
   display: block;
   padding: 100px 20px;
 }
+
+app-card {
+  display: block;
+}

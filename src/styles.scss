@@ -20,9 +20,9 @@ $my-app-theme: mat.define-light-theme(
 @include mat.all-component-themes($my-app-theme);
 
 :root {
-  --logo-background-color: #F9EABC;
-  --logo-border-color: #E87A76;
-  --logo-drop-shadow-color: #88B099;
+  --logo-background-color: #f9eabc;
+  --logo-border-color: #e87a76;
+  --logo-drop-shadow-color: #88b099;
 }
 
 html,
@@ -37,42 +37,13 @@ body {
 .border-gradient {
   border-image-slice: 1;
   border-width: 5px;
+  border-image-source: linear-gradient(
+    to left,
+    var(--logo-border-color),
+    var(--logo-background-color),
+    var(--logo-border-color)
+  );
 }
-
-.border-gradient-purple {
-  border-image-source: linear-gradient(to left, var(--logo-border-color), var(--logo-background-color), var(--logo-border-color));
-}
-
-// View Transition API
-
-.package-details-readme {
-  view-transition-name: package-details-readme;
-  contain: layout;
-}
-html::view-transition-old(root) {
-  animation: 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55) both slide-up;
-}
-html::view-transition-new(root) {
-  animation: 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55) both slide-down;
-}
-
-.package-details-wide {
-  view-transition-name: package-details-wide;
-  contain: layout;
-}
-
-@keyframes slide-down {
-  from {
-    transform: translateY(60px);
-  }
-}
-
-@keyframes slide-up {
-  to {
-    transform: translateY(-60px);
-  }
-}
-
 
 // dark theme adjustments
 
@@ -86,4 +57,133 @@ html::view-transition-new(root) {
 
 .dark-theme input {
   color: #ffffff !important;
+}
+
+.dark-theme .algolia-credits {
+  filter: brightness(3);
+}
+
+///////////////////////
+// View Transitions
+///////////////////////
+
+// search results
+html::view-transition-new(search-result) {
+  animation: 100ms cubic-bezier(0.68, -0.55, 0.265, 1.55) both
+    search-result-animation-in;
+}
+@keyframes search-result-animation-in {
+  to {
+    transform: translateY(100px);
+  }
+}
+
+html::view-transition-old(search-result) {
+  display: none;
+  animation: 100ms cubic-bezier(0.68, -0.55, 0.265, 1.55) both
+    search-result-animation-out;
+}
+@keyframes search-result-animation-out {
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+// navigation back button
+html::view-transition-new(navigation-back) {
+  animation: 300ms cubic-bezier(0.85, 0, 0.44, 0.56) both
+    navigation-back-animation-in;
+  animation-delay: 500ms;
+  opacity: 0;
+}
+@keyframes navigation-back-animation-in {
+  from {
+    transform: translateX(-10px);
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+html::view-transition-old(navigation-back) {
+  animation: 300ms linear both navigation-back-animation-out;
+}
+@keyframes navigation-back-animation-out {
+  from {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  to {
+    transform: translateX(-10px);
+  }
+}
+
+// details page
+html::view-transition-new(package-details-card):only-child {
+  animation: 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55) both
+    package-details-card-animation-in;
+  z-index: 10;
+}
+@keyframes package-details-card-animation-in {
+  from {
+    transform: translateY(500px);
+  }
+}
+
+html::view-transition-old(package-details-card) {
+  animation: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55) both
+    package-details-card-animation-out;
+}
+@keyframes package-details-card-animation-out {
+  to {
+    transform: translateY(1000px);
+  }
+  30% {
+    display: none;
+  }
+}
+
+html::view-transition-new(package-details-readme) {
+  animation: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55) both
+    package-details-readme-animation-in;
+}
+@keyframes package-details-readme-animation-in {
+  from {
+    transform: translateY(400px);
+  }
+}
+
+html::view-transition-old(package-details-readme) {
+  animation: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55) both
+    package-details-readme-animation-out;
+}
+@keyframes package-details-readme-animation-out {
+  to {
+    transform: translateY(500px);
+  }
+}
+
+// Search container and filters
+html::view-transition-old(search-container),
+html::view-transition-old(search-filters) {
+  animation-delay: 58ms;
+}
+html::view-transition-new(search-container),
+html::view-transition-new(search-filters) {
+  animation-delay: 221ms;
+}
+
+// header and footer
+html::view-transition-new(main-header) {
+  animation: 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55) both
+    main-header-animation-in;
+    animation-delay: 100ms;
+}
+@keyframes main-header-animation-in {
+  50% {
+    transform: translateY(-10px);
+  }
 }

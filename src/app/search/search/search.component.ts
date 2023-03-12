@@ -14,6 +14,8 @@ import { MetricsService } from 'src/app/shared/metrics.service';
 import { PackageType } from 'src/typings';
 import { AlgoliaService } from './../../core/algolia/algolia.service';
 import { DeeplinkService } from '../../shared/deeplink.service';
+import { ViewTransitionDirective } from 'src/app/shared/view-transition.directive';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -30,12 +32,14 @@ export class SearchComponent implements OnInit, AfterContentInit {
 
   @ViewChild('resultContainerRef') resultContainerRef!: ElementRef;
   @ViewChild('queryInput', { static: true }) queryInput!: ElementRef;
+  @ViewChild(ViewTransitionDirective) viewTransitionRef!: ViewTransitionDirective;
 
   constructor(
     private search: AlgoliaService,
     private deeplink: DeeplinkService,
     private metrics: MetricsService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {
     this.searchForm = new FormGroup({
       query: new FormControl('')
@@ -179,5 +183,19 @@ export class SearchComponent implements OnInit, AfterContentInit {
   closeMobileBeyboard(event: Event) {
     this.queryInput.nativeElement.blur();
     return this.noop(event);
+  }
+
+  onDetailsRequestClicked({ pkg, query }: { pkg: PackageType; query: string }) {
+    // YOLO!
+    document.querySelector('router-outlet')?.scrollIntoView();
+
+    this.viewTransitionRef.startViewTransition(async () => {
+      await this.router.navigate([`pkg`, pkg.name], {
+        state: {
+          pkg,
+          query,
+        },
+      });
+    });
   }
 }

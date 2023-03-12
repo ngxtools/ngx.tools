@@ -50,8 +50,6 @@ mat-toolbar {
   display: flex;
   justify-content: flex-start;
   z-index: 10;
-  view-transition-name: mat-toolbar;
-  contain: layout;
 }
 
 mat-toolbar a {
@@ -59,7 +57,7 @@ mat-toolbar a {
   text-decoration: underline;
 }
 
-mat-toolbar a img {
+.algolia-credits {
   top: 2px;
   display: inline-block;
   position: relative;

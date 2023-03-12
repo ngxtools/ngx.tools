@@ -1,8 +1,12 @@
-import { Component, Input, Renderer2, ViewChild, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  Renderer2
+} from '@angular/core';
 import { DeeplinkService } from 'src/app/shared/deeplink.service';
 import { PackageType } from 'src/typings';
-import { ViewTransitionDirective } from '../view-transition.directive';
 
 @Component({
   selector: 'app-card',
@@ -13,26 +17,12 @@ export class CardComponent {
   @Input() package: PackageType | null = null;
 
   @Input() isFullMode = true;
+  @Output() detailsRequestClicked = new EventEmitter<{
+    pkg: PackageType;
+    query: string;
+  }>();
 
-  @ViewChild(ViewTransitionDirective)
-  viewTransitionRef!: ViewTransitionDirective;
-
-  id = signal('');
-
-  constructor(
-    private renderer: Renderer2,
-    private deeplink: DeeplinkService,
-
-    private router: Router
-  ) {}
-
-  ngOnChanges() {
-    this.id.set('card-' + this.package!.rev + (this.isFullMode ? '-full' : ''));
-  }
-
-  ngAfterContentInit() {
-    debugger;
-  }
+  constructor(private renderer: Renderer2, private deeplink: DeeplinkService) {}
 
   onAvatarImageError(avatarImage: HTMLImageElement, avatarIcon: HTMLElement) {
     this.renderer.setStyle(avatarImage, 'display', 'none');
@@ -70,7 +60,7 @@ export class CardComponent {
     const packageType = pkg.computedMetadata['schematics']
       ? 'schematics'
       : 'library';
-    const origin = `${location.origin}/#/search?q=${packageName}&t=${packageType}`;
+    const origin = `https://ngx.tools/#/search?q=${packageName}&t=${packageType}`;
 
     const pkgKeywords = new Set(
       pkg.keywords.concat(['angular', 'ngxtools', 'javascript'])
@@ -82,22 +72,14 @@ export class CardComponent {
     return encodeURIComponent(
       `Check out this cool @angular ${packageType}: "${pkg.name}".\n\n` +
         `🔗 ${origin}\n\n` +
-        `${keywords}`
+        `${keywords} @manekinekko`
     );
   }
 
-  async navigateTo(pkg: PackageType, event: Event) {
-    await this.viewTransitionRef.startViewTransition(async () => {
-      await this.onViewTransition(pkg);
-    });
-  }
-
-  async onViewTransition(pkg: PackageType) {
-    return await this.router.navigate([`pkg`, pkg.name], {
-      state: {
-        pkg,
-        query: this.deeplink.getState(),
-      },
+  onDetailsRequestClick(pkg: PackageType) {
+    this.detailsRequestClicked.emit({
+      pkg,
+      query: this.deeplink.getState(),
     });
   }
 }
