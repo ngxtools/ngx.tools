@@ -12,11 +12,20 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar class="main-header border-gradient border-gradient-purple">
+    <mat-toolbar
+      class="main-header border-gradient border-gradient-purple"
+      appViewTransition="main-header"
+    >
       <button mat-icon-button (click)="snav.toggle()" class="button__menu">
         <mat-icon>menu</mat-icon>
       </button>
-      <button mat-icon-button class="button__back" *ngIf="shouldShowBackButton()" (click)="navigateBack()">
+      <button
+        mat-icon-button
+        class="button__back"
+        *ngIf="shouldShowBackButton()"
+        (click)="navigateBack()"
+        appViewTransition="navigation-back"
+      >
         <mat-icon>arrow_back</mat-icon>
       </button>
       <a routerLink="/" class="header__logo"></a>
@@ -41,7 +50,10 @@
       <router-outlet></router-outlet>
     </main>
 
-    <mat-toolbar class="main-footer border-gradient border-gradient-purple">
+    <mat-toolbar
+      class="main-footer border-gradient border-gradient-purple"
+      appViewTransition="main-footer"
+    >
       <span>
         Built with ❤ by
         <a href="https://twitter.com/manekinekko">Wassim Chegham</a>

@@ -1,4 +1,4 @@
-<section aria-label="Search for package by name" class="search-container">
+<section aria-label="Search for package by name" class="search-container" appViewTransition="search-container">
   <form [formGroup]="searchForm">
     <input
       (keydown.enter)="closeMobileBeyboard($event)"
@@ -23,7 +23,7 @@
   </form>
 </section>
 
-<section aria-label="filter results">
+<section aria-label="filter results" appViewTransition="search-filters">
   <p>
     <mat-button-toggle-group
       [value]="filterOption()"
@@ -55,5 +55,8 @@
   <app-search-result
     [packages]="packages()"
     (scrollReachedBottom)="loadNextPage()"
+    appViewTransition="search-result"
+    #viewTransitionRef
+    (detailsRequestClicked)="onDetailsRequestClicked($event)"
   ></app-search-result>
 </section>

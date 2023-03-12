@@ -23,6 +23,6 @@ const MAT_MODULES = [
 @NgModule({
   imports: [CommonModule, RouterModule, ...MAT_MODULES],
   declarations: [NotFoundComponent, CardComponent, HumanDatePipe, InfiniteScrollDirective, ViewTransitionDirective],
-  exports: [NotFoundComponent, CardComponent, HumanDatePipe, InfiniteScrollDirective]
+  exports: [NotFoundComponent, CardComponent, HumanDatePipe, InfiniteScrollDirective, ViewTransitionDirective]
 })
 export class SharedModule {}

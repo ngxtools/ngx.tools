@@ -4,7 +4,9 @@ import {
   Input,
   OnChanges,
   Output,
+  ViewChild,
 } from '@angular/core';
+import { ViewTransitionDirective } from 'src/app/shared/view-transition.directive';
 import { PackageType } from 'src/typings';
 
 @Component({
@@ -15,7 +17,11 @@ import { PackageType } from 'src/typings';
 export class SearchResultComponent implements OnChanges {
   @Input() packages: PackageType[] = [];
   @Output() scrollReachedBottom: EventEmitter<void> = new EventEmitter();
+  @Output() detailsRequestClicked: EventEmitter<{ pkg: PackageType; query: string }> = new EventEmitter();
   isInvalidAvatar = false;
+
+  @ViewChild(ViewTransitionDirective, { static: true })
+  viewTransitionRef!: ViewTransitionDirective;
 
   constructor() {}
 
@@ -34,4 +40,7 @@ export class SearchResultComponent implements OnChanges {
     this.scrollReachedBottom.emit();
   }
 
+  onDetailsRequestClicked({ pkg, query }: { pkg: PackageType; query: string }) {
+    this.detailsRequestClicked.emit({ pkg, query });
+  }
 }

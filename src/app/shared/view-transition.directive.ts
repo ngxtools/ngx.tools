@@ -3,8 +3,10 @@ import {
   Directive,
   ElementRef,
   Inject,
+  Input,
   NgZone,
   Renderer2,
+  signal,
 } from '@angular/core';
 import { DocumentWithViewTransitionAPI } from 'src/typings';
 
@@ -12,6 +14,8 @@ import { DocumentWithViewTransitionAPI } from 'src/typings';
   selector: '[appViewTransition]',
 })
 export class ViewTransitionDirective {
+  @Input() appViewTransition!: string;
+  id = signal('');
   constructor(
     private zone: NgZone,
     @Inject(DOCUMENT) private document: Document,
@@ -21,7 +25,9 @@ export class ViewTransitionDirective {
 
   ngOnInit() {
     this.renderer.setStyle(this.element.nativeElement, 'contain', 'layout');
-    this.setElementTransitionName(this.element.nativeElement.id);
+    this.id.set(this.appViewTransition || this.element.nativeElement.id);
+
+    this.setElementTransitionName(this.id());
   }
 
   setElementTransitionName(name: string) {
@@ -32,18 +38,15 @@ export class ViewTransitionDirective {
     );
   }
 
-  async startViewTransition(callback: () => Promise<void>) {
+  startViewTransition(callback: () => Promise<void>) {
     if (!(this.document as DocumentWithViewTransitionAPI).startViewTransition) {
       console.warn('View transition API is not available in this browser.');
-      return await callback();
+      return callback();
     }
 
-    this.setElementTransitionName(this.element.nativeElement.id + '-full');
-
-    (this.document as DocumentWithViewTransitionAPI).startViewTransition(() => {
+    return (this.document as DocumentWithViewTransitionAPI).startViewTransition(() => {
       // TODO: patch zone.js to support view transition api callbacks
-      this.zone.run(async () => await callback());
-      this.setElementTransitionName(this.element.nativeElement.id);
+      this.zone.run(async() => await callback());
     });
   }
 }
