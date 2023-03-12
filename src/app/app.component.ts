@@ -1,7 +1,19 @@
-import { Component, ViewChild, signal } from '@angular/core';
-import { Event, Router, RoutesRecognized } from '@angular/router';
+import { NgIf } from '@angular/common';
+import { Component, ViewChild, inject, signal } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import {
+  Event,
+  Router,
+  RouterLink,
+  RouterOutlet,
+  RoutesRecognized,
+} from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { PromptUpdateService } from './prompt-update.service';
+import { PromptUpdateService } from './shared/prompt-update.service';
 import { ThemeManagerService } from './shared/theme-manager.service';
 import { ViewTransitionDirective } from './shared/view-transition.directive';
 
@@ -9,26 +21,38 @@ import { ViewTransitionDirective } from './shared/view-transition.directive';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  standalone: true,
+  imports: [
+    ViewTransitionDirective,
+    NgIf,
+    RouterLink,
+    RouterOutlet,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatToolbarModule,
+  ],
 })
 export class AppComponent {
-  version = environment.version;
-  isDarkMode = signal(false);
-  shouldShowBackButton = signal(false);
-
   @ViewChild(ViewTransitionDirective, { static: true })
   viewTransitionRef!: ViewTransitionDirective;
 
+  version = signal(environment.version);
+  isDarkMode = signal(false);
+  shouldShowBackButton = signal(false);
   locationHistory = signal<string[]>(['/']);
 
-  constructor(
-    private promptUpdateService: PromptUpdateService,
-    private themeManager: ThemeManagerService,
-    private router: Router
-  ) {
-    this.promptUpdateService.check();
-    this.isDarkMode.set(this.themeManager.isDarkMode);
+  promptUpdateService = inject(PromptUpdateService);
+  themeManager = inject(ThemeManagerService);
+  router = inject(Router);
 
-    router.events.subscribe((event: Event) => {
+  constructor() {
+    this.promptUpdateService.check();
+    this.isDarkMode.set(this.themeManager.isDarkMode());
+
+    this.router.events.subscribe((event: Event) => {
       if (event instanceof RoutesRecognized) {
         const { url } = event;
         this.shouldShowBackButton.set(url.startsWith('/pkg'));
@@ -46,7 +70,7 @@ export class AppComponent {
 
   toggleDarkTheme() {
     this.themeManager.toggleDarkTheme();
-    this.isDarkMode.update(() => this.themeManager.isDarkMode);
+    this.isDarkMode.update(() => this.themeManager.isDarkMode());
   }
 
   navigateBack() {

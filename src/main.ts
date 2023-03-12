@@ -1,13 +1,64 @@
+import { enableProdMode, importProvidersFrom } from '@angular/core';
 import 'hammerjs';
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { AppModule } from './app/app.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { Routes, provideRouter, withHashLocation } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { AppComponent } from './app/app.component';
+import { AlgoliaModule } from './app/core/algolia/algolia.module';
 import { environment } from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+export const ROUTES: Routes = [
+  { path: '', redirectTo: '/search', pathMatch: 'full' },
+  {
+    path: 'search',
+    loadComponent: () =>
+      import('./app/search/search-container/search-container.component').then(
+        (m) => m.SearchContainerComponent
+      ),
+  },
+  {
+    path: 'pkg/:name',
+    loadComponent: () =>
+      import('./app/details/details.component').then((m) => m.DetailsComponent),
+  },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./app/shared/not-found/not-found.component').then(
+        (m) => m.NotFoundComponent
+      ),
+  },
+];
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    importProvidersFrom(MatSnackBarModule),
+
+    importProvidersFrom(
+      AlgoliaModule.forRoot({
+        applicationId: environment.algolia.applicationId,
+        searchApiKey: environment.algolia.searchApiKey,
+        indexName: environment.algolia.indexName,
+      })
+    ),
+
+    provideRouter(ROUTES, withHashLocation()),
+
+    importProvidersFrom(
+      ServiceWorkerModule.register('ngsw-worker.js', {
+        enabled: environment.production,
+        // Register the ServiceWorker as soon as the application is stable
+        // or after 30 seconds (whichever comes first).
+        registrationStrategy: 'registerWhenStable:30000',
+      })
+    ),
+    provideAnimations(),
+  ],
+}).catch((err) => console.error(err));

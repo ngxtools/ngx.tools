@@ -87,6 +87,7 @@ i[hidden] {
   top: -40px;
   right: -40px;
   transform: rotate(45deg);
+  background: var(--logo-drop-shadow-color);
 }
 
 .mat-mdc-card {

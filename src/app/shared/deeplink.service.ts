@@ -1,23 +1,20 @@
-import { AlgoliaService } from '../core/algolia/algolia.service';
+import { Injectable, inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { AlgoliaService } from '../core/algolia/algolia.service';
 
 export interface QueryParams {
   q: string;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DeeplinkService {
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private search: AlgoliaService
-  ) {}
-
+  router = inject(Router);
+  route = inject(ActivatedRoute);
+  search = inject(AlgoliaService);
   /**
    * Register a given FormGroup instance with the current "q" queryParams Observbale. Every time the
    * "q" queryParams changes, the "query" FormControl (of the given FormGroup instance) will be updated, reflecting the same value.
@@ -27,14 +24,14 @@ export class DeeplinkService {
     this.route.queryParams.subscribe((query: Params) => {
       if (query['q']) {
         form.patchValue({
-          [controlName]: query['q']
+          [controlName]: query['q'],
         });
       }
     });
   }
 
   registerState(queryParam: string) {
-    return this.route.queryParams.pipe(map(query => query[queryParam]));
+    return this.route.queryParams.pipe(map((query) => query[queryParam]));
   }
 
   getState() {
@@ -57,7 +54,7 @@ export class DeeplinkService {
 
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams
+      queryParams,
     });
   }
 }
