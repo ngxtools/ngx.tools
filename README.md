@@ -1,11 +1,11 @@
-# Ngx.tools
+# ngx.tools
 
 This project is the source code of the https://ngx.tools search engine.
 
+![image](https://user-images.githubusercontent.com/1699357/224674639-d9ca1cef-db21-44ad-bfdb-77277d1c83ac.png)
+
 
 # Contribute
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.5.
 
 ## Development server
 
