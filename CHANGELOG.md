@@ -1,5 +1,22 @@
 
 
+# [16.0.0-next.2](https://github.com/ngxtools/ngx.tools/compare/15.0.0...16.0.0-next.2) (2023-03-13)
+
+
+### Bug Fixes
+
+* format code ([b7e24bf](https://github.com/ngxtools/ngx.tools/commit/b7e24bfab7523b1b63f5fe7975382fca3f97880c))
+* infinite scroll + use IntersectionObserver ([9e0ce98](https://github.com/ngxtools/ngx.tools/commit/9e0ce98b5e16a458864f9700af74cee7e2399440))
+* make css view transitions api work ([b8f595c](https://github.com/ngxtools/ngx.tools/commit/b8f595cf47db68fb1abad934246a725cb658ecd9))
+
+
+### Features
+
+* add dark mode ([83ac855](https://github.com/ngxtools/ngx.tools/commit/83ac855432f68298f45947cde00f8f2af8279d3d))
+* add pkg details page ([5cda09e](https://github.com/ngxtools/ngx.tools/commit/5cda09efbde622df632adb269179ca092832c24c))
+* introduce view transition directive ([d64f934](https://github.com/ngxtools/ngx.tools/commit/d64f934d1364d1405aefa25bcf1796b27a425469))
+* migrate to angular signals ([d56674f](https://github.com/ngxtools/ngx.tools/commit/d56674f24ba9037fc5a3b0748849269d0b1b3f9f))
+
 # [15.0.0](https://github.com/ngxtools/ngx.tools/compare/13.0.0...15.0.0) (2023-03-04)
 
 ### Changes
