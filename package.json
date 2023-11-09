@@ -53,6 +53,7 @@
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
     "@types/showdown": "^2.0.0",
+    "conventional-changelog-angular": "^7.0.0",
     "conventional-changelog-cli": "^2.0.31",
     "jasmine-core": "~4.0.0",
     "jasmine-spec-reporter": "~4.2.1",
