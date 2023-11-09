@@ -1,5 +1,12 @@
 
 
+# [17.0.0](https://github.com/ngxtools/ngx.tools/compare/16.0.0-next.2...17.0.0) (2023-11-09)
+
+
+### Features
+
+* upgrade to angular v17 ([4639dc5](https://github.com/ngxtools/ngx.tools/commit/4639dc5be093cd54229daf8dce5194b5c6dd1f23))
+
 # [16.0.0-next.2](https://github.com/ngxtools/ngx.tools/compare/15.0.0...16.0.0-next.2) (2023-03-13)
 
 
