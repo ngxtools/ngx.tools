@@ -1,14 +1,17 @@
-<section
-  *ngIf="packages.length > 0"
-  appInfiniteScroll="load-more"
-  (scroll)="onScroll()"
->
-  <app-card
-    *ngFor="let package of packages; trackBy: packageName"
-    [package]="package"
-    [isFullMode]="false"
-    (detailsRequestClicked)="onDetailsRequestClicked($event)"
-  >
-  </app-card>
+@if (packages.length > 0) {
+
+<section appInfiniteScroll="load-more" (scroll)="onScroll()">
+
+  @for (package of packages; track packageName) {
+    <app-card
+      [package]="package"
+      [isFullMode]="false"
+      (detailsRequestClicked)="onDetailsRequestClicked($event)"
+    >
+    </app-card>
+  }
+
   <div class="load-more"></div>
 </section>
+
+}

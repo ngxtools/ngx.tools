@@ -7,7 +7,6 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { ViewTransitionDirective } from 'src/app/shared/view-transition.directive';
 import { PackageType } from 'src/typings';
 import { CardComponent } from '../../shared/card/card.component';
 import { InfiniteScrollDirective } from '../../shared/infinite-scroll.directive';
@@ -26,9 +25,6 @@ export class SearchResultComponent implements OnChanges {
     pkg: PackageType;
     query: string;
   }> = new EventEmitter();
-
-  @ViewChild(ViewTransitionDirective, { static: true })
-  viewTransitionRef!: ViewTransitionDirective;
 
   ngOnChanges() {
     this.packages = this.packages.map((pack) => {

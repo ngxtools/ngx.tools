@@ -139,10 +139,7 @@ html::view-transition-old(package-details-card) {
 }
 @keyframes package-details-card-animation-out {
   to {
-    transform: translateY(1000px);
-  }
-  30% {
-    display: none;
+    transform: translateY(-1000px);
   }
 }
 
@@ -156,15 +153,15 @@ html::view-transition-new(package-details-readme) {
   }
 }
 
-html::view-transition-old(package-details-readme) {
-  animation: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55) both
-    package-details-readme-animation-out;
-}
-@keyframes package-details-readme-animation-out {
-  to {
-    transform: translateY(500px);
-  }
-}
+// html::view-transition-old(package-details-readme) {
+//   animation: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55) both
+//     package-details-readme-animation-out;
+// }
+// @keyframes package-details-readme-animation-out {
+//   to {
+//     transform: translateY(500px);
+//   }
+// }
 
 // Search container and filters
 html::view-transition-old(search-container),

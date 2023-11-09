@@ -22,6 +22,10 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "allowedCommonJsDependencies": [
+              "algoliasearch-helper",
+              "showdown"
+            ],
             "assets": [
               {
                 "glob": "favicon.ico",
@@ -87,10 +91,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ngx.tools:build:production"
+              "buildTarget": "ngx.tools:build:production"
             },
             "development": {
-              "browserTarget": "ngx.tools:build:development"
+              "buildTarget": "ngx.tools:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -98,7 +102,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx.tools:build"
+            "buildTarget": "ngx.tools:build"
           }
         },
         "test": {

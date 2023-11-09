@@ -1,4 +1,7 @@
 <app-card appViewTransition="package-details-card" [package]="pkg()"></app-card>
-<mat-card appViewTransition="package-details-readme" *ngIf="pkg()?.readme">
+
+@if (pkg()?.readme) {
+<mat-card appViewTransition="package-details-readme">
   <mat-card-content [innerHTML]="readme()"></mat-card-content>
 </mat-card>
+}

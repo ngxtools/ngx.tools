@@ -19,15 +19,18 @@
       <button mat-icon-button (click)="snav.toggle()" class="button__menu">
         <mat-icon>menu</mat-icon>
       </button>
+
+      @if (shouldShowBackButton()) {
       <button
         mat-icon-button
         class="button__back"
-        *ngIf="shouldShowBackButton()"
         (click)="navigateBack()"
         appViewTransition="navigation-back"
       >
         <mat-icon>arrow_back</mat-icon>
       </button>
+      }
+
       <a routerLink="/" class="header__logo"></a>
       <a
         mat-icon-button

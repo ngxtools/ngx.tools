@@ -15,7 +15,6 @@ import {
 import { environment } from 'src/environments/environment';
 import { PromptUpdateService } from './shared/prompt-update.service';
 import { ThemeManagerService } from './shared/theme-manager.service';
-import { ViewTransitionDirective } from './shared/view-transition.directive';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +22,6 @@ import { ViewTransitionDirective } from './shared/view-transition.directive';
   styleUrls: ['./app.component.css'],
   standalone: true,
   imports: [
-    ViewTransitionDirective,
     NgIf,
     RouterLink,
     RouterOutlet,
@@ -36,9 +34,6 @@ import { ViewTransitionDirective } from './shared/view-transition.directive';
   ],
 })
 export class AppComponent {
-  @ViewChild(ViewTransitionDirective, { static: true })
-  viewTransitionRef!: ViewTransitionDirective;
-
   version = signal(environment.version);
   isDarkMode = signal(false);
   shouldShowBackButton = signal(false);
@@ -73,10 +68,8 @@ export class AppComponent {
     this.isDarkMode.update(() => this.themeManager.isDarkMode());
   }
 
-  navigateBack() {
-    this.viewTransitionRef.startViewTransition(async () => {
-      const [_, lastVisitedUrl] = this.locationHistory();
-      await this.router.navigateByUrl(lastVisitedUrl);
-    });
+  async navigateBack() {
+    const [_, lastVisitedUrl] = this.locationHistory();
+    await this.router.navigateByUrl(lastVisitedUrl);
   }
 }
