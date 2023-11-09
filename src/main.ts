@@ -4,7 +4,7 @@ import 'hammerjs';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { Routes, provideRouter, withHashLocation } from '@angular/router';
+import { Routes, provideRouter, withHashLocation, withViewTransitions } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app/app.component';
 import { AlgoliaModule } from './app/core/algolia/algolia.module';
@@ -49,7 +49,9 @@ bootstrapApplication(AppComponent, {
       })
     ),
 
-    provideRouter(ROUTES, withHashLocation()),
+    provideRouter(ROUTES, withHashLocation(), withViewTransitions({
+      skipInitialTransition: true
+    })),
 
     importProvidersFrom(
       ServiceWorkerModule.register('ngsw-worker.js', {

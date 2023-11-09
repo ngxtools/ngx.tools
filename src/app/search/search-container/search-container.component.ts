@@ -18,11 +18,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { MetricsService } from 'src/app/shared/metrics.service';
-import { ViewTransitionDirective } from 'src/app/shared/view-transition.directive';
 import { PackageType } from 'src/typings';
 import { AlgoliaService } from '../../core/algolia/algolia.service';
 import { DeeplinkService } from '../../shared/deeplink.service';
-import { ViewTransitionDirective as ViewTransitionDirective_1 } from '../../shared/view-transition.directive';
 import { SearchResultComponent } from '../search-result/search-result.component';
 
 @Component({
@@ -31,7 +29,6 @@ import { SearchResultComponent } from '../search-result/search-result.component'
   styleUrls: ['./search-container.component.css'],
   standalone: true,
   imports: [
-    ViewTransitionDirective_1,
     ReactiveFormsModule,
     MatButtonModule,
     MatIconModule,
@@ -55,9 +52,6 @@ export class SearchContainerComponent implements OnInit, AfterContentInit {
 
   @ViewChild('resultContainerRef') resultContainerRef!: ElementRef;
   @ViewChild('queryInput', { static: true }) queryInput!: ElementRef;
-  @ViewChild(ViewTransitionDirective)
-  viewTransitionRef!: ViewTransitionDirective;
-
   constructor() {
     this.searchForm = new FormGroup({
       query: new FormControl(''),
@@ -203,17 +197,15 @@ export class SearchContainerComponent implements OnInit, AfterContentInit {
     return this.noop(event);
   }
 
-  onDetailsRequestClicked({ pkg, query }: { pkg: PackageType; query: string }) {
+  async onDetailsRequestClicked({ pkg, query }: { pkg: PackageType; query: string }) {
     // YOLO!
     document.querySelector('router-outlet')?.scrollIntoView();
 
-    this.viewTransitionRef.startViewTransition(async () => {
-      await this.router.navigate([`pkg`, pkg.name], {
-        state: {
-          pkg,
-          query,
-        },
-      });
+    await this.router.navigate([`pkg`, pkg.name], {
+      state: {
+        pkg,
+        query,
+      },
     });
   }
 }

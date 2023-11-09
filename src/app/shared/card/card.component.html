@@ -1,7 +1,6 @@
-<mat-card
-class="mat-elevation-z4"
-*ngIf="package"
->
+@if (package) {
+
+<mat-card class="mat-elevation-z4">
   <span
     [ngClass]="{ 'is-schematic': package.computedMetadata['schematics'] }"
   ></span>
@@ -18,27 +17,28 @@ class="mat-elevation-z4"
     <mat-card-title>
       <h1 class="title-header-text">{{ package.name }}</h1>
 
-      <span
-        *ngIf="shouldShowVerifiedBadge(package)"
-        class="title-badge"
-        matTooltip="Official Package"
-      >
+      @if (shouldShowVerifiedBadge(package)) {
+
+      <span class="title-badge" matTooltip="Official Package">
         <i class="material-icons">verified_user</i>
       </span>
+
+      } @if (shouldShowWarningBadge(package)) {
+
       <span
-        *ngIf="shouldShowWarningBadge(package)"
         class="title-badge"
         matTooltip="This package may refer to AngularJS"
       >
         <i class="material-icons">warning</i>
       </span>
-      <span
-        *ngIf="isDeprecated(package)"
-        class="title-badge"
-        matTooltip="This package has been deprecated"
-      >
+
+      } @if (isDeprecated(package)) {
+
+      <span class="title-badge" matTooltip="This package has been deprecated">
         <i class="material-icons">error_outline</i>
       </span>
+
+      }
     </mat-card-title>
     <mat-card-subtitle
       (click)="searchByKeyword(package.owner.name)"
@@ -55,15 +55,16 @@ class="mat-elevation-z4"
   </mat-card-content>
 
   <mat-card-actions>
-    <button
-      *ngIf="!isFullMode"
-      mat-button
-      (click)="onDetailsRequestClick(package)"
-    >
+    @if (!isFullMode) {
+
+    <button mat-button (click)="onDetailsRequestClick(package)">
       <i class="material-icons">
         <i class="material-icons">fullscreen</i>
       </i>
     </button>
+
+    }
+
     <a
       mat-button
       href="{{ package.lastPublisher.link }}"
@@ -74,8 +75,10 @@ class="mat-elevation-z4"
         <img width="35" src="assets/npm.png" />
       </i>
     </a>
+
+    @if (package.repository) {
+
     <a
-      *ngIf="package.repository"
       mat-button
       href="{{ package.repository.url }}"
       target="__blank"
@@ -85,8 +88,10 @@ class="mat-elevation-z4"
         <img width="24" src="assets/GitHub-Mark-32px.png" />
       </i>
     </a>
+
+    } @if (package.repository) {
+
     <a
-      *ngIf="package.repository"
       mat-button
       href="{{ package.repository.url }}/issues"
       target="__blank"
@@ -94,8 +99,10 @@ class="mat-elevation-z4"
     >
       <i class="material-icons">bug_report</i>
     </a>
+
+    } @if (package.repository) {
+
     <a
-      *ngIf="package.repository"
       mat-button
       href="https://github.dev/{{ package.repository.user }}/{{
         package.repository.project
@@ -105,6 +112,9 @@ class="mat-elevation-z4"
     >
       <i class="material-icons">mode_edit</i>
     </a>
+
+    }
+
     <a
       class="twitter-share-button"
       mat-button
@@ -139,11 +149,15 @@ class="mat-elevation-z4"
       >
     </p>
     <mat-chip-listbox>
+
+      @for (keyword of package.keywords; track keyword) {
       <mat-chip
         (click)="searchByKeyword(keyword)"
-        *ngFor="let keyword of package.keywords"
         >{{ keyword }}</mat-chip
       >
+      }
     </mat-chip-listbox>
   </mat-card-footer>
 </mat-card>
+
+}
