@@ -1,5 +1,16 @@
 
 
+# [17.0.0](https://github.com/ngxtools/ngx.tools/compare/16.0.0-next.2...17.0.0) (2023-11-09)
+
+
+### Features
+
+* upgrade to angular v17 ([0f44f87](https://github.com/ngxtools/ngx.tools/commit/0f44f872972f962066517599b6c58aa61e258abe))
+  - Update to Angular v17
+  - Update Algolia to latest
+  - Remove the custom View Transition API code and use `withViewTransitions ()`
+  - Use `@if` and `@for` control flows
+  
 # [16.0.0-next.2](https://github.com/ngxtools/ngx.tools/compare/15.0.0...16.0.0-next.2) (2023-03-13)
 
 
